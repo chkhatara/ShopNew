@@ -8,6 +8,7 @@ create table person(
     person_password varchar(64) not null,
     person_id_number varchar(11) not null unique key,
     person_birth_date date not null,
+    person_tel varchar(64) not null,
     person_sex enum('MALE','FEMALE'),
     constraint person_pk primary key(person_id)
 );
@@ -23,7 +24,7 @@ create table card_info(
 );
 create table shop_category(
 	category_id int not null auto_increment,
-    category_name varchar(64) not null,
+    category_name varchar(64) not null unique key,
     constraint shop_category_pk primary key(category_id)
 
 );
@@ -34,6 +35,7 @@ create table shop(
     shop_password varchar(64) not null,
     shop_site varchar (64) not null,
     shop_category int not null,
+    shop_tel varchar(64) not null,
     shop_info text,
     constraint shop_pk primary key(shop_id),
     constraint shop_category_fk foreign key (shop_category) references shop_category(category_id)
@@ -72,7 +74,43 @@ create table item(
     item_description text,
     shop_id int not null,
     constraint item_id_pk primary key(item_id),
-    constraint item_type_fk foreign key(item_type) references item_type(item_type_id),
-    constraint item_shop_id_fk foreign key(shop_id) references shop_id(shop_id)
+    constraint item_type_fk1 foreign key(item_type) references item_type(item_type),
+    constraint item_shop_id_fk1 foreign key(shop_id) references shop(shop_id)
 );
+create table item_photoes(
+	item_photo_id int not null auto_increment,
+    item_id int not null,
+    item_photo mediumblob not null,
+    constraint item_photo_id primary key(item_photo_id),
+    constraint item_id_fk foreign key (item_id) references item(item_id)
+
+);
+create table shop_photoes(
+	shop_photo_id int not null auto_increment,
+    shop_id int not null,
+    shop_photo mediumblob not null,
+    constraint ishop_photo_id primary key(shop_photo_id),
+    constraint shop_id_fk foreign key (shop_id) references shop(shop_id)
+
+);
+
+create table recommended_item(
+	item_id int not null,
+    person_id int not null,
+    searched_number int not null,
+    constraint item_id_fk1 foreign key(item_id) references item(item_id),
+    constraint person_id_fk1 foreign key(person_id) references person(person_id)
+
+);
+create table favourite_shops(
+	person_id int not null,
+    shop_id int not null,
+     constraint shop_id_fk2 foreign key(shop_id) references shop(shop_id),
+    constraint person_id_fk3 foreign key(person_id) references person(person_id) 
+
+);
+
+USE iShop;
+INSERT INTO person (person_name,person_lastName,person_email,person_password,person_id_number,person_birth_date,person_sex) 
+ values ("Dato","","dato@gmail.com","123","12312",01/02/1994,"MALE");
 
