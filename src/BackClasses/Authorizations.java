@@ -79,4 +79,24 @@ public class Authorizations {
 			System.out.print(e.getMessage());
 		}
 	}
+	public void addShop(String name,String email,String password,String site,String tel,int Category,String info) {
+		Connection con=DataBaseInfo.getConnection();
+		PreparedStatement stmt;
+		try {
+			stmt = con.prepareStatement("INSERT INTO shop (shop_name,shop_email,shop_password,shop_site,shop_tel,shop_category,shop_info) "
+					+ "values (?,?,?,?,?,?,?)");
+			stmt.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			stmt.setString(1, name);
+			stmt.setString(2, email);
+			stmt.setString(3, password);
+			stmt.setString(4, site);
+			stmt.setString(5, tel);
+			stmt.setInt(6, Category);
+			stmt.setString(7, info);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
