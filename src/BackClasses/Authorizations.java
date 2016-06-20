@@ -16,7 +16,7 @@ import java.sql.Statement;
  */
 public class Authorizations {
 	
-	public boolean searchPerson(String email,String password){		
+	public  boolean searchPerson(String email,String password){	
 		Connection con = null;
 		con=DataBaseInfo.getConnection();
 		Statement stmt;

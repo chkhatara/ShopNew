@@ -16,7 +16,7 @@
 <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css">
 <link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>iShop</title>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -121,7 +121,7 @@
 
         </li>
       </ul>
-      <form id="signin" class="navbar-form navbar-right" role="form">
+      <form id="signin" action="LoginServlet" method="post" class="navbar-form navbar-right" role="form">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                             <input id="email" type="email" class="form-control" name="email" value="" placeholder="Email Address">                                        
@@ -132,7 +132,7 @@
                             <input id="password" type="password" class="form-control" name="password" value="" placeholder="Password">                                        
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="submit" class="btn btn-primary" value="Login" >Login</button>
                    </form>
      
     </div>
@@ -154,12 +154,12 @@
                 <li><a href="#">Electronics & Computers</a>
                 	<ul>
             			<li><a href="#">TV & Video</a></li>
-            			<li><a href="#">Cell Phones & Accessories</a>
+            			<li><a href="#">Phones & Accessories</a>
             				<ul>
             					<li><a href="#">Android Phones</a>
             						<ul>
             							<li><a href="#">Android Phones</a>
-            							<li><a href="#">Android Phone Accesories</a>
+            							<li><a href="#">Accesories</a>
             							
             						
             						</ul>
@@ -168,13 +168,13 @@
             					<li><a href="#">iPhones</a>
             					<ul>
             							<li><a href="#">iPhones</a>
-            							<li><a href="#">iPhone Accesories</a>
+            							<li><a href="#">Accesories</a>
             							</ul>
             					</li>
             					<li><a href="#">Windows Phones</a>
             					<ul>
             							<li><a href="#">Windows Phones</a>
-            							<li><a href="#">Phone Accesories</a>
+            							<li><a href="#">Accesories</a>
             							</ul>
             						</li>
             						</ul>
@@ -207,10 +207,10 @@
                             </ol>
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                    <img class="slide-image" src="http://shop-ukbrands.com/wp-content/uploads/2016/03/Brands2-800x300.jpg" alt="">
                                 </div>
                                 <div class="item">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                    <img class="slide-image" src="https://avocabeachhotel.com.au/wp-content/uploads/2016/04/Bottleshop-800-300-1-800x300.jpg" alt="">
                                 </div>
                                 <div class="item">
                                     <img class="slide-image" src="http://placehold.it/800x300" alt="">
