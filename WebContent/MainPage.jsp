@@ -141,7 +141,7 @@
        		 <form class="navbar-form navbar-right" action="LogoutServlet" method="post" role="logout">
           		<button type="submit" class="btn btn-primary" value="Logout">Log Out</button>
           		</form>
-          		<a class="navbar-brand navbar-right" href="PersonServlet">My Profile</a>
+          		<a class="navbar-brand navbar-right" href="PersonServlet"><% session.getAttribute("email");%></a>
      
      <% } %>
     </div>
@@ -624,7 +624,8 @@ jQuery(document).on('click', '.mega-dropdown', function(e) {
      <script src="js/bootstrap.js"></script>
      <script src="js/npm.js"></script>
     <script src="js/jquery.js"></script>
-
+    <script src="js/jquery.bxslider.min.js"></script>
+	<script src="js/mimity.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 </body>

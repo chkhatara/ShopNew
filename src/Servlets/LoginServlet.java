@@ -60,6 +60,8 @@ public class LoginServlet extends HttpServlet {
 		    }
 		    session=request.getSession();
 		    session.setAttribute("email", "em");
+		    RequestDispatcher rd = request.getRequestDispatcher("MainPage.jsp");
+		    rd.forward(request, response);
 		    
 		}
 	}
