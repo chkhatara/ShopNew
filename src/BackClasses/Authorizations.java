@@ -38,7 +38,7 @@ public class Authorizations {
 		return true;
 	}
 	
-	public static boolean searchShop(String email,String password){
+	public  boolean searchShop(String email,String password){
 		Connection con=DataBaseInfo.getConnection();
 		Statement stmt;
 		try {
@@ -98,5 +98,62 @@ public class Authorizations {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public int getPersonId(String email){
+		 Statement stm;
+		 int res=-1;
+		 Connection con = DataBaseInfo.getConnection();
+		try {
+			stm=con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			ResultSet rSet=stm.executeQuery(
+					"select * from person where person_email='"+email+"';");
+			if(rSet.next()){
+				res=rSet.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}		
+		 
+	return res;
+	}
+	public Person getPerson(int idN){
+		 Statement stm;
+		 Person pers=null;
+		 Connection con = DataBaseInfo.getConnection();
+		 try {
+			stm=con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			ResultSet rSet=stm.executeQuery("select persons_id,person_name,"
+					+ "person_surname,person_birth_date,"
+					+ "person_sex,person_email,person_info "
+					+ "from persons  where persons_id="+idN+";");
+			Date date=null;
+			String sex=null;
+			String name=null;
+			String mail=null;
+			String surname=null;
+			String id=null;
+			String about=null;
+			if(rSet.next()){
+				  date=rSet.getDate(4);
+				  sex=rSet.getString(5);
+				  name=rSet.getString(2);
+				  mail=rSet.getString(6);
+				  surname=rSet.getString(3);
+				  id=rSet.getString(1);
+				  about=rSet.getString(7);
+				 
+			}
+			//ResultSet rSet2=stm.executeQuery("select person_photo from person_photoes where persons_id="+idNum+";");
+			//byte[] photo=getPhoto(idN);
+			pers=new Person(name, mail, surname, id, sex, date, null);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+	return pers;
+	
 	}
 }
