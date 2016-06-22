@@ -38,7 +38,7 @@ public class Authorizations {
 		return true;
 	}
 	
-	public static boolean searchShop(String email,String password){
+	public  boolean searchShop(String email,String password){
 		Connection con=DataBaseInfo.getConnection();
 		Statement stmt;
 		try {

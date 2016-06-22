@@ -1,10 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,11 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-
-
 import BackClasses.Authorizations;
-import BackClasses.DataBaseInfo;
+
 
 
 
@@ -52,10 +46,35 @@ public class LoginServlet extends HttpServlet {
 		String email=(String)request.getParameter("email");
 		String password=(String)request.getParameter("password");
 		Authorizations aut = new Authorizations();
-		boolean contains = aut.searchPerson(email, password);
-		System.out.println(contains);
-		
-		
+		boolean containsPerson = aut.searchPerson(email, password);
+		boolean containsShop = aut.searchShop(email, password); 
+		if(containsPerson == false && containsShop == false){
+			RequestDispatcher rd=request.getRequestDispatcher("iShopMain.jsp");
+			rd.forward(request,response);
+		}else{
+			if(containsPerson){
+				HttpSession session = request.getSession(false);			        
+			    if(session != null){
+			        session.invalidate();
+			    }
+			    session=request.getSession();
+			    session.setAttribute("email", email);
+			    session.setAttribute("password", password);
+			    session.setAttribute("user", "person");
+			    RequestDispatcher rd = request.getRequestDispatcher("iShopMain.jsp");
+			    rd.forward(request, response);
+			}else{
+				HttpSession session = request.getSession(false);			        
+			    if(session != null){
+			        session.invalidate();
+			    }
+			    session=request.getSession();
+			    session.setAttribute("email", email);
+			    session.setAttribute("password", password);
+			    session.setAttribute("user", "shop");
+			    RequestDispatcher rd = request.getRequestDispatcher("iShopMain.jsp");
+			    rd.forward(request, response);								
+			}
+		}
 	}
-
 }
