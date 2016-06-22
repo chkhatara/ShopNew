@@ -1,10 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -51,12 +48,21 @@ public class LoginServlet extends HttpServlet {
 		Authorizations aut = new Authorizations();
 		boolean containsPerson = aut.searchPerson(email, password);
 		boolean containsShop = aut.searchShop(email, password); 
+		HttpSession session = request.getSession(false);			        
+	    if(session != null){
+	        session.invalidate();
+	    }
 		if(containsPerson == false && containsShop == false){
+			 session = request.getSession(false);			        
+		    if(session != null){
+		        session.invalidate();
+		    }
 			RequestDispatcher rd=request.getRequestDispatcher("iShopMain.jsp");
 			rd.forward(request,response);
 		}else{
+			
 			if(containsPerson){
-				HttpSession session = request.getSession(false);			        
+				 session = request.getSession(false);			        
 			    if(session != null){
 			        session.invalidate();
 			    }
@@ -67,7 +73,7 @@ public class LoginServlet extends HttpServlet {
 			    RequestDispatcher rd = request.getRequestDispatcher("iShopMain.jsp");
 			    rd.forward(request, response);
 			}else{
-				HttpSession session = request.getSession(false);			        
+				 session = request.getSession(false);			        
 			    if(session != null){
 			        session.invalidate();
 			    }

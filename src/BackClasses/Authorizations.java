@@ -16,7 +16,7 @@ import java.sql.Statement;
  */
 public class Authorizations {
 	
-	public  boolean searchPerson(String email,String password){	
+	public  static boolean searchPerson(String email,String password){	
 		Connection con = null;
 		con=DataBaseInfo.getConnection();
 		Statement stmt;
@@ -38,7 +38,7 @@ public class Authorizations {
 		return true;
 	}
 	
-	public  boolean searchShop(String email,String password){
+	public static  boolean searchShop(String email,String password){
 		Connection con=DataBaseInfo.getConnection();
 		Statement stmt;
 		try {
