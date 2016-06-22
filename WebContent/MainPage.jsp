@@ -15,7 +15,8 @@
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css">
 <link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<%@ page import="BackClasses.*" %>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>iShop</title>
 </head>
 <body>
@@ -121,6 +122,7 @@
 
         </li>
       </ul>
+      <% if(session.getAttribute("email")==null){ %>
       <form id="signin" action="LoginServlet" method="post" class="navbar-form navbar-right" role="form">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -134,7 +136,14 @@
 
                         <button type="submit" class="btn btn-primary" value="Login" >Login</button>
                    </form>
+     <%}else{ %>
+     		 
+       		 <form class="navbar-form navbar-right" action="LogoutServlet" method="post" role="logout">
+          		<button type="submit" class="btn btn-primary" value="Logout">Log Out</button>
+          		</form>
+          		<a class="navbar-brand navbar-right" href="PersonServlet"><% session.getAttribute("email");%></a>
      
+     <% } %>
     </div>
   </div>
 </nav>
@@ -615,7 +624,8 @@ jQuery(document).on('click', '.mega-dropdown', function(e) {
      <script src="js/bootstrap.js"></script>
      <script src="js/npm.js"></script>
     <script src="js/jquery.js"></script>
-
+    <script src="js/jquery.bxslider.min.js"></script>
+	<script src="js/mimity.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 </body>

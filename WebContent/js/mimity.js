@@ -61,4 +61,5 @@ $(function(){
 			$('.back-top').fadeOut();
 		}
 	});
+
 })

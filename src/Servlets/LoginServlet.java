@@ -1,7 +1,10 @@
 package Servlets;
 
 import java.io.IOException;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -75,6 +78,7 @@ public class LoginServlet extends HttpServlet {
 			    RequestDispatcher rd = request.getRequestDispatcher("iShopMain.jsp");
 			    rd.forward(request, response);								
 			}
+		
 		}
 	}
 }
