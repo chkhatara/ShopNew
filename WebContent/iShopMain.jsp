@@ -12,6 +12,8 @@
     <link href="css/jquery.bxslider.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <%@ page import="BackClasses.*" %>
+    
+<%@ page import="java.util.ArrayList" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>iShop</title>
 </head>
@@ -70,18 +72,17 @@
                         <button type="submit" class="btn btn-primary" value="Login" >Login</button>
                    </form>
      <%}else{ 
-     	System.out.println(session.getAttribute("email"));%>
+     	%>
      		 
        		 <form class="navbar-form navbar-right" action="LogOutServlet" method="post" role="logout">
        		 
           		<button type="submit" class="btn btn-primary" value="Logout">Log Out</button>
           		</form>
-          		<form class="navbar-form navbar-right" action="ShopCartServlet" method="post" role="logout">
+          		<form class="navbar-form navbar-right" action="ShoppingCartServlet" method="post" role="logout">
        		 
           		<button type="submit" class="btn btn-primary" value="Cart">
           		 <span class="glyphicon glyphicon-shopping-cart"></span> Cart</button>
           		</form>
-          		<a class="navbar-brand navbar-right" href="PersonServlet"><% session.getAttribute("email");%></a>
      
 <% } %>
                

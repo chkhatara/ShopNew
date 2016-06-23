@@ -26,7 +26,7 @@ public class DatabaseClass {
 			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
 			ResultSet rSet=stm.executeQuery(
 					"select * from person_cart_items where person_id='"+personId+"';");
-			if(rSet.next()){
+			while(rSet.next()){
 				arr.add(getItemCart(rSet.getInt(2),rSet.getInt(3),rSet.getInt(4)));
 			}
 		} catch (SQLException e) {
@@ -45,6 +45,7 @@ public class DatabaseClass {
 			ResultSet rSet=stm.executeQuery(
 					"select * from item where item_id='"+itemId+"';");
 			if(rSet.next()){
+				System.out.println(rSet.getString(2));
 				item= new ItemCart(rSet.getString(2), rSet.getString(5), rSet.getInt(6), itemQuantity, null);
 			}
 		} catch (SQLException e) {
