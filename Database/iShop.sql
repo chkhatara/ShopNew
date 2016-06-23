@@ -50,13 +50,21 @@ create table item_category(
     
 
 );
+create table item_sub_cateogory(
+	item_sub_category int not null auto_increment,
+	item_sub_name varchar(64) not null,
+    item_category_id int not null,
+    constraint item_sub_category_pk primary key(item_sub_category),
+    constraint item_sub_category_fk foreign key(item_category_id) references item_category(item_category_id)
+
+);
 
 create table item_type(
 	item_type int not null auto_increment,
 	item_type_name varchar(64) not null,
-    item_category_id int not null,
+    item_sub_category_id int not null,
     constraint item_type_pk primary key(item_type),
-    constraint item_type_fk foreign key(item_category_id) references item_category(item_category_id)
+    constraint item_type_fk foreign key(item_sub_category_id) references item_sub_cateogory(item_sub_category)
 
 );
 
@@ -71,9 +79,13 @@ create table item(
 	item_id int not null auto_increment,
     item_name varchar(64) not null,
     item_type int not null,
+    item_brand int not null,
     item_description text,
+    item_price int not null,
+    
     shop_id int not null,
     constraint item_id_pk primary key(item_id),
+    constraint item_brand_fk foreign key(item_brand) references item_brand (item_brand),
     constraint item_type_fk1 foreign key(item_type) references item_type(item_type),
     constraint item_shop_id_fk1 foreign key(shop_id) references shop(shop_id)
 );
@@ -109,8 +121,24 @@ create table favourite_shops(
     constraint person_id_fk3 foreign key(person_id) references person(person_id) 
 
 );
+create table person_cart_items(
+	person_id int not null,
+    item_id int not null,
+    item_quantity int not null,
+    is_Bought int not null,
+    constraint person_cart_items_fk1 foreign key(person_id) references person(person_id),
+    constraint person_cart_items_fk2 foreign key(item_id) references item(item_id)
+);
+
+
+
 
 USE iShop;
-INSERT INTO person (person_name,person_lastName,person_email,person_password,person_id_number,person_birth_date,person_sex) 
- values ("Dato","","dato@gmail.com","123","12312",01/02/1994,"MALE");
+INSERT INTO person (person_name,person_lastName,person_email,person_password,person_id_number,person_birth_date,person_tel,person_sex) 
+ values ("nika","nikadze","nika@gmail.com","123","123123",01/02/1994,"593200083","MALE"),
+ ("badri","","badridze@gmail.com","123","123124",01/02/1994,"593200083","MALE"),
+  ("nugo","","nugodze@gmail.com","123","123125",01/02/1994,"593200083","MALE"),
+  ("salo","","salodze@gmail.com","123","123126",01/02/1994,"593200083","MALE"),
+ ("nini","","ninidze@gmail.com","123","123127",01/02/1994,"593200083","MALE")
+ ;
 
