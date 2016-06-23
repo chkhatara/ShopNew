@@ -50,11 +50,12 @@ public class RegisterPerson extends HttpServlet {
 		String surname=(String)request.getParameter("last_name");
 		String id=(String)request.getParameter("id_number");
 		String sex=request.getParameter("inlineRadioOptions");
+		String tel = (String)request.getParameter("tele");
 		int year=Integer.parseInt(request.getParameter("year"));
 		int month=Integer.parseInt(request.getParameter("month"));
 		int day=Integer.parseInt(request.getParameter("day"));
 		Date date = (Date) new GregorianCalendar(year, month, day).getTime();
-		//Date date=new Date(day,month,year);		
+		Date date1=new Date(day,month,year);		
 		Authorizations aut= new Authorizations();
 		try {
 			boolean contains=aut.searchPerson(email,password);			
@@ -67,7 +68,7 @@ public class RegisterPerson extends HttpServlet {
 		        if(session != null){
 		            session.invalidate();
 		        }
-		        aut.addPerson(first_name, surname, password, id, new java.sql.Date(date.getTime()), email, sex);
+		        aut.addPerson(first_name, surname, password, id, new java.sql.Date(date1.getTime()), email, sex);
 //				DataForPerson data=new DataForPerson();
 //				Person p=data.getPerson(data.getPersonId(email));
 //				session=request.getSession();
