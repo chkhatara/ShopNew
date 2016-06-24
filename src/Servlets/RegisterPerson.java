@@ -2,8 +2,6 @@ package Servlets;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.util.GregorianCalendar;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import BackClasses.Authorizations;
+import BackClasses.Person;
 
 /**
  * Servlet implementation class RegisterPerson
@@ -45,38 +44,41 @@ public class RegisterPerson extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String email=(String)request.getParameter("email");
 		String password=(String)request.getParameter("password");
-		String password_confirm=(String)request.getParameter("password_confirmation");
-		String first_name=(String)request.getParameter("first_name");
-		String surname=(String)request.getParameter("last_name");
-		String id=(String)request.getParameter("id_number");
-		String sex=request.getParameter("inlineRadioOptions");
-		String tel = (String)request.getParameter("tele");
-		int year=Integer.parseInt(request.getParameter("year"));
-		int month=Integer.parseInt(request.getParameter("month"));
-		int day=Integer.parseInt(request.getParameter("day"));
-		Date date = (Date) new GregorianCalendar(year, month, day).getTime();
-		Date date1=new Date(day,month,year);		
-		Authorizations aut= new Authorizations();
+		String password_confirm=(String)request.getParameter("confirm_password");
+		String first_name=(String)request.getParameter("name");
+		String surname=(String)request.getParameter("surname");
+		String id=(String)request.getParameter("idNumber");
+		String tel = (String)request.getParameter("Phone");
+	
+		Authorizations aut=  new Authorizations();
 		try {
-			boolean contains=aut.searchPerson(email,password);			
-			if(contains==true||password.length()==0
-					||password_confirm.length()==0||!password.equals(password_confirm)||surname.length()==0||email.length()==0|first_name.length()==0){
-				RequestDispatcher rd=request.getRequestDispatcher("personRegister.jsp");
+			
+			@SuppressWarnings("static-access")
+			boolean containsPerson=aut.searchPerson(email,password);	
+			
+			@SuppressWarnings("static-access")
+			boolean containsShop=aut.searchShop(email,password);
+			if(containsPerson==true||containsShop==true||password.length()==0||password_confirm.length()==0||!password.equals(password_confirm)||surname.length()==0||email.length()==0||first_name.length()==0){
+				System.out.println("asdas");
+				RequestDispatcher rd=request.getRequestDispatcher("PersonRegister.jsp");
 				rd.forward(request, response);
 			}else{
+				
 				HttpSession session = request.getSession(false);			        
 		        if(session != null){
 		            session.invalidate();
 		        }
-		        aut.addPerson(first_name, surname, password, id, new java.sql.Date(date1.getTime()), email, sex);
-//				DataForPerson data=new DataForPerson();
-//				Person p=data.getPerson(data.getPersonId(email));
-//				session=request.getSession();
-//				session.setAttribute("person", p);
-//				session.setAttribute("first_name", first_name);
-//				session.setAttribute("last_name", surname);
-//				session.setAttribute("email", email);
-//				response.sendRedirect("http://localhost:8080/HR-Geo/PersonServlet");			
+		        Date d = new Date(0);
+		        aut.addPerson(first_name, surname, password, id, d, email,tel, "MALE");
+				Person p=aut.getPerson(aut.getPersonId(email));
+				session=request.getSession();
+				session.setAttribute("person", p);
+				session.setAttribute("first_name", first_name);
+				session.setAttribute("last_name", surname);
+				session.setAttribute("email", email);
+				RequestDispatcher rd=request.getRequestDispatcher("iShopMain.jsp");
+				rd.forward(request, response);
+				//response.sendRedirect("http://localhost:8080/HR-Geo/PersonServlet");			
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

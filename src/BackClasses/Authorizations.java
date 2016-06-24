@@ -24,7 +24,7 @@ public class Authorizations {
 			stmt = con.createStatement();
 			stmt.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
 			String query = "SELECT * FROM person "
-					+ "WHERE " + "person_email = '" + email + "' AND person_password = '"+password
+					+ "WHERE " + "person_email = '" + email 
 					+ "' ;";
 			ResultSet rs=stmt.executeQuery(query);
 			if(!rs.next()){
@@ -45,7 +45,7 @@ public class Authorizations {
 			stmt = con.createStatement();
 			stmt.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
 			String query = "SELECT * FROM shop "
-					+ "WHERE " + "shop_email = '" + email + "' AND shop_password = '"+password
+					+ "WHERE " + "shop_email = '" + email 
 					+ "' ;";
 			ResultSet rs=stmt.executeQuery(query);
 			if(!rs.next()){
@@ -58,13 +58,13 @@ public class Authorizations {
 		return true;
 	}
 	
-	public void addPerson(String name,String surname,String password,String id,Date date,String email,String sex) {
+	public void addPerson(String name,String surname,String password,String id,Date date,String email,String sex,String tel) {
 		Connection con=DataBaseInfo.getConnection();
 
 		PreparedStatement stmt;
 		try {
-			stmt = con.prepareStatement("INSERT INTO person (person_name,person_lastName,person_email,person_password,person_id_number,person_birth_date,person_sex) "
-					+ "values (?,?,?,?,?,?,?)");
+			stmt = con.prepareStatement("INSERT INTO person (person_name,person_lastName,person_email,person_password,person_id_number,person_birth_date,person_tel,person_sex) "
+					+ "values (?,?,?,?,?,?,?,?)");
 			stmt.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
 			stmt.setString(1, name);
 			stmt.setString(2, surname);
@@ -72,7 +72,8 @@ public class Authorizations {
 			stmt.setString(4, password);
 			stmt.setString(5, id);
 			stmt.setDate(6, date);
-			stmt.setString(7,sex);
+			stmt.setString(7, tel);
+			stmt.setString(8,sex);
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -124,10 +125,8 @@ public class Authorizations {
 		 try {
 			stm=con.createStatement();
 			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
-			ResultSet rSet=stm.executeQuery("select persons_id,person_name,"
-					+ "person_surname,person_birth_date,"
-					+ "person_sex,person_email,person_info "
-					+ "from persons  where persons_id="+idN+";");
+			ResultSet rSet=stm.executeQuery("select person_id"
+					+ "from person  where person_id="+idN+";");
 			Date date=null;
 			String sex=null;
 			String name=null;
