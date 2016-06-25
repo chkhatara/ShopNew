@@ -101,5 +101,92 @@ public class DatabaseClass {
 		}
 		return shop;
 	}
+	public ArrayList<Item> getShopItems(int id){
+		ArrayList<Item> items = new ArrayList<Item>();
+		Statement stm;
+		String itemName= null;
+		String itemSubCategory = null;
+		String itemCategory = null;
+		String itemDescription = null;
+		int itemQuantity = 0;
+		int itemPrice = 0;
+		Connection con = DataBaseInfo.getConnection();
+		try {
+			stm=con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			ResultSet rSet=stm.executeQuery(
+					"select * from item where shop_id='"+id+"';");
+			while(rSet.next()){
+				itemName = rSet.getString("item_name");
+				itemDescription = rSet.getString("item_description");
+				itemPrice = rSet.getInt("item_price");
+				itemQuantity = rSet.getInt("item_quantity");
+				itemCategory = getCategoryName(getCategoryId(rSet.getInt("item_sub_category")));
+				itemSubCategory = getSubCategoryName(rSet.getInt("item_sub_category"));
+				Item item = new Item(itemName, itemPrice, itemQuantity, itemDescription, itemCategory, itemSubCategory);
+				items.add(item);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}		
+		return items;
+	}
+	
+	public String getSubCategoryName(int idN){
+		Statement stm;
+		String subCategory = null;
+		Connection con = DataBaseInfo.getConnection();
+		try {
+			stm = con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			ResultSet rSet = stm.executeQuery("select * from item_sub_category  where item_sub_category=" + idN + ";");			
+			if (rSet.next()) {
+				subCategory = rSet.getString("item_sub_name");				
+			}
 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		return subCategory;
+		
+	}
+	public int getCategoryId(int idN){
+		Statement stm;
+		int category = 0;
+		Connection con = DataBaseInfo.getConnection();
+		try {
+			stm = con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			ResultSet rSet = stm.executeQuery("select * from item_sub_category  where item_sub_category=" + idN + ";");			
+			if (rSet.next()) {
+				category = rSet.getInt("item_category_id");				
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		return category;
+	}
+	
+	public String getCategoryName(int idN){
+		Statement stm;
+		String subCategory = null;
+		Connection con = DataBaseInfo.getConnection();
+		try {
+			stm = con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			ResultSet rSet = stm.executeQuery("select * from item_category  where item_category_id=" + idN + ";");			
+			if (rSet.next()) {
+				subCategory = rSet.getString("item_category_name");				
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		return subCategory;
+		
+	}
 }

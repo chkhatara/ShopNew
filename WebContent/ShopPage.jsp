@@ -13,12 +13,16 @@
 
     <title>Shop Item - Start Bootstrap Template</title>
 
+ <link href="css/shop-homepage.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/shop-item.css" rel="stylesheet">
+    
+    <%@ page import="BackClasses.*" %>
 
+<%@ page import="java.util.ArrayList" %>
    
 
 </head>
@@ -75,7 +79,7 @@
 
                         <button type="submit" class="btn btn-primary" value="Login" >Login</button>
                    </form>
-     <%}else{ 
+     <%}else if(session.getAttribute("user").equals("person")){ 
      	%>
      		 
        		 <form class="navbar-form navbar-right" action="LogOutServlet" method="post" role="logout">
@@ -88,25 +92,36 @@
           		 <span class="glyphicon glyphicon-shopping-cart"></span> Cart</button>
           		</form>
      
-<% } %>
+	<% } else{ %>
+		<form class="navbar-form navbar-right" action="LogOutServlet" method="post" role="logout">
+		 
+		<button type="submit" class="btn btn-primary" value="Logout">Log Out</button>
+		</form>
+		<form class="navbar-form navbar-right" action="ShopPageServlet" method="GET" role="logout">
+	
+		<button type="submit" class="btn btn-primary" value="Cart">
+		 <span class="glyphicon glyphicon-shopping-cart"></span> My Page</button>
+		</form>
+
+	<% } %>
                
             </div>
         </div>
     </nav>
 
     
-
+	<% Shop shop = (Shop)request.getAttribute("ShopObject"); %>
     <!-- Page Content -->
     <div class="container">
 
         <div class="row">
 
             <div class="col-md-3">
-                <p class="lead">Shop Name</p>
+                <p class="lead"> Categories</p>
                 <div class="list-group">
-                    <a href="#" class="list-group-item active">Category 1</a>
-                    <a href="#" class="list-group-item">Category 2</a>
-                    <a href="#" class="list-group-item">Category 3</a>
+                    <a href="#" class="list-group-item active">Electronics & Computers</a>
+                    <a href="#" class="list-group-item">Clothes</a>
+                    <a href="#" class="list-group-item">e Commerce</a>
                 </div>
             </div>
 
@@ -115,78 +130,41 @@
                 <div class="thumbnail">
                     <img class="img-responsive" src="http://placehold.it/800x300" alt="">
                     <div class="caption-full">
-                        <h4 class="pull-right">$24.99</h4>
-                        <h4><a href="#">Product Name</a>
-                        </h4>
-                        <p>See more snippets like these online store reviews at <a target="_blank" href="http://bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-                        <p>Want to make these reviews work? Check out
-                            <strong><a href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this building a review system tutorial</a>
-                            </strong>over at maxoffsky.com!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                        <h2><a href="#"><%= shop.getName() %></a>
+                        </h2>
+                        <p> <%= shop.getInfo() %></p>
                     </div>
-                    <div class="ratings">
-                        <p class="pull-right">3 reviews</p>
-                        <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            4.0 stars
-                        </p>
-                    </div>
+                    
                 </div>
-
-                <div class="well">
-
-                    <div class="text-right">
-                        <a class="btn btn-success">Leave a Review</a>
-                    </div>
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">10 days ago</span>
-                            <p>This product was great in terms of quality. I would definitely buy another!</p>
+                <% 
+                DatabaseClass db = new DatabaseClass();
+                ArrayList<Item> arr = db.getShopItems(db.getShopId((String)session.getAttribute("email")));
+                for(int i=0;i<arr.size();i++){
+                Item item = arr.get(i);%>
+				<div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <img src="http://placehold.it/320x150" alt="">
+                            <div class="caption">
+                                <h4 class="pull-right">$<%= item.getPrice()  %></h4>
+                                <h4><a href="#"><%= item.getName() %></a>
+                                </h4>
+                                <p><%= item.getitemDescription() %> <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+                            </div>
+                            <div class="ratings">
+                                <p class="pull-right">15 reviews</p>
+                                <p>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </p>
+                            </div>
                         </div>
                     </div>
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">12 days ago</span>
-                            <p>I've alredy ordered another one!</p>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">15 days ago</span>
-                            <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
-                        </div>
-                    </div>
+	<%} %>
+                   
+                
 
                 </div>
 
@@ -194,7 +172,7 @@
 
         </div>
 
-    </div>
+   
     <!-- /.container -->
 
     <div class="container">
