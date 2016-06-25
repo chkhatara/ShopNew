@@ -13,13 +13,20 @@ public class Shop {
 	//private String password;
 	private String site;
 	private String info;
-	
-	public Shop(String shopName,String email,String site,String info){
+	private String tel;
+	public Shop(String shopName,String email,String tel,String site,String info){
 		this.shopName=shopName;
 		this.email=email;
 		this.site=site;
 		this.info=info;
+		this.tel=tel;
 		
+	}
+	public void setTel(String tel){
+		this.tel=tel;
+	}
+	public String getTel(){
+		return this.tel;
 	}
 	public void setShopName(String shopName){
 		this.shopName=shopName;

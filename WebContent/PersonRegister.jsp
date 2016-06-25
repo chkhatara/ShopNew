@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html >
 <html>
+<link href="css/datepicker.css" rel="stylesheet">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -110,6 +111,8 @@
                   <div class="form-group">
                     <input type="email" name="email" id="email" class="form-control" placeholder="Email Address">
                   </div>
+            
+         
                   <div class="form-group">
                     <input type="text" name="idNumber" id="idNumber" class="form-control" placeholder="id number">
                   </div>
@@ -123,6 +126,8 @@
                   <div class="form-group">
                     <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm Password">
                   </div>
+                   
+				 
                   <div class="form-group">
                     <div class="checkbox">
                       <label>
@@ -130,6 +135,7 @@
                       </label>
                     </div>
                   </div>
+                  
                    
                   <div class="form-group">
                     <input type="submit" class="btn btn-success btn-block"  value="SUBMIT">
@@ -179,7 +185,7 @@
           <div class="col-sm-6 mobile-pull">
             <article role="login">
               <h3 class="text-center"><i class="fa fa-lock"></i> Create Shop Account</h3>
-              <form class="signup" action="index.html" method="post">
+              <form class="signup" action="RegisterShop" method="post">
                 <div class="form-group">
                   <input type="text" id="name" name="name" class="form-control" placeholder="Shop Name">
                 </div>
@@ -199,27 +205,15 @@
                   <div class="form-group">
                     <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm Password">
                   </div>
-                <div class="form-group">
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Please accept the terms and conditions to proceed with your request.
-                    </label>
-                  </div>
-                </div>
+                   <div class="form-group">
+				  <textarea name="Text" id="Text" cols="68" rows="5"></textarea>
+				  </div>
+                
                 <div class="form-group">
                   <input type="submit" class="btn btn-success btn-block"  value="SUBMIT">
                 </div>
               </form>
-              <footer role="signup" class="text-center">
-                <ul>
-                  <li>
-                    <a href="#">Terms of Use</a>
-                  </li>
-                  <li>
-                    <a href="#">Privacy Statement</a>
-                  </li>
-                </ul>
-              </footer>
+              
 
             </article>
           </div>
@@ -247,5 +241,14 @@
   </div>
   </div>
   </div>
+ 
+
 </head>
+<script src="js/bootstrap-datepicker.js"></script>
+ <script>
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+
 </html>

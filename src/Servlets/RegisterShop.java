@@ -2,6 +2,7 @@ package Servlets;
 
 import java.io.IOException;
 import java.sql.Date;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,16 +15,16 @@ import BackClasses.Authorizations;
 import BackClasses.Person;
 
 /**
- * Servlet implementation class RegisterPerson
+ * Servlet implementation class RegisterShop
  */
-@WebServlet("/RegisterPerson")
-public class RegisterPerson extends HttpServlet {
+@WebServlet("/RegisterShop")
+public class RegisterShop extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterPerson() {
+    public RegisterShop() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,10 +46,10 @@ public class RegisterPerson extends HttpServlet {
 		String email=(String)request.getParameter("email");
 		String password=(String)request.getParameter("password");
 		String password_confirm=(String)request.getParameter("confirm_password");
-		String first_name=(String)request.getParameter("name");
-		String surname=(String)request.getParameter("surname");
-		String id=(String)request.getParameter("idNumber");
+		String name=(String)request.getParameter("name");
 		String tel = (String)request.getParameter("Phone");
+		String info = (String)request.getParameter("Text");
+		String site = (String)request.getParameter("site");
 	
 		Authorizations aut=  new Authorizations();
 		try {
@@ -56,8 +57,9 @@ public class RegisterPerson extends HttpServlet {
 			boolean containsPerson=aut.searchPerson(email,password);	
 			boolean containsShop=aut.searchShop(email,password);
 			if(containsPerson==true||containsShop==true||password.length()==0
-					||password_confirm.length()==0||!password.equals(password_confirm)||surname.length()==0
-					||email.length()==0||first_name.length()==0){
+					||password_confirm.length()==0||!password.equals(password_confirm)
+				
+					||email.length()==0||name.length()==0){
 				RequestDispatcher rd=request.getRequestDispatcher("PersonRegister.jsp");
 				rd.forward(request, response);
 			}else{
@@ -66,20 +68,19 @@ public class RegisterPerson extends HttpServlet {
 		        if(session != null){
 		            session.invalidate();
 		        }
-		        aut.addPerson(first_name, surname,email, password, id,tel, "MALE");
-				Person p=aut.getPerson(aut.getPersonId(email));
+		        aut.addShop(name, email, password_confirm, site, tel,info);
+		        
 				session=request.getSession();
-				session.setAttribute("person", p);
-				session.setAttribute("user", "person");
-				session.setAttribute("first_name", first_name);
-				session.setAttribute("last_name", surname);
+				session.setAttribute("user", "shop");
+				session.setAttribute("name", name);
 				session.setAttribute("email", email);
 				RequestDispatcher rd=request.getRequestDispatcher("iShopMain.jsp");
 				rd.forward(request, response);			
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-}
+		}
+	
 	}
 
 }

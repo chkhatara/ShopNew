@@ -16,20 +16,25 @@ public class Person {
 	private String id;
 	private String sex;
 	private Date date;
+	private String tel;
 	private byte[] photo;
 	
-	public Person(String name,String mail,String surname,String id,String sex,Date date,byte[]photo){
+	public Person(String name,String mail,String surname,String id,String sex,String tel){
 		this.name=name;
 		this.mail=mail;
 		this.surname=surname;
 		this.id=id;
 		this.sex=sex;
-		this.date=date;
-		this.photo=photo;	
+		this.tel=tel;
 	}
 	
 
-
+	public String getTel(){
+		return this.tel;
+	}
+	public void setTel(String tel){
+		this.tel=tel;
+	}
 	public Date getDate(){
 		return date;
 	}

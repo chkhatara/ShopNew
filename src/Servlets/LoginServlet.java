@@ -46,45 +46,33 @@ public class LoginServlet extends HttpServlet {
 		String email=(String)request.getParameter("email");
 		String password=(String)request.getParameter("password");
 		Authorizations aut = new Authorizations();
-		boolean containsPerson = aut.searchPerson(email, password);
-		boolean containsShop = aut.searchShop(email, password); 
+		boolean containsPerson = aut.searchPerson(email, password); //find  if person exists in database
+		boolean containsShop = aut.searchShop(email, password);  //find if shop exists in database
 		HttpSession session = request.getSession(false);			        
 	    if(session != null){
 	        session.invalidate();
 	    }
 		if(containsPerson == false && containsShop == false){
+			RequestDispatcher rd=request.getRequestDispatcher("iShopMain.jsp");
+			rd.forward(request,response);
+		}else if(containsPerson){				 
+		    session=request.getSession();
+		    session.setAttribute("email", email);
+		    session.setAttribute("password", password);
+		    session.setAttribute("user", "person");
+		    RequestDispatcher rd = request.getRequestDispatcher("iShopMain.jsp");
+		    rd.forward(request, response);
+		}else{
 			 session = request.getSession(false);			        
 		    if(session != null){
 		        session.invalidate();
 		    }
-			RequestDispatcher rd=request.getRequestDispatcher("iShopMain.jsp");
-			rd.forward(request,response);
-		}else{
-			
-			if(containsPerson){
-				 session = request.getSession(false);			        
-			    if(session != null){
-			        session.invalidate();
-			    }
-			    session=request.getSession();
-			    session.setAttribute("email", email);
-			    session.setAttribute("password", password);
-			    session.setAttribute("user", "person");
-			    RequestDispatcher rd = request.getRequestDispatcher("iShopMain.jsp");
-			    rd.forward(request, response);
-			}else{
-				 session = request.getSession(false);			        
-			    if(session != null){
-			        session.invalidate();
-			    }
-			    session=request.getSession();
-			    session.setAttribute("email", email);
-			    session.setAttribute("password", password);
-			    session.setAttribute("user", "shop");
-			    RequestDispatcher rd = request.getRequestDispatcher("iShopMain.jsp");
-			    rd.forward(request, response);								
-			}
-		
-		}
+		    session=request.getSession();
+		    session.setAttribute("email", email);
+		    session.setAttribute("password", password);
+		    session.setAttribute("user", "shop");
+		    RequestDispatcher rd = request.getRequestDispatcher("iShopMain.jsp");
+		    rd.forward(request, response);								
+		}				
 	}
 }

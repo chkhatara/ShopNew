@@ -71,7 +71,7 @@
 
                         <button type="submit" class="btn btn-primary" value="Login" >Login</button>
                    </form>
-     <%}else{ 
+     <%}else if(session.getAttribute("user").equals("person")){ 
      	%>
      		 
        		 <form class="navbar-form navbar-right" action="LogOutServlet" method="post" role="logout">
@@ -84,6 +84,17 @@
           		 <span class="glyphicon glyphicon-shopping-cart"></span> Cart</button>
           		</form>
      
+<% }else{ %>
+			<form class="navbar-form navbar-right" action="LogOutServlet" method="post" role="logout">
+       		 
+          		<button type="submit" class="btn btn-primary" value="Logout">Log Out</button>
+          		</form>
+          		<form class="navbar-form navbar-right" action="ShopPageServlet" method="GET" role="logout">
+       		 
+          		<button type="submit" class="btn btn-primary" value="Cart">
+          		 <span class="glyphicon glyphicon-shopping-cart"></span> My Page</button>
+          		</form>
+
 <% } %>
                
             </div>

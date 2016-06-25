@@ -53,5 +53,53 @@ public class DatabaseClass {
 		}		
 		return item;
 	}
+	
+	public int getShopId(String email){
+		Statement stm;
+		int res = -1;
+		Connection con = DataBaseInfo.getConnection();
+		try {
+			stm = con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			ResultSet rSet = stm.executeQuery("select * from shop where shop_email='" + email + "';");
+			if (rSet.next()) {
+				res = rSet.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return res;
+	}
+	
+	public Shop getShop(int idN){
+		Statement stm;
+		Shop shop = null;
+		Connection con = DataBaseInfo.getConnection();
+		try {
+			stm = con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			ResultSet rSet = stm.executeQuery("select * from shop  where shop_id=" + idN + ";");
+			String site = null;
+			String name = null;
+			String mail = null;
+			String tel = null;
+			String info = null;
+			if (rSet.next()) {
+				name = rSet.getString("shop_name");
+				mail = rSet.getString("shop_email");
+				tel = rSet.getString("shop_tel");
+				info=rSet.getString("shop_info");
+				site=rSet.getString("shop_site");
+
+			}
+
+			shop = new Shop(name, mail, tel, site, info);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		return shop;
+	}
 
 }
