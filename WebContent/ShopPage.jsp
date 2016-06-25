@@ -148,10 +148,12 @@
                                 <h4 class="pull-right">$<%= item.getPrice()  %></h4>
                                 <h4><a href="#"><%= item.getName() %></a>
                                 </h4>
-                                <p><%= item.getitemDescription() %> <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+                                <h5>Category: <%= item.getCategory() %></h5>
+                                <h6>SubCategory: <%= item.getSubCategory() %></h6>
+                                <p>Description: <%= item.getitemDescription() %>.</p>
                             </div>
                             <div class="ratings">
-                                <p class="pull-right">15 reviews</p>
+                                <p class="pull-right">15 views</p>
                                 <p>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
