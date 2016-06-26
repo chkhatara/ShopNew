@@ -1,3 +1,5 @@
+
+drop database ishop;
 create database ishop;
 use  ishop;
 create table person(
@@ -145,3 +147,5 @@ values (1,1,1,0);
 INSERT INTO item (item_name,item_sub_category,item_description,item_price,item_quantity,shop_id)
  values
    ("Laptop",1,"Best Laptop",89,1,1);
+   INSERT INTO person_cart_items(person_id,item_id,item_quantity,is_bought)
+values (1,2,3,0);
