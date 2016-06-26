@@ -78,7 +78,7 @@
        		 
           		<button type="submit" class="btn btn-primary" value="Logout">Log Out</button>
           		</form>
-          		<form class="navbar-form navbar-right" action="ShopCartServlet" method="post" role="logout">
+          		<form class="navbar-form navbar-right" action="ShoppingCartServlet" method="post" role="logout">
        		 
           		<button type="submit" class="btn btn-primary" value="Cart">
           		 <span class="glyphicon glyphicon-shopping-cart"></span> Cart</button>
@@ -107,27 +107,28 @@
                 <tbody>
                  <% ArrayList<ItemCart> itemC = (ArrayList<ItemCart>)request.getAttribute("ItemCart");
                  	ItemCart item;
+                 	int total = 0;
                  	for(int i=0;i<itemC.size();i++){
                  		item=itemC.get(i);
-                 		System.out.println(item.getName()+"sadad");
+                 		total+=item.getPrice()*item.getQuantity();
                  %>
                     <tr>
                         <td class="col-sm-8 col-md-6">
                         <div class="media">
-                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://images.nationalgeographic.com/wpf/media-live/photos/000/936/cache/bear-road-denali_93621_990x742.jpg" style="width: 72px; height: 72px;"> </a>
+                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="" style="width: 72px; height: 72px;"> </a>
                             <div class="media-body">
                                 <h4 class="media-heading"><a href="#"> <%= item.getName()%></a></h4>
                                
-                                <h5 class="media-heading"> by <a href="#"><% //item.getShopName(); %></a></h5>
+                                <h5 class="media-heading"> by <a href="#"></a></h5>
                                  <h5 class="media-heading"> Description: <%= item.getItemDescription()%></h5>
                                 <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
                             </div>
                         </div></td>
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                        <input type="email" class="form-control" id="exampleInputEmail1" value="3">
+                        <input type="email" class="form-control" id="exampleInputEmail1" value=<%= item.getQuantity() %>>
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>$<%= item.getPrice() %></strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>$14.61</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>$<%= item.getPrice()*item.getQuantity() %></strong></td>
                         <td class="col-sm-1 col-md-1">
                         <button type="button" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span> Remove
@@ -135,26 +136,14 @@
                     </tr>
                     <%} %>
                     
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td><h5>Subtotal</h5></td>
-                        <td class="text-right"><h5><strong>$24.59</strong></h5></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td><h5>Estimated shipping</h5></td>
-                        <td class="text-right"><h5><strong>$6.94</strong></h5></td>
-                    </tr>
+                    
+                   
                     <tr>
                         <td>   </td>
                         <td>   </td>
                         <td>   </td>
                         <td><h3>Total</h3></td>
-                        <td class="text-right"><h3><strong>$31.53</strong></h3></td>
+                        <td class="text-right"><h3><strong>$<%= total %></strong></h3></td>
                     </tr>
                     <tr>
                         <td>   </td>

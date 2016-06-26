@@ -45,8 +45,8 @@ public class DatabaseClass {
 			ResultSet rSet=stm.executeQuery(
 					"select * from item where item_id='"+itemId+"';");
 			if(rSet.next()){
-				System.out.println(rSet.getString(2));
-				item= new ItemCart(rSet.getString(2), rSet.getString(5), rSet.getInt(6), itemQuantity, null);
+				//item= new ItemCart(rSet.getString(2), rSet.getString(5), rSet.getInt(6), itemQuantity, null);
+				item= new ItemCart(rSet.getString("item_name"), rSet.getString("item_description"), rSet.getInt("item_price"), itemQuantity, null);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
