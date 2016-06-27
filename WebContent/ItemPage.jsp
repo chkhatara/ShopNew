@@ -108,9 +108,6 @@
         <div class="row">
         	<div class="col-lg-3 col-md-3 col-sm-12">
 
-				
-				<!-- End Best Seller -->
-
         	</div>
 
         	<div class="clearfix visible-sm"></div>

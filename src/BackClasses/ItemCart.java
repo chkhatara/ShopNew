@@ -13,13 +13,18 @@ public class ItemCart {
 	private int itemPrice;
 	private int itemQuantity;
 	private byte[] photo;
+	private int id;
 	
-	public ItemCart(String itemName,String itemDescription,int itemPrice,int itemQuantity,byte[] photo){
+	public ItemCart(String itemName,String itemDescription,int itemPrice,int itemQuantity,byte[] photo,int id){
 		this.itemName=itemName;
 		this.itemDescription=itemDescription;
 		this.itemPrice=itemPrice;
 		this.itemQuantity=itemQuantity;
 		this.photo=photo;		
+		this.id=id;
+	}
+	public int getId(){
+		return this.id;
 	}
 	public String getName(){
 		return this.itemName;
