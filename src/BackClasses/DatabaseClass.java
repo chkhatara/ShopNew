@@ -131,7 +131,7 @@ public class DatabaseClass {
 		}		
 		return items;
 	}
-	
+	//gets sub category name by sub category id
 	public String getSubCategoryName(int idN){
 		Statement stm;
 		String subCategory = null;
@@ -151,6 +151,7 @@ public class DatabaseClass {
 		return subCategory;
 		
 	}
+	//gets category id by item sub category id
 	public int getCategoryId(int idN){
 		Statement stm;
 		int category = 0;
@@ -169,7 +170,7 @@ public class DatabaseClass {
 		}
 		return category;
 	}
-	
+	//gets item category name by item category id
 	public String getCategoryName(int idN){
 		Statement stm;
 		String subCategory = null;
@@ -189,4 +190,71 @@ public class DatabaseClass {
 		return subCategory;
 		
 	}
+	//gets category id by category name
+	public int getCategory(String name){
+		Statement stm;
+		int category = 0;
+		Connection con = DataBaseInfo.getConnection();
+		try {
+			stm = con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			ResultSet rSet = stm.executeQuery("select * from item_category  where item_category_name='" + name + "';");			
+			if (rSet.next()) {
+				
+				category = rSet.getInt("item_category_id");
+				System.out.println(category);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		return category;
+	}
+	//search sub category ids by category name
+	public ArrayList<Integer> searchSubCategories(String name){
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		Statement stm;
+		Connection con = DataBaseInfo.getConnection();
+		int categoryId = getCategory(name);
+		try {
+			stm = con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			ResultSet rSet = stm.executeQuery("select * from item_sub_category  where item_category_id=" + categoryId + ";");			
+			while (rSet.next()) {
+				arr.add(rSet.getInt("item_sub_category"));				
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		return arr;
+	}
+	//search items by category name
+	public ArrayList<Item> searchItems(String name){
+		ArrayList <Integer> subCategoryIds = searchSubCategories(name);
+		ArrayList <Item> items = new ArrayList<Item>();
+		Statement stm;
+		Connection con = DataBaseInfo.getConnection();
+		try {
+			stm = con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			for(int i=0;i<subCategoryIds.size();i++){
+				int subId = subCategoryIds.get(i);
+				Item item = null;
+				ResultSet rSet = stm.executeQuery("select * from item where item_sub_category=" + subId + ";");			
+				while (rSet.next()) {
+					item = new Item(rSet.getString("item_name"), rSet.getInt("item_price"), rSet.getInt("item_quantity"), rSet.getString("item_description"), name, getSubCategoryName(rSet.getInt("item_sub_category")));		
+					items.add(item);
+				}
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		return items;
+	}
+	
 }
