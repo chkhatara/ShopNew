@@ -181,10 +181,12 @@
 									
 									<div class="clearfix"></div>
 									<hr/>
+									<form id="AddToCart" action="AddToCartServlet" method="post" role="form">
 									<div class="col-xs-12 input-qty-detail">
 										<input type="text" class="form-control input-qty text-center" value="1">
-										<button class="btn btn-default pull-left"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+										<button type ="submit" class="btn btn-default pull-left"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
 									</div>
+									</form>
 									<div class="clearfix"></div><br/>
 									<div class="col-xs-12 add-to-detail">
 										<div class="row">

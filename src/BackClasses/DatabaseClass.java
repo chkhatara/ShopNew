@@ -4,6 +4,7 @@
 package BackClasses;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -288,6 +289,29 @@ public class DatabaseClass {
 			System.out.println(e.getMessage());
 		}
 		return items;
+	}
+	
+	public boolean addItemToPersonCart(int cartId,int personId,int quantity){
+		Connection con = DataBaseInfo.getConnection();
+
+		PreparedStatement stmt;
+		boolean returnBool=true;
+		try {
+			stmt = con.prepareStatement(
+					"INSERT INTO person_cart_items (person_id,item_id,item_quantity,is_bought) "
+							+ "values (?,?,?,?)");
+			stmt.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			stmt.setInt(1,cartId);
+			stmt.setInt(2,personId);
+			stmt.setInt(3,quantity);
+			stmt.setInt(4, 0);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			returnBool=false;
+			// TODO Auto-generated catch block
+			System.out.print(e.getMessage());
+		}
+		return returnBool;
 	}
 	
 }

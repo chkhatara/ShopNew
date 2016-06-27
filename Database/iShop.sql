@@ -1,4 +1,3 @@
-
 drop database ishop;
 create database ishop;
 use  ishop;
@@ -62,7 +61,6 @@ create table item_sub_category(
 
 
 
-
 create table item(
 	item_id int not null auto_increment,
     item_name varchar(64) not null,
@@ -74,6 +72,17 @@ create table item(
     constraint item_id_pk primary key(item_id),
     constraint item_sube_fk1 foreign key(item_sub_category) references item_sub_category(item_sub_category),
     constraint item_shop_id_fk1 foreign key(shop_id) references shop(shop_id)
+);
+
+create table item_review(
+	review_id int not null auto_increment,
+    item_id int not null,
+    description text,
+    person_name varchar(64) not null,
+    constraint review_pk primary key(review_id),
+    constraint item_review_fk foreign key(item_id) references item(item_id)
+    
+
 );
 create table item_photoes(
 	item_photo_id int not null auto_increment,
@@ -144,8 +153,6 @@ INSERT INTO person (person_name,person_lastName,person_email,person_password,per
    ("Laptop",1,"Best Laptop",89,1,1);
  INSERT INTO person_cart_items(person_id,item_id,item_quantity,is_bought)
 values (1,1,1,0);
-INSERT INTO item (item_name,item_sub_category,item_description,item_price,item_quantity,shop_id)
- values
-   ("Laptop",1,"Best Laptop",89,1,1);
+
    INSERT INTO person_cart_items(person_id,item_id,item_quantity,is_bought)
 values (1,2,3,0);
