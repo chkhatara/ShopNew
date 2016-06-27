@@ -165,33 +165,23 @@
 
 					<div id="main_menu">
                         <div class="list-group panel panel-cat">
-                            <a href="#sub1" class="list-group-item" data-toggle="collapse" data-parent="#main_menu">Electronics & Computers <i class="fa fa-caret-down pull-right"></i></a>
-                            <div class="collapse list-group-sub" id="sub1">
-                                <a href="#SubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubMenu1">Phones & Accessories<i class="fa fa-caret-down"></i></a>
-                                <div class="collapse list-group-submenu" id="SubMenu1">
-                                    <a href="#" class="list-group-item" data-parent="#SubMenu1">iPhone</a>
-                                    <a href="#" class="list-group-item" data-parent="#SubMenu1">Android</a>
-                                    <a href="#" class="list-group-item" data-parent="#SubMenu1">windows phone</a>
-                                    <a href="#" class="list-group-item" data-parent="#SubMenu1">other</a>
-                                  
-                                    
-                                </div>
+                        <%  DatabaseClass db = new DatabaseClass();
+                        	ArrayList<String> categories = db.getAllCategories();
+                        	int size = categories.size();
+                        	ArrayList<Integer> subCategories = new ArrayList<Integer>();
+                        	for(int i=0;i<size;i++){
+                        		subCategories=db.searchSubCategories(categories.get(i));
+                        	%>
+                            <a href="#sub<%=size+1  %>" class="list-group-item" data-toggle="collapse" data-parent="#main_menu"><%= categories.get(i) %> <i class="fa fa-caret-down pull-right"></i></a>
+                            <div class="collapse list-group-sub" id="sub<%=size+1  %>">
+                            	<% for(int k=0;k<subCategories.size();k++){ %>                             
+                                <a href="#" class="list-group-item"  data-parent="#sub<%= size+1 %>"><%= db.getSubCategoryName(subCategories.get(k)) %></a>
+                                
                                 
                             </div>
-                            <a href="#" class="list-group-item" >Dapibus ac facilisis in</a>
-                            <a href="#sub2" class="list-group-item" data-toggle="collapse" data-parent="#main_menu">Porta ac consectetur ac <i class="fa fa-caret-down pull-right"></i></a>
-                            <div class="collapse list-group-sub" id="sub2">
-                                <a href="#" class="list-group-item">Subitem 1</a>
-                                <a href="#" class="list-group-item">Subitem 2</a>
-                                <a href="#" class="list-group-item">Subitem 3</a>
-                            </div>
-                            <a href="#" class="list-group-item" >Vestibulum at eros</a>
-                            <a href="#" class="list-group-item" >Porta ac consectetur ac</a>
-                            <a href="#" class="list-group-item" >Cras justo odio</a>
-                            <a href="#" class="list-group-item" >Dapibus ac facilisis in</a>
-                            <a href="#" class="list-group-item" >Porta ac consectetur ac</a>
-                            <a href="#" class="list-group-item" >Vestibulum at eros</a>
-                            <a href="#" class="list-group-item" >Porta ac consectetur ac</a>
+                            <%}
+                            } %>
+                            
                         </div>
                     </div>
 

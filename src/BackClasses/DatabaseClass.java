@@ -314,4 +314,26 @@ public class DatabaseClass {
 		return returnBool;
 	}
 	
+	public ArrayList<String> getAllCategories(){		
+		ArrayList <String> categories = new ArrayList<String>();
+		Statement stm;
+		Connection con = DataBaseInfo.getConnection();
+		try {
+			stm = con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			
+			ResultSet rSet = stm.executeQuery("select * from item_category" + ";");			
+			while (rSet.next()) {
+				categories.add(rSet.getString("item_category_name"));
+			}
+			
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		return categories;
+	}
 }
+	
+
