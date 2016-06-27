@@ -15,14 +15,18 @@ public class Item {
 	private String itemDescription;
 	private String itemCategory;
 	private String itemSubCategory;
-	
-	public Item(String itemName,int itemPrice,int itemQuantity,String itemDescription,String itemCategory,String itemSubCategory){
+	private int id;
+	public Item(String itemName,int itemPrice,int itemQuantity,String itemDescription,String itemCategory,String itemSubCategory,int id){
 		this.itemName=itemName;
 		this.itemPrice=itemPrice;
 		this.itemQuantity=itemQuantity;
 		this.itemDescription=itemDescription;
 		this.itemCategory=itemCategory;
 		this.itemSubCategory=itemSubCategory;
+		this.id=id;
+	}
+	public int getId(){
+		return this.id;
 	}
 	public String getName(){
 		return this.itemName;

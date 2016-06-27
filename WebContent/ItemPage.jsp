@@ -7,16 +7,22 @@
 <!-- Mirrored from www.grehon.com/mimity/v1.4/detail.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Jun 2016 00:59:48 GMT -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>ItemPage</title>
+  <%@ page import="BackClasses.*" %>
+	<%@ page import="java.util.ArrayList" %>
+	<% Item item = null;
+		DatabaseClass db = new DatabaseClass();
+		item = db.getItemById(Integer.parseInt(request.getParameter("id")));%>
+	<title><%= item.getName() %></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Product Detail - Mimity</title>
+    <title></title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/smoothproducts.html" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+  
 </head>
 <body>
 	
@@ -162,51 +168,17 @@
 							<div class="well product-short-detail">
 								<div class="row">
 									<div class="the-list">
-										<h3 class="col-xs-12">
-											<!-- <span class="price-old">$169</span> -->
-											$428.96
+										<h3 class="col-xs-12">$<%= item.getPrice() %>
 										</h3>
 									</div>
 									<div class="the-list">
 										<div class="col-xs-4">Availability</div>
 										<div class="col-xs-8">
 											<!-- <span class="red">OUT OF STOCK</span> -->
-											<span class="green">98 items in stock</span>
+											<span class="green"><%= item.getQuantity() %></span>
 										</div>
 									</div>
-									<div class="the-list">
-										<div class="col-xs-4">Select</div>
-										<div class="col-xs-8">
-											<select class="form-control">
-												<option value="">Select Option</option>
-												<option value="option1">Option 1</option>
-												<option value="option2">Option 2</option>
-												<option value="option3">Option 3</option>
-											</select>
-										</div>
-									</div>
-									<div class="the-list">
-										<div class="col-xs-4">Checkbox</div>
-										<div class="col-xs-8">
-											<label>
-												<input type="checkbox" value="check1"> Check 1
-											</label>&nbsp;
-											<label>
-												<input type="checkbox" value="check2" checked> Check 2
-											</label>
-										</div>
-									</div>
-									<div class="the-list">
-										<div class="col-xs-4">Radio</div>
-										<div class="col-xs-8">
-											<label>
-												<input type="radio" name="radio" value="radio1" checked> Radio 1
-											</label>&nbsp;
-											<label>
-												<input type="radio" name="radio" value="radio2"> Radio 2
-											</label>
-										</div>
-									</div>
+									
 									<div class="clearfix"></div>
 									<hr/>
 									<div class="col-xs-12 input-qty-detail">
@@ -242,7 +214,7 @@
 							<div class="tab-content">
 								<div class="tab-pane active" id="desc">
 									<div class="well">
-										<p>Actually this part of clothes is very unique and original. It is a way of self-expression because nowadays making some logo or phrase has become very popular. Obviously the T-shirts are the part of modern culture and they have a great influence on teens because of their freedom and epatage. We are offering you our unique and original products. </p>
+										<p><%= item.getitemDescription() %></p>
 									</div>
 								</div>
 								<div class="tab-pane" id="detail">

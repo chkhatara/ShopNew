@@ -148,7 +148,7 @@
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
                                 <h4 class="pull-right">$<%= item.getPrice()  %></h4>
-                                <h4><a href="#"><%= item.getName() %></a>
+                                <h4><a href="ItemPage.jsp?id=<%= item.getId()%>"><%= item.getName() %></a>
                                 </h4>
                                 <h5>Category: <%= item.getCategory() %></h5>
                                 <h6>SubCategory: <%= item.getSubCategory() %></h6>

@@ -53,7 +53,38 @@ public class DatabaseClass {
 		}		
 		return item;
 	}
-	
+	public Item getItemById(int id){
+		Statement stm;
+		Item item = null;
+		Connection con = DataBaseInfo.getConnection();
+		try {
+			stm = con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			ResultSet rSet = stm.executeQuery("select * from item  where item_id=" + id + ";");
+			String itemName= null;
+			String itemSubCategory = null;
+			String itemCategory = null;
+			String itemDescription = null;
+			int itemQuantity = 0;
+			int itemPrice = 0;
+			int itemId= 0;
+			if (rSet.next()) {
+				itemId= rSet.getInt("item_id");
+				itemName = rSet.getString("item_name");
+				itemDescription = rSet.getString("item_description");
+				itemPrice = rSet.getInt("item_price");
+				itemQuantity = rSet.getInt("item_quantity");
+				itemCategory = getCategoryName(getCategoryId(rSet.getInt("item_sub_category")));
+				itemSubCategory = getSubCategoryName(rSet.getInt("item_sub_category"));
+				item = new Item(itemName, itemPrice, itemQuantity, itemDescription, itemCategory, itemSubCategory,itemId);
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		return item;
+	}
 	public int getShopId(String email){
 		Statement stm;
 		int res = -1;
@@ -110,6 +141,7 @@ public class DatabaseClass {
 		String itemDescription = null;
 		int itemQuantity = 0;
 		int itemPrice = 0;
+		int itemId= 0;
 		Connection con = DataBaseInfo.getConnection();
 		try {
 			stm=con.createStatement();
@@ -117,13 +149,14 @@ public class DatabaseClass {
 			ResultSet rSet=stm.executeQuery(
 					"select * from item where shop_id='"+id+"';");
 			while(rSet.next()){
+				itemId= rSet.getInt("item_id");
 				itemName = rSet.getString("item_name");
 				itemDescription = rSet.getString("item_description");
 				itemPrice = rSet.getInt("item_price");
 				itemQuantity = rSet.getInt("item_quantity");
 				itemCategory = getCategoryName(getCategoryId(rSet.getInt("item_sub_category")));
 				itemSubCategory = getSubCategoryName(rSet.getInt("item_sub_category"));
-				Item item = new Item(itemName, itemPrice, itemQuantity, itemDescription, itemCategory, itemSubCategory);
+				Item item = new Item(itemName, itemPrice, itemQuantity, itemDescription, itemCategory, itemSubCategory,itemId);
 				items.add(item);
 			}
 		} catch (SQLException e) {
@@ -245,7 +278,7 @@ public class DatabaseClass {
 				Item item = null;
 				ResultSet rSet = stm.executeQuery("select * from item where item_sub_category=" + subId + ";");			
 				while (rSet.next()) {
-					item = new Item(rSet.getString("item_name"), rSet.getInt("item_price"), rSet.getInt("item_quantity"), rSet.getString("item_description"), name, getSubCategoryName(rSet.getInt("item_sub_category")));		
+					item = new Item(rSet.getString("item_name"), rSet.getInt("item_price"), rSet.getInt("item_quantity"), rSet.getString("item_description"), name, getSubCategoryName(rSet.getInt("item_sub_category")),rSet.getInt("item_id"));		
 					items.add(item);
 				}
 			}
