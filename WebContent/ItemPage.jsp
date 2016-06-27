@@ -22,6 +22,7 @@
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/smoothproducts.html" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/searchfields.css" rel="stylesheet">
   
 </head>
 <body>
@@ -81,7 +82,8 @@
                    </form>
      <%}else if(session.getAttribute("user").equals("person")){ 
      	%>
-     		 
+     		
+ 
        		 <form class="navbar-form navbar-right" action="LogOutServlet" method="post" role="logout">
        		 
           		<button type="submit" class="btn btn-primary" value="Logout">Log Out</button>
