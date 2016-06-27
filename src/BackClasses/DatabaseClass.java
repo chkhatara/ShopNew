@@ -236,7 +236,6 @@ public class DatabaseClass {
 			if (rSet.next()) {
 				
 				category = rSet.getInt("item_category_id");
-				System.out.println(category);
 			}
 
 		} catch (SQLException e) {

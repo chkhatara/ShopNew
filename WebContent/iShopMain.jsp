@@ -168,16 +168,16 @@
                         <%  DatabaseClass db = new DatabaseClass();
                         	ArrayList<String> categories = db.getAllCategories();
                         	int size = categories.size();
+                        	System.out.println("size"+size);
                         	ArrayList<Integer> subCategories = new ArrayList<Integer>();
                         	for(int i=0;i<size;i++){
                         		subCategories=db.searchSubCategories(categories.get(i));
+                        		System.out.println(subCategories.size()+"sub");
                         	%>
-                            <a href="#sub<%=size+1  %>" class="list-group-item" data-toggle="collapse" data-parent="#main_menu"><%= categories.get(i) %> <i class="fa fa-caret-down pull-right"></i></a>
-                            <div class="collapse list-group-sub" id="sub<%=size+1  %>">
+                            <a href="#sub<%=i+1  %>" class="list-group-item" data-toggle="collapse" data-parent="#main_menu"><%= categories.get(i) %> <i class="fa fa-caret-down pull-right"></i></a>
+                            <div class="collapse list-group-sub" id="sub<%=i+1  %>">
                             	<% for(int k=0;k<subCategories.size();k++){ %>                             
-                                <a href="#" class="list-group-item"  data-parent="#sub<%= size+1 %>"><%= db.getSubCategoryName(subCategories.get(k)) %></a>
-                                
-                                
+                                <a href="#" class="list-group-item"  data-parent="#sub<%= i+1 %>"><%= db.getSubCategoryName(subCategories.get(k)) %></a>                             
                             </div>
                             <%}
                             } %>
