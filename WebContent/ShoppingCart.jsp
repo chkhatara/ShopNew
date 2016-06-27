@@ -117,7 +117,7 @@
                         <div class="media">
                             <a class="thumbnail pull-left" href="#"> <img class="media-object" src="" style="width: 72px; height: 72px;"> </a>
                             <div class="media-body">
-                                <h4 class="media-heading"><a href="#"> <%= item.getName()%></a></h4>
+                                <h4 class="media-heading"><a href="ItemPage.jsp?id=1"> <%= item.getName()%></a></h4>
                                
                                 <h5 class="media-heading"> by <a href="#"></a></h5>
                                  <h5 class="media-heading"> Description: <%= item.getItemDescription()%></h5>

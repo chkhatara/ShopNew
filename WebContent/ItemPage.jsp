@@ -19,68 +19,7 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-	<header>
-	    <div class="container">
-	        <div class="row">
-
-	        	<!-- Logo -->
-	            <div class="col-lg-4 col-md-3 hidden-sm hidden-xs">
-	            	<div class="well logo">
-	            		<a href="index.html">
-	            			Mimity <span>Online Shop</span>
-	            		</a>
-	            		<div>Lorem ipsum dolor sit amet.</div>
-	            	</div>
-	            </div>
-	            <!-- End Logo -->
-
-				<!-- Search Form -->
-	            <div class="col-lg-5 col-md-5 col-sm-7 col-xs-12">
-	            	<div class="well">
-	                    <form action="#">
-	                        <div class="input-group">
-	                            <input type="text" class="form-control input-search" placeholder="Enter something to search"/>
-	                            <span class="input-group-btn">
-	                                <button class="btn btn-default no-border-left" type="submit"><i class="fa fa-search"></i></button>
-	                            </span>
-	                        </div>
-	                    </form>
-	                </div>
-	            </div>
-	            <!-- End Search Form -->
-
-	            <!-- Shopping Cart List -->
-	            <div class="col-lg-3 col-md-4 col-sm-5">
-	                <div class="well">
-	                    <div class="btn-group btn-group-cart">
-	                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <span class="pull-left"><i class="fa fa-shopping-cart icon-cart"></i></span>
-                                <span class="pull-left">Shopping Cart: 2 item(s)</span>
-                                <span class="pull-right"><i class="fa fa-caret-down"></i></span>
-                            </button>
-                            <ul class="dropdown-menu cart-content" role="menu">
-                                <li>
-                                    <a href="detail.html">
-                                        <b>Penn State College T-Shirt</b>
-                                        <span>x1 $528.96</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="detail.html">
-                                        <b>Live Nation ACDC Gray T-Shirt</b>
-                                        <span>x1 $428.96</span>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li><a href="cart.html">Total: $957.92</a></li>
-                            </ul>
-	                    </div>
-	                </div>
-	            </div>
-	            <!-- End Shopping Cart List -->
-	        </div>
-	    </div>
-    </header>
+	
 
 	<!-- Navigation -->
     <nav class="navbar navbar-inverse" role="navigation">
@@ -97,16 +36,18 @@
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
                     <li><a href="catalogue.html">Catalogue</a></li>
-                    <li><a href="cart.html">Shopping Cart</a></li>
+                    <li><a href="cart.html">Shopping Cart</a>
+                    </li>
                     <li><a href="checkout.html">Checkout</a></li>
                     <li class="nav-dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            Pages <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="about.html">About Us</a></li>
+                    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							Pages <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+                            <li><a href="about.html">About Us</a>
+                             </li>
                             <li><a href="blog.html">Blog</a></li>
                             <li><a href="blog-detail.html">Blog Detail</a></li>
                             <li><a href="compare.html">Compare</a></li>
@@ -117,7 +58,47 @@
                             <li><a href="typography.html">Typography</a></li>
                         </ul>
                     </li>
-                </ul>
+                     </ul>
+                     <% if(session.getAttribute("email")==null){ %>
+      <form id="signin" action="LoginServlet" method="post" class="navbar-form navbar-right" role="form">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input id="email" type="email" class="form-control" name="email" value="" placeholder="Email Address">                                        
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input id="password" type="password" class="form-control" name="password" value="" placeholder="Password">                                        
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" value="Login" >Login</button>
+                   </form>
+     <%}else if(session.getAttribute("user").equals("person")){ 
+     	%>
+     		 
+       		 <form class="navbar-form navbar-right" action="LogOutServlet" method="post" role="logout">
+       		 
+          		<button type="submit" class="btn btn-primary" value="Logout">Log Out</button>
+          		</form>
+          		<form class="navbar-form navbar-right" action="ShoppingCartServlet" method="post" role="logout">
+       		 
+          		<button type="submit" class="btn btn-primary" value="Cart">
+          		 <span class="glyphicon glyphicon-shopping-cart"></span> Cart</button>
+          		</form>
+     
+<% }else{ %>
+			<form class="navbar-form navbar-right" action="LogOutServlet" method="post" role="logout">
+       		 
+          		<button type="submit" class="btn btn-primary" value="Logout">Log Out</button>
+          		</form>
+          		<form class="navbar-form navbar-right" action="ShopPageServlet" method="GET" role="logout">
+       		 
+          		<button type="submit" class="btn btn-primary" value="Cart">
+          		 <span class="glyphicon glyphicon-shopping-cart"></span> My Page</button>
+          		</form>
+
+<% } %>
+               
             </div>
         </div>
     </nav>
@@ -127,42 +108,7 @@
         <div class="row">
         	<div class="col-lg-3 col-md-3 col-sm-12">
 
-				<!-- Best Seller -->
-				<div class="col-lg-12 col-md-12 col-sm-12 visible-lg visible-md">
-					<div class="no-padding">
-	            		<span class="title">BEST SELLER</span>
-	            	</div>
-		                <div class="thumbnail col-lg-12 col-md-12 col-sm-6 text-center">
-		                	<a href="detail.html" class="link-p">
-		                    	<img src="images/product-8.jpg" alt="">
-		                	</a>
-		                    <div class="caption prod-caption">
-		                        <h4><a href="detail.html">Penn State College T-Shirt</a></h4>
-		                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-		                        <p>
-		                        	<div class="btn-group">
-			                        	<a href="#" class="btn btn-default">$ 528.96</a>
-			                        	<a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
-		                        	</div>
-		                        </p>
-		                    </div>
-		                </div>
-		                <div class="thumbnail col-lg-12 col-md-12 col-sm-6 hidden-xs text-center">
-		                	<a href="detail.html" class="link-p">
-		                    	<img src="images/product-9.jpg" alt="">
-		                	</a>
-		                    <div class="caption prod-caption">
-		                        <h4><a href="detail.html">Ohio State College T-Shirt</a></h4>
-		                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-		                        <p>
-		                        	<div class="btn-group">
-			                        	<a href="#" class="btn btn-default">$ 924.25</a>
-			                        	<a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
-		                        	</div>
-		                        </p>
-		                    </div>
-		                </div>
-				</div>
+				
 				<!-- End Best Seller -->
 
         	</div>
