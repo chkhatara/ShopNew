@@ -3,6 +3,7 @@
  */
 package BackClasses;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -355,6 +356,40 @@ public class DatabaseClass {
 			System.out.println(e.getMessage());
 		}
 		return arr;
+	}
+	//adds  picture to shop 
+	public void addCompPicture(String mail, InputStream in) {
+		int id=0;
+		try {
+			Statement st;
+			Connection con = DataBaseInfo.getConnection();
+			st = con.createStatement();
+			st.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			id = getShopId(mail);
+			java.sql.PreparedStatement prs = con.prepareStatement("insert into shop_photoes (shop_id, shop_photo) values(?,?)");
+			prs.setInt(1, id);
+			prs.setBlob(2, in);
+			prs.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	//adds picture to item
+	public void addItemPicture(int id, InputStream in) {
+		try {
+			Statement st;
+			Connection con = DataBaseInfo.getConnection();
+			st = con.createStatement();
+			st.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			java.sql.PreparedStatement prs = con.prepareStatement("insert into item_photoes (item_id, item_photo) values(?,?)");
+			prs.setInt(1, id);
+			prs.setBlob(2, in);
+			prs.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
 	

@@ -60,7 +60,7 @@ public class Upload extends HttpServlet {
         outputStream.close();
         if (id==null && mail!=null) {
 	        DatabaseClass db = new DatabaseClass();
-	        //d.addPicture(mail, inputStream);
+	        db.addCompPicture(mail, inputStream);
         } else if(id!=null) {
         	 DatabaseClass db = new DatabaseClass();
         	//dp.addPicture(id, inputStream);
