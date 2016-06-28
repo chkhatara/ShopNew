@@ -14,6 +14,8 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/jquery-ui.min.css" rel="stylesheet">
+    <link href="css/fileinput.min.css" rel="stylesheet">
+    <link href="css/fileinput.css" rel="stylesheet">
     
     
 
@@ -115,6 +117,7 @@
 		</div>
       </div>
     </div>    
+        
     <!-- edit form column -->
     <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
       <div class="alert alert-info alert-dismissable">
@@ -199,6 +202,9 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/fileinput.js"></script>
+    <script src="js/fileinput.min.js"></script>
   
 </body>
 </html>
