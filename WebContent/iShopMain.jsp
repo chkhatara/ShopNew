@@ -168,19 +168,22 @@
                         <%  DatabaseClass db = new DatabaseClass();
                         	ArrayList<String> categories = db.getAllCategories();
                         	int size = categories.size();
-                        	System.out.println("size"+size);
+                        	System.out.println("size "+size);
                         	ArrayList<Integer> subCategories = new ArrayList<Integer>();
                         	for(int i=0;i<size;i++){
                         		subCategories=db.searchSubCategories(categories.get(i));
-                        		System.out.println(subCategories.size()+"sub");
+                        		System.out.println(subCategories.size()+" "+categories.get(i)+" i "+i);
+                        		
                         	%>
-                            <a href="#sub<%=i+1  %>" class="list-group-item" data-toggle="collapse" data-parent="#main_menu"><%= categories.get(i) %> <i class="fa fa-caret-down pull-right"></i></a>
-                            <div class="collapse list-group-sub" id="sub<%=i+1  %>">
-                            	<% for(int k=0;k<subCategories.size();k++){ %>                             
-                                <a href="#" class="list-group-item"  data-parent="#sub<%= i+1 %>"><%= db.getSubCategoryName(subCategories.get(k)) %></a>                             
+                            <a href="#sub<%= i+1  %>" class="list-group-item" data-toggle="collapse" data-parent="#main_menu"><%= categories.get(i) %> <i class="fa fa-caret-down pull-right"></i></a>
+                            <div class="collapse list-group-submenu" id="sub<%= i+1  %>">  
+                            <% for(int k=0;k<subCategories.size();k++){ %>   
+                                                     	                          
+                                <a href="#" class="list-group-item" ><%= db.getSubCategoryName(subCategories.get(k)) %></a>                             
+                           
+                            <%}%>
                             </div>
-                            <%}
-                            } %>
+                           <% } %>
                             
                         </div>
                     </div>
@@ -188,46 +191,7 @@
 				</div>
 				<!-- End Categories -->
 
-				<!-- Best Seller -->
-				<div class="col-lg-12 col-md-12 col-sm-6">
-					<div class="no-padding">
-	            		<span class="title">BEST SELLER</span>
-	            	</div>
-					<div class="hero-feature">
-		                <div class="thumbnail text-center">
-		                	<a href="detail.html" class="link-p">
-		                    	<img src="images/product-8.jpg" alt="">
-		                	</a>
-		                    <div class="caption prod-caption">
-		                        <h4><a href="detail.html">Penn State College T-Shirt</a></h4>
-		                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-		                        <p>
-		                        	<div class="btn-group">
-			                        	<a href="#" class="btn btn-default">$ 528.96</a>
-			                        	<a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
-		                        	</div>
-		                        </p>
-		                    </div>
-		                </div>
-		            </div>
-		            <div class="hero-feature hidden-sm">
-		                <div class="thumbnail text-center">
-		                	<a href="detail.html" class="link-p">
-		                    	<img src="images/product-9.jpg" alt="">
-		                	</a>
-		                    <div class="caption prod-caption">
-		                        <h4><a href="detail.html">Ohio State College T-Shirt</a></h4>
-		                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-		                        <p>
-		                        	<div class="btn-group">
-			                        	<a href="#" class="btn btn-default">$ 924.25</a>
-			                        	<a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
-		                        	</div>
-		                        </p>
-		                    </div>
-		                </div>
-		            </div>
-				</div>
+				
 				<!-- End Best Seller -->
 
         	</div>
