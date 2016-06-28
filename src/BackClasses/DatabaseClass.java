@@ -54,6 +54,7 @@ public class DatabaseClass {
 		}		
 		return item;
 	}
+	//gets item by id
 	public Item getItemById(int id){
 		Statement stm;
 		Item item = null;
@@ -332,6 +333,28 @@ public class DatabaseClass {
 			System.out.println(e.getMessage());
 		}
 		return categories;
+	}
+	//gets item by sub category id
+	public ArrayList<Item> getItemsBySubCategoryId(int id){
+		ArrayList<Item> arr = new ArrayList<Item>();
+		Statement stm;
+		Connection con = DataBaseInfo.getConnection();
+		try {
+			stm = con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			
+			ResultSet rSet = stm.executeQuery("select * from item where item_sub_category = " +id+ ";");			
+			while (rSet.next()) {
+				Item item = getItemById(rSet.getInt("item_id"));
+				arr.add(item);
+			}
+			
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		return arr;
 	}
 }
 	
