@@ -179,7 +179,7 @@
                             <div class="collapse list-group-submenu" id="sub<%= i+1  %>">  
                             <% for(int k=0;k<subCategories.size();k++){ %>   
                                                      	                          
-                                <a href="#" class="list-group-item" ><%= db.getSubCategoryName(subCategories.get(k)) %></a>                             
+                                <a href="FilterBySubCategories.jsp?id=<%= subCategories.get(k)  %>" class="list-group-item" ><%= db.getSubCategoryName(subCategories.get(k)) %></a>                             
                            
                             <%}%>
                             </div>

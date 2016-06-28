@@ -5,8 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Sub Categories</title>
+<%@ page import="BackClasses.*" %>
+    
+<%@ page import="java.util.ArrayList" %>
 </head>
 <body>
+  <% int id = Integer.parseInt(request.getParameter("id"));
+  	DatabaseClass db = new DatabaseClass();
+  	ArrayList<Item> items = db.getItemsBySubCategoryId(id);
+  	%>
 	
 
 </body>
