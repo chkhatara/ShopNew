@@ -108,9 +108,9 @@
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="text-center">
        	  <form action=<%="\""+"Upload?mail=tbilisi@gmail.com"+"\"" %> method="post" enctype="multipart/form-data">
-			    <input type="text" name="description" />
 			    <input type="file" name="file" />
-			    <input type="submit" />
+			    <h1></h1>
+			    <input class="btn btn-primary" type="submit" />
 		</form>
         
        <div>

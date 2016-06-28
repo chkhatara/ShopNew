@@ -49,8 +49,7 @@ public class Upload extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
     	String mail = request.getParameter("mail");
-    	String id = request.getParameter("id");
-        String description = request.getParameter("description"); // Retrieves <input type="text" name="description">
+    	String id = request.getParameter("id"); // Retrieves <input type="text" name="description">
         Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
         InputStream fileContent = filePart.getInputStream();
         File file = new File(FILE_PATH+"/that.jpg");
@@ -59,16 +58,15 @@ public class Upload extends HttpServlet {
         FileInputStream inputStream= new FileInputStream(file);
         outputStream.close();
         if (id==null && mail!=null) {
-        	System.out.println("dsada");
 	        DatabaseClass db = new DatabaseClass();
 	        db.addCompPicture(mail, inputStream);
         } else if(id!=null) {
         	 DatabaseClass db = new DatabaseClass();
-        	//dp.addPicture(id, inputStream);
+        	 db.addItemPicture(Integer.parseInt(id), inputStream);
         }
         inputStream.close();
         file.delete();
-        response.getWriter().print("<html><h1>file: "+description+" was successfully uploaded</h1></html>");
+       // response.getWriter().print("<html><h1>file: "+description+" was successfully uploaded</h1></html>");
 	}
 
 }

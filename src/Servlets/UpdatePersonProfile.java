@@ -6,6 +6,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import BackClasses.Authorizations;
+import BackClasses.DatabaseClass;
+import BackClasses.Person;
 
 /**
  * Servlet implementation class UpdatePersonProfile
@@ -49,31 +54,26 @@ public class UpdatePersonProfile extends HttpServlet {
 		String idnumber=(String)request.getParameter("idnumber");
 		String about=(String)request.getParameter("about");
 		String phone = (String) request.getParameter("phone");
-//		if(name.length()!=0 && !name.equals(""))currentPerson.setName(name);
-//		if(lastName!=null && !lastName.equals("")) currentPerson.setSurname(lastName);
-//		if(email!=null && !email.equals("")){
-//			currentPerson.setMail(email);
-//		}
-//		if(date!=null && date.length()==10){
-//			int year=Integer.parseInt(date.substring(0,4));
-//			int day=Integer.parseInt(date.substring(8));
-//			int month=Integer.parseInt(date.substring(5,7));
-//			Date d=new GregorianCalendar(year, month-1, day).getTime();
-//			currentPerson.setDate(d);
-//		}
-//		Boolean changePassword=false;
-//		DBSelect db=new DBSelect();
-//		if(db.searchPerson(sessionMail, currentPassword)){
-//			if(password!=null && password.equals(confirmPassword) && !password.equals("")){
-//				changePassword=true;
-//			}
-//		}
-//		currentPerson.setSex(sex);
-//		currentPerson.setAbout(about);
+		Authorizations aut = new Authorizations();
+		Person currentPerson = aut.getPerson(aut.getPersonId(sessionMail));
+		
+		if(name.length()!=0 && !name.equals(""))currentPerson.setName(name);
+		if(lastName!=null && !lastName.equals("")) currentPerson.setSurname(lastName);
+		if(email!=null && !email.equals("")){
+			currentPerson.setMail(email);
+		}
+
+		Boolean changePassword=false;
+		if(aut.searchPerson(sessionMail, currentPassword)){
+			if(password!=null && password.equals(confirmPassword) && !password.equals("")){
+				changePassword=true;
+			}
+		}
+	//	currentPerson.setDes(about);
 //		data.updatePerson(currentPerson, password, changePassword, sessionMail);
-//		HttpSession ses=request.getSession();
-//		ses.setAttribute("email", currentPerson.getMail());
-//		ses.setAttribute("person", currentPerson);
+		HttpSession ses=request.getSession();
+		ses.setAttribute("email", currentPerson.getMail());
+		ses.setAttribute("person", currentPerson);
 //		response.sendRedirect("http://localhost:8080/HR-Geo/PersonServlet");
 	}
 
