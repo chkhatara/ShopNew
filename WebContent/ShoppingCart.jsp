@@ -34,7 +34,7 @@
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="iShopMain.jsp" class="active">Home</a></li>
                     <li><a href="catalogue.html">Catalogue</a></li>
                     <li><a href="cart.html">Shopping Cart</a>
                     </li>
@@ -43,17 +43,15 @@
                     	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							Pages <span class="caret"></span>
 						</a>
-						<ul class="dropdown-menu">
-                            <li><a href="about.html">About Us</a>
-                             </li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="blog-detail.html">Blog Detail</a></li>
-                            <li><a href="compare.html">Compare</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="detail.html">Product Detail</a></li>
-                            <li><a href="register.html">Register</a></li>
-                            <li><a href="typography.html">Typography</a></li>
+						<ul class="dropdown-menu">                   
+						<% if(session.getAttribute("email")==null){ %>       
+                            <li><a href="PersonRegister.jsp">Register</a></li>
+                        <% }else if(session.getAttribute("user").equals("person")){ %>
+                        	<li><a href="UpdatePersonProfile.jsp">Update Profile</a></li>
+                        	<% }else{ %>
+                       	 	<li><a href="UpdateShopProfile.jsp">Update Profile</a></li>
+                        <%} %>
+                        
                         </ul>
                     </li>
                      </ul>
@@ -115,7 +113,7 @@
                     <tr>
                         <td class="col-sm-8 col-md-6">
                         <div class="media">
-                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="" style="width: 72px; height: 72px;"> </a>
+                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="GetCompanyPicture?id=1" style="width: 72px; height: 72px;"> </a>
                             <div class="media-body">
                                 <h4 class="media-heading"><a href="ItemPage.jsp?id=<%= item.getId()%>"> <%= item.getName()%></a></h4>
                                

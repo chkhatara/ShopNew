@@ -136,12 +136,34 @@ INSERT INTO person (person_name,person_lastName,person_email,person_password,per
   ("salo","","salodze@gmail.com","123","123126","593200083","MALE"),
  ("nini","","ninidze@gmail.com","123","123127","593200083","MALE")
  ;
- use ishop;
- INSERT INTO item_category( item_category_name)
- values ("cate name");
-  INSERT INTO item_sub_category(item_sub_name,item_category_id)
- values ("dubcate",1);
 
+ INSERT INTO item_category( item_category_name)
+ values ("კომპიუტერები & აქსესუარები"),
+ ("საოჯახო ტექნიკა"),
+ ("სპორტი & ტურიზმი"),
+ ("ტანსაცმელი & აქსესუარები"),
+ ("აუდიო & ვიდეო – ტექნიკა") ,
+ ("მუსიკალური ინსტრუმენტები"),
+ ("ავეჯი & ინტერიერი") ,
+ ("მობილური ტელეფონები");
+ 
+  INSERT INTO item_sub_category(item_sub_name,item_category_id)
+ values ("Desktop კომპიუტერები",1),
+ ("Laptop კომპიუტერები",1),
+ ("Laptop-ის ჩანთები",1),
+ ("კლავიატურები",1),
+ ("კომპიუტერის ნაწილები",1),
+ ("მაუსები",1),
+ ("კომპიუტერის დინამიკები",1),
+ ("მაცივრები",2),
+ ("მტვერსასრუტები",2),
+ ("კონდეციონერები",2),
+ ("სარეცხი მანქანები",2),
+ ("უთოები",2),
+ ("ფენები",2),
+ ("ალპინიზმი",3),
+ ("სამოგზაურო ჩანთები",3);
+ 
  
  
 	INSERT INTO shop_category(category_name)
