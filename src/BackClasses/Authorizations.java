@@ -22,7 +22,7 @@ public class Authorizations {
 		try {
 			stmt = con.createStatement();
 			stmt.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
-			String query = "SELECT * FROM person " + "WHERE  person_email = '" + email + "' ;";
+			String query = "SELECT * FROM person " + "WHERE  person_email = '" + email + "' and person_password ='"+password+"';";
 			ResultSet rs = stmt.executeQuery(query);
 			if (!rs.next()) {
 				return false;
@@ -41,7 +41,7 @@ public class Authorizations {
 		try {
 			stmt = con.createStatement();
 			stmt.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
-			String query = "SELECT * FROM shop " + "WHERE " + "shop_email = '" + email + "' ;";
+			String query = "SELECT * FROM shop " + "WHERE " + "shop_email = '" + email +"' and shop_password ='"+password+ "' ;";
 			ResultSet rs = stmt.executeQuery(query);
 			if (!rs.next()) {
 				return false;
