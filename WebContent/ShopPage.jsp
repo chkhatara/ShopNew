@@ -19,7 +19,10 @@
 
     <!-- Custom CSS -->
     <link href="css/shop-item.css" rel="stylesheet">
-    
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/jquery.bxslider.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     <%@ page import="BackClasses.*" %>
 
 <%@ page import="java.util.ArrayList" %>
@@ -114,18 +117,50 @@
     
 	<% Shop shop = (Shop)request.getAttribute("ShopObject"); %>
     <!-- Page Content -->
-    <div class="container">
-
+ 
+<div class="container main-container">
         <div class="row">
+          	<div class="col-lg-3 col-md-3 col-sm-12">
 
-            <div class="col-md-3">
-                <p class="lead"> Categories</p>
-                <div class="list-group">
-                    <a href="#" class="list-group-item active">Electronics & Computers</a>
-                    <a href="#" class="list-group-item">Clothes</a>
-                    <a href="#" class="list-group-item">e Commerce</a>
-                </div>
-            </div>
+        		<!-- Categories -->
+        		<div class="col-lg-12 col-md-12 col-sm-6">
+	        		<div class="no-padding">
+	            		<span class="title">CATEGORIES</span>
+	            	</div>
+
+					<div id="main_menu">
+                        <div class="list-group panel panel-cat">
+                        <%  DatabaseClass db = new DatabaseClass();
+                        	ArrayList<String> categories = db.getAllCategories();
+                        	int size = categories.size();
+                        	System.out.println("size "+size);
+                        	ArrayList<Integer> subCategories = new ArrayList<Integer>();
+                        	for(int i=0;i<size;i++){
+                        		subCategories=db.searchSubCategories(categories.get(i));
+                        		System.out.println(subCategories.size()+" "+categories.get(i)+" i "+i);
+                        		
+                        	%>
+                            <a href="#sub<%= i+1  %>" class="list-group-item" data-toggle="collapse" data-parent="#main_menu"><%= categories.get(i) %> <i class="fa fa-caret-down pull-right"></i></a>
+                            <div class="collapse list-group-submenu" id="sub<%= i+1  %>">  
+                            <% for(int k=0;k<subCategories.size();k++){ %>   
+                                                     	                          
+                                <a href="FilterBySubCategories.jsp?id=<%= subCategories.get(k)  %>" class="list-group-item" ><%= db.getSubCategoryName(subCategories.get(k)) %></a>                             
+                           
+                            <%}%>
+                            </div>
+                           <% } %>
+                            
+                        </div>
+                    </div>
+
+				</div>
+				<!-- End Categories -->
+
+				
+				<!-- End Best Seller -->
+
+        	</div>
+				<!-- End Categories -->
 
             <div class="col-md-9">
 
@@ -139,7 +174,7 @@
                     
                 </div>
                 <% 
-                DatabaseClass db = new DatabaseClass();
+                 db = new DatabaseClass();
                 ArrayList<Item> arr = db.getShopItems(db.getShopId((String)session.getAttribute("email")));
                 for(int i=0;i<arr.size();i++){
                 Item item = arr.get(i);%>
@@ -200,7 +235,11 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
+	<script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.bxslider.min.js"></script>
+    <script src="js/jquery.blImageCenter.js"></script>
+    <script src="js/mimity.js"></script>
 </body>
 
 </html>

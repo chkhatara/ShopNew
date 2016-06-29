@@ -30,7 +30,9 @@ public class GetCompanyPicture extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		response.setContentType("image/jpeg");
+		System.out.println("Asdasd");
 		String id = request.getParameter("id");
 		DatabaseClass db = new DatabaseClass();
 		byte [] pic = db.getPhoto(Integer.parseInt(id));

@@ -402,6 +402,7 @@ public class DatabaseClass {
 				stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
 			
 				ResultSet rSet=stm.executeQuery("select shop_photo from shop_photoes where shop_id="+idNum+";");
+				System.out.println(idNum);
 				if(rSet.next()){
 					Blob blob = rSet.getBlob(1);
 				    photo =  blob.getBytes(1, (int) blob.length());
