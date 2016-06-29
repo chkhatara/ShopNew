@@ -3,11 +3,11 @@
 <!DOCTYPE html >
 <html>
 <link href="css/datepicker.css" rel="stylesheet">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/jquery.bxslider.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
  <link href="css/Register.css" rel="stylesheet" type="text/css">
 <head>
  <nav class="navbar navbar-inverse" role="navigation">
@@ -25,10 +25,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="iShopMain.jsp" class="active">Home</a></li>
-                    <li><a href="catalogue.html">Catalogue</a></li>
-                    <li><a href="cart.html">Shopping Cart</a>
-                    </li>
-                    <li><a href="checkout.html">Checkout</a></li>
+                    <li><a href="#">Search Pages</a></li>
                     <li class="nav-dropdown">
                     	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							Pages <span class="caret"></span>
@@ -242,10 +239,16 @@
 
 </head>
 <script src="js/bootstrap-datepicker.js"></script>
- <script>
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
-        </script>
+<script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+    
+     <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.bxslider.min.js"></script>
+    <script src="js/jquery.blImageCenter.js"></script>
+    <script src="js/mimity.js"></script>
 
 </html>

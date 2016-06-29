@@ -14,8 +14,11 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/jquery-ui.min.css" rel="stylesheet">
-    <link href="css/fileinput.min.css" rel="stylesheet">
-    <link href="css/fileinput.css" rel="stylesheet">
+    
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/jquery.bxslider.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     
     
 
@@ -37,16 +40,14 @@
                 <a class="navbar-brand visible-xs" href="index.html">Mimity Online Shop</a>
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav">
+                 <ul class="nav navbar-nav">
                     <li><a href="iShopMain.jsp" class="active">Home</a></li>
-                    <li><a href="catalogue.html">Catalogue</a></li>
-                    <li><a href="cart.html">Shopping Cart</a>
-                    </li>
-                    <li><a href="checkout.html">Checkout</a></li>
+                    <li><a href="#">Search Pages</a></li>                   
                     <li class="nav-dropdown">
                     	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							Pages <span class="caret"></span>
 						</a>
+						
 						<ul class="dropdown-menu">                    
 						<% if(session.getAttribute("email")==null){ %>       
                             <li><a href="PersonRegister.jsp">Register</a></li>
@@ -114,7 +115,9 @@
 		</div>
       </div>
     </div>    
-        
+     <%
+     Authorizations aut = new Authorizations();
+     Person p = aut.getPerson(aut.getPersonId((String)session.getAttribute("email"))); %>
     <!-- edit form column -->
     <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
       <div class="alert alert-info alert-dismissable">
@@ -127,32 +130,32 @@
         <div class="form-group">
           <label class="col-lg-3 control-label">First name:</label>
           <div class="col-lg-8">
-            <input class="form-control" name="first_name" placeholder="First Name" type="text" id="first_name" value="">
+            <input class="form-control" name="first_name" value=<%= p.getName() %> type="text" id="first_name" value="">
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Last name:</label>
           <div class="col-lg-8">
-            <input class="form-control" name="last_name" placeholder="Last Name" type="text" value="">
+            <input class="form-control" name="last_name" value=<%= p.getSurname() %> type="text" value="">
           </div>
         </div>
   
         <div class="form-group">
           <label class="col-lg-3 control-label">Email:</label>
           <div class="col-lg-8">
-            <input class="form-control" placeholder="email" name="email" type="text" value="" >
+            <input class="form-control" value=<%= p.getMail() %> name="email" type="text" value="" >
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Id Number:</label>
           <div class="col-lg-8">
-            <input class="form-control" placeholder="Id" name="idnumber" type="text" value="" >
+            <input class="form-control" value=<%= p.getId() %> name="idnumber" type="text" value="" >
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Phone:</label>
           <div class="col-lg-8">
-            <input class="form-control" placeholder="Phone" name="phone" type="text" value="" >
+            <input class="form-control" value=<%= p.getTel() %> name="phone" type="text" value="" >
           </div>
         </div>
           <div class="form-group">
@@ -190,12 +193,14 @@
 <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/fileinput.js"></script>
-    <script src="js/fileinput.min.js"></script>
+
+
+    
+     <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.bxslider.min.js"></script>
+    <script src="js/jquery.blImageCenter.js"></script>
+    <script src="js/mimity.js"></script>
   
 </body>
 </html>
