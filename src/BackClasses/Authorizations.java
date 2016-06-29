@@ -4,7 +4,6 @@
 package BackClasses;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -149,4 +148,24 @@ public class Authorizations {
 		return pers;
 
 	}
+	public void updatePerson(Person p,String password,Boolean changePassword,String email){
+		Statement stm;
+		Connection con = DataBaseInfo.getConnection();
+			try {
+				stm=con.createStatement();
+				stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+				if(changePassword){
+					stm.executeUpdate("update person "
+							+ "set person_name='"+p.getName()+"', person_lastName='"+p.getSurname()+"', person_tel='"+p.getTel()+"', person_password='"+password+"', person_email='"+p.getMail()+"', person_id_number='"+p.getId()+"' where person_email='"+email+"';");
+				}else{
+					stm.executeUpdate("update person "
+							+ "set person_name='"+p.getName()+"', person_lastName='"+p.getSurname()+"', person_tel='"+p.getTel()+"', person_email='"+p.getMail()+"', person_id_number='"+p.getId()+"' where person_email='"+email+"';");
+
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 }

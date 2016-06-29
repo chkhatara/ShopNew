@@ -28,7 +28,9 @@ public class Person {
 		this.tel=tel;
 	}
 	
-
+	public void setId(String id){
+		this.id = id;
+	}
 	public String getTel(){
 		return this.tel;
 	}

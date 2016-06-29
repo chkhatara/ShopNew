@@ -163,11 +163,9 @@
                         <%  DatabaseClass db = new DatabaseClass();
                         	ArrayList<String> categories = db.getAllCategories();
                         	int size = categories.size();
-                        	System.out.println("size "+size);
                         	ArrayList<Integer> subCategories = new ArrayList<Integer>();
                         	for(int i=0;i<size;i++){
                         		subCategories=db.searchSubCategories(categories.get(i));
-                        		System.out.println(subCategories.size()+" "+categories.get(i)+" i "+i);
                         		
                         	%>
                             <a href="#sub<%= i+1  %>" class="list-group-item" data-toggle="collapse" data-parent="#main_menu"><%= categories.get(i) %> <i class="fa fa-caret-down pull-right"></i></a>

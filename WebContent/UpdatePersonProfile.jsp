@@ -123,7 +123,7 @@
          <strong>ყურადღება!</strong>. გთხოვთ შეავსოთ შესაბამისი ველები სანდო ინფორმაციით.
       </div>
       <h3>Personal info</h3>
-      <form class="form-horizontal" role="form" action="PersonalInfoUpdate" method="post">       
+      <form class="form-horizontal" role="form" action="UpdatePersonProfile" method="post">       
         <div class="form-group">
           <label class="col-lg-3 control-label">First name:</label>
           <div class="col-lg-8">
@@ -173,13 +173,7 @@
             <input class="form-control" placeholder = "password_confirm" name="password_confirm" type="password">
           </div>
         </div>
-           <div class="form-group">
-          <label class="col-lg-3 control-label">About me</label>
-          <div class="col-lg-8">
-           	<textarea cols="50" rows="5" name="about"> 
-			</textarea>
-          </div>
-        </div>
+           
         <div class="form-group">
           <label class="col-md-3 control-label"></label>
           <div class="col-lg-8">
