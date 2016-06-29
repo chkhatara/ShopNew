@@ -413,6 +413,25 @@ public class DatabaseClass {
 			}
 		 	return photo;
 	}
+	public void addItem(Item item,int shopId,int subCategoryId){
+		try {
+			Statement st;
+			Connection con = DataBaseInfo.getConnection();
+			st = con.createStatement();
+			st.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			java.sql.PreparedStatement prs = con.prepareStatement("insert into item (item_name, item_sub_category,item_description,item_price,item_quantity,shop_id) values(?,?,?,?,?,?)");
+			prs.setString(1, item.getName());
+			prs.setInt(2, subCategoryId);
+			prs.setString(3,item.getitemDescription());
+			prs.setInt(4,item.getPrice());
+			prs.setInt(5,item.getQuantity());
+			prs.setInt(6, shopId);
+			prs.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
 	
 
