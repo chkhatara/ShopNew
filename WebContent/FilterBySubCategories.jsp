@@ -11,6 +11,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/jquery.bxslider.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+
+
+    
 <title>Sub Categories</title>
 <%@ page import="BackClasses.*" %>
     
@@ -24,18 +32,11 @@
 
     <title>Heroic Features - Start Bootstrap Template</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/heroic-features.css" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
 
 </head>
 
@@ -55,27 +56,21 @@
                 <a class="navbar-brand visible-xs" href="index.html">Mimity Online Shop</a>
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="catalogue.html">Catalogue</a></li>
-                    <li><a href="cart.html">Shopping Cart</a>
-                    </li>
-                    <li><a href="checkout.html">Checkout</a></li>
+                 <ul class="nav navbar-nav">
+                    <li><a href="iShopMain.jsp" class="active">Home</a></li>
+                    <li><a href="#">Search Pages</a></li>
                     <li class="nav-dropdown">
                     	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							Pages <span class="caret"></span>
 						</a>
-						<ul class="dropdown-menu">
-                            <li><a href="about.html">About Us</a>
-                             </li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="blog-detail.html">Blog Detail</a></li>
-                            <li><a href="compare.html">Compare</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="detail.html">Product Detail</a></li>
-                            <li><a href="register.html">Register</a></li>
-                            <li><a href="typography.html">Typography</a></li>
+						<ul class="dropdown-menu">                    
+						<% if(session.getAttribute("email")==null){ %>       
+                            <li><a href="PersonRegister.jsp">Register</a></li>
+                        <% }else if(session.getAttribute("user").equals("person")){ %>
+                        	<li><a href="UpdatePersonProfile.jsp">Update Profile</a></li>
+                        	<% }else{ %>
+                       	 	<li><a href="UpdateShopProfile.jsp">Update Profile</a></li>
+                        <%} %>
                         </ul>
                     </li>
                      </ul>
@@ -215,7 +210,14 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.bxslider.min.js"></script>
+    <script src="js/jquery.blImageCenter.js"></script>
+    <script src="js/mimity.js"></script>
 
 </body>
 </html>

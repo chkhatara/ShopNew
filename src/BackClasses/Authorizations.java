@@ -168,4 +168,25 @@ public class Authorizations {
 				e.printStackTrace();
 			}
 		}
+	
+	public void updateShop(Shop shop,String password,Boolean changePassword,String email){
+		Statement stm;
+		Connection con = DataBaseInfo.getConnection();
+			try {
+				stm=con.createStatement();
+				stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+				if(changePassword){
+					stm.executeUpdate("update shop "
+							+ "set shop_name='"+shop.getName()+"', shop_site='"+shop.getSite()+"', shop_tel='"+shop.getTel()+"', shop_password='"+password+"', shop_email='"+shop.getEmail()+"', shop_info='"+shop.getInfo()+"' where shop_email='"+email+"';");
+				}else{
+					stm.executeUpdate("update shop "
+							+ "set shop_name='"+shop.getName()+"', shop_site='"+shop.getSite()+"', shop_tel='"+shop.getTel()+"', shop_email='"+shop.getEmail()+"', shop_info='"+shop.getInfo()+"' where shop_email='"+email+"';");
+
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 }

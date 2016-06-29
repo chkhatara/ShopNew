@@ -8,12 +8,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Update Profile</title>
- <link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/jquery.bxslider.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/jquery-ui.min.css" rel="stylesheet">
+    
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/jquery.bxslider.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     
     
 
@@ -37,10 +42,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="iShopMain.jsp" class="active">Home</a></li>
-                    <li><a href="catalogue.html">Catalogue</a></li>
-                    <li><a href="cart.html">Shopping Cart</a>
-                    </li>
-                    <li><a href="checkout.html">Checkout</a></li>
+                    <li><a href="#">Search Pages</a></li>
                     <li class="nav-dropdown">
                     	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							Pages <span class="caret"></span>
@@ -116,6 +118,8 @@
 		</div>
       </div>
     </div>    
+    <% DatabaseClass db = new DatabaseClass();
+    	Shop shop = db.getShop(db.getShopId((String)session.getAttribute("email")));%>
     <!-- edit form column -->
     <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
       <div class="alert alert-info alert-dismissable">
@@ -128,7 +132,7 @@
         <div class="form-group">
           <label class="col-lg-3 control-label">Shop name:</label>
           <div class="col-lg-8">
-            <input class="form-control" name="name" placeholder="Shop Name" type="text" id="name" value="">
+            <input class="form-control" value =<%= shop.getName() %>name="name" type="text" id="name" value="">
           </div>
         </div>
       
@@ -136,19 +140,19 @@
         <div class="form-group">
           <label class="col-lg-3 control-label">Email:</label>
           <div class="col-lg-8">
-            <input class="form-control" placeholder="email" name="email" id="email" type="text" value="" >
+            <input class="form-control" value = <%= shop.getEmail() %> name="email" id="email" type="text" value="" >
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Shop Site:</label>
           <div class="col-lg-8">
-            <input class="form-control" placeholder="Site" name="site" id="site" type="text" value="" >
+            <input class="form-control" value= <%= shop.getSite() %> name="site" id="site" type="text" value="" >
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Phone:</label>
           <div class="col-lg-8">
-            <input class="form-control" placeholder="Phone" name="phone" id="phone" type="text" value="" >
+            <input class="form-control" value=<%= shop.getTel() %>  name="phone" id="phone" type="text" value="" >
           </div>
         </div>
           <div class="form-group">
@@ -172,7 +176,7 @@
            <div class="form-group">
           <label class="col-lg-3 control-label">About me</label>
           <div class="col-lg-8">
-           	<textarea cols="50" rows="5" name="about"> 
+           	<textarea cols="50" rows="5" value=<%= shop.getInfo() %> name="about"> 
 			</textarea>
           </div>
         </div>
@@ -192,9 +196,14 @@
 <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+
+
+    
+     <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.bxslider.min.js"></script>
+    <script src="js/jquery.blImageCenter.js"></script>
+    <script src="js/mimity.js"></script>
   
 </body>
 </html>
