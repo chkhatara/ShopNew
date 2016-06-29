@@ -4,6 +4,7 @@
 package BackClasses;
 
 import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -390,6 +391,26 @@ public class DatabaseClass {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public byte [] getPhoto(int idNum){
+		 Statement stm;
+		 byte[] photo=null;
+		 try {
+			 Connection con = DataBaseInfo.getConnection();
+				stm=con.createStatement();
+				stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			
+				ResultSet rSet=stm.executeQuery("select shop_photo from shop_photoes where shop_id="+idNum+";");
+				if(rSet.next()){
+					Blob blob = rSet.getBlob(1);
+				    photo =  blob.getBytes(1, (int) blob.length());
+				}
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		 	return photo;
 	}
 }
 	
