@@ -20,11 +20,11 @@
     <link href="css/jquery.bxslider.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     
-    
 
 </head>
 <body>
 <%@page import="BackClasses.*" %>
+<%@ page import="java.util.ArrayList" %>
  
 <!-- Navigation -->
     <nav class="navbar navbar-inverse" role="navigation">
@@ -116,8 +116,9 @@
       </div>
     </div>    
      <%
-     Authorizations aut = new Authorizations();
-     Person p = aut.getPerson(aut.getPersonId((String)session.getAttribute("email"))); %>
+     	DatabaseClass db = new DatabaseClass();
+     	ArrayList<String> subCate = db.getAllSubCategories();
+     %>
     <!-- edit form column -->
     <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
       <div class="alert alert-info alert-dismissable">
@@ -125,57 +126,57 @@
         <i class="fa fa-coffee"></i>
          <strong>ყურადღება!</strong>. გთხოვთ შეავსოთ შესაბამისი ველები სანდო ინფორმაციით.
       </div>
-      <h3>Personal info</h3>
-      <form class="form-horizontal" role="form" action="UpdatePersonProfile" method="post">       
+      <h3>Item info</h3>
+      <form class="form-horizontal" role="form" action="ItemCreateServlet" method="post">       
         <div class="form-group">
-          <label class="col-lg-3 control-label">First name:</label>
+          <label class="col-lg-3 control-label">Item name:</label>
           <div class="col-lg-8">
-            <input class="form-control" name="first_name" value=<%= p.getName() %> type="text" id="first_name" value="">
+            <input class="form-control" name="name" placeholder="Item Name" type="text" id="name" value="">
           </div>
         </div>
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Last name:</label>
-          <div class="col-lg-8">
-            <input class="form-control" name="last_name" value=<%= p.getSurname() %> type="text" value="">
-          </div>
-        </div>
+      <div class="form-group">
+         <label class="col-lg-3 control-label">SubCategory:</label>  
+            <div class="col-lg-8">
+      			<select class="form-control" id="sel1">
+      			<% for(int i=0;i<subCate.size();i++){ %>
+			        <option><%=subCate.get(i) %></option>
+				<%} %>
+      			</select>
+                 </div>
+                 </div>
   
         <div class="form-group">
-          <label class="col-lg-3 control-label">Email:</label>
+          <label class="col-lg-3 control-label">Item Price:</label>
           <div class="col-lg-8">
-            <input class="form-control" value=<%= p.getMail() %> name="email" type="text" value="" >
+            <input class="form-control" placeholder="Item Price" name="price" type="text" value="" >
           </div>
         </div>
         <div class="form-group">
-          <label class="col-lg-3 control-label">Id Number:</label>
+          <label class="col-lg-3 control-label">Item Quantity:</label>
           <div class="col-lg-8">
-            <input class="form-control" value=<%= p.getId() %> name="idnumber" type="text" value="" >
+            <input class="form-control" placeholder="Quantity" name="idnumber" type="text" value="" >
           </div>
         </div>
+       
+         <div class="form-group">
+         <label class="col-lg-3 control-label">Shop:</label>  
+            <div class="col-lg-8">
+      			<select class="form-control" id="sel1">
+			        <option>1</option>
+			        <option>2</option>
+			        <option>3</option>
+			        <option>4</option>
+      			</select>
+                 </div>
+                 </div>
         <div class="form-group">
-          <label class="col-lg-3 control-label">Phone:</label>
+          <label class="col-lg-3 control-label">Item Info:</label>
           <div class="col-lg-8">
-            <input class="form-control" value=<%= p.getTel() %> name="phone" type="text" value="" >
+           	<textarea cols="50" rows="5"  name="about"> 
+			</textarea>
           </div>
         </div>
-          <div class="form-group">
-          <label class="col-md-3 control-label">Current Password:</label>
-          <div class="col-lg-8">
-            <input class="form-control" placeholder="Enter Current Password" name="current_password" type="password">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-3 control-label">Enter Password:</label>
-          <div class="col-lg-8">
-            <input class="form-control" placeholder="Enter Password" name="password" type="password">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-3 control-label">Confirm password:</label>
-          <div class="col-lg-8">
-            <input class="form-control" placeholder = "password_confirm" name="password_confirm" type="password">
-          </div>
-        </div>
+        
            
         <div class="form-group">
           <label class="col-md-3 control-label"></label>
@@ -201,7 +202,36 @@
     <script src="js/jquery.bxslider.min.js"></script>
     <script src="js/jquery.blImageCenter.js"></script>
     <script src="js/mimity.js"></script>
-  
+   <script>
+    //Select2
+    $.getScript('js/select.js',function(){
+                    
+      /* Select2 plugin as tagpicker */
+      $("#tagPicker").select2({
+        closeOnSelect:false
+      });
+    }); //script         
+    $(document).ready(function() {});</script>
+    <script>
+    //Select2
+    $.getScript('js/select.js',function(){
+                    
+      /* Select2 plugin as tagpicker */
+      $("#tagPicker2").select2({
+        closeOnSelect:false
+      });
+    }); //script         
+    $(document).ready(function() {});</script>
+    <script>
+    //Select2
+    $.getScript('js/select.js',function(){
+                    
+      /* Select2 plugin as tagpicker */
+      $("#tagPicker3").select2({
+        closeOnSelect:false
+      });
+    }); //script         
+    $(document).ready(function() {});</script>
 </body>
 </html>
 

@@ -32,7 +32,7 @@
 
 <body>
 
-	
+<% int itemNum =0; %>	
 <nav class="navbar navbar-inverse" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -175,6 +175,7 @@
                  db = new DatabaseClass();
                 ArrayList<Item> arr = db.getShopItems(db.getShopId((String)session.getAttribute("email")));
                 for(int i=0;i<arr.size();i++){
+                	itemNum++;
                 Item item = arr.get(i);%>
 				<div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
@@ -210,16 +211,12 @@
         </div>
 
    
-    <!-- /.container -->
-
-    <div class="container">
-
-        <hr>
-
-      
-
-    </div>
-    <!-- /.container -->
+ <nav>
+	  <ul class="pager">
+	    <li class="pager-prev disabled"><a href="#">Older</a></li>
+	    <li class="pager-next"><a href="#">Newer</a></li>
+	  </ul>
+	</nav>
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>

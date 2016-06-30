@@ -336,6 +336,27 @@ public class DatabaseClass {
 		}
 		return categories;
 	}
+	//all sub category names
+	public ArrayList<String> getAllSubCategories(){		
+		ArrayList <String> categories = new ArrayList<String>();
+		Statement stm;
+		Connection con = DataBaseInfo.getConnection();
+		try {
+			stm = con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			
+			ResultSet rSet = stm.executeQuery("select * from item_sub_category" + ";");			
+			while (rSet.next()) {
+				categories.add(rSet.getString("item_sub_name"));
+			}
+			
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		return categories;
+	}
 	//gets item by sub category id
 	public ArrayList<Item> getItemsBySubCategoryId(int id){
 		ArrayList<Item> arr = new ArrayList<Item>();
