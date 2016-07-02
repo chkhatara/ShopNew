@@ -247,6 +247,25 @@ public class DatabaseClass {
 		}
 		return category;
 	}
+	public int SubCatId(String subCat){
+		Statement stm;
+		int category = 0;
+		Connection con = DataBaseInfo.getConnection();
+		try {
+			stm = con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+//			//ResultSet rSet = stm.executeQuery("select * from item_sub_category  where item_sub_='" + name + "';");			
+//			if (rSet.next()) {
+//				
+//				category = rSet.getInt("item_category_id");
+//			}
+//
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		return 0;
+	}
 	//search sub category ids by category name
 	public ArrayList<Integer> searchSubCategories(String name){
 		ArrayList<Integer> arr = new ArrayList<Integer>();
@@ -357,6 +376,28 @@ public class DatabaseClass {
 		}
 		return categories;
 	}
+	
+	//all shop names
+		public ArrayList<String> getAllShop(){		
+			ArrayList <String> shops = new ArrayList<String>();
+			Statement stm;
+			Connection con = DataBaseInfo.getConnection();
+			try {
+				stm = con.createStatement();
+				stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+				
+				ResultSet rSet = stm.executeQuery("select * from shop" + ";");			
+				while (rSet.next()) {
+					shops.add(rSet.getString("shop_name"));
+				}
+				
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				System.out.println(e.getMessage());
+			}
+			return shops;
+		}
 	//gets item by sub category id
 	public ArrayList<Item> getItemsBySubCategoryId(int id){
 		ArrayList<Item> arr = new ArrayList<Item>();

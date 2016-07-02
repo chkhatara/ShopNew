@@ -49,34 +49,43 @@ public class UpdateShopProfile extends HttpServlet {
 			return;
 		}
 		String sessionMail=(String)request.getSession().getAttribute("email");
-		String name=(String) request.getParameter("name");
-		String email=(String)request.getParameter("email");
+		String name=(String) request.getParameter("shopname");
+		String email=(String)request.getParameter("shopemail");
 		String currentPassword=(String)request.getParameter("current_password");
 		String password=(String)request.getParameter("password");
 		String confirmPassword=(String)request.getParameter("password_confirm");
-		String site=(String)request.getParameter("site");
-		String phone = (String) request.getParameter("phone");
+		String site=(String)request.getParameter("shopsite");
+		String phone = (String) request.getParameter("shopphone");
+		//String about = (String) request.getParameter("shopabout");
 		Authorizations aut = new Authorizations();
 		DatabaseClass db = new DatabaseClass();
 		Shop currentShop = db.getShop(db.getShopId(sessionMail));
-		
-		if(name.length()!=0 && !name.equals(""))currentShop.setShopName(name);
-		if(email!=null && !email.equals("")){
-			currentShop.setEmail(email);
-		}
-		
-		if(phone.length()!=0 && !phone.equals(""))currentShop.setTel(phone);
-		Boolean changePassword=false;
-		if(aut.searchShop(sessionMail, currentPassword)){
-			if(password!=null && password.equals(confirmPassword) && !password.equals("")){
-				changePassword=true;
+		System.out.println(name);
+		System.out.println(currentShop.getEmail()+" shopping "+currentShop.getInfo()+" "+currentShop.getName()+" "+currentShop.getSite()+" "+currentShop.getTel());
+		if(currentShop!=null){
+			if(name.length()!=0 && !name.equals("")){
+				currentShop.setShopName(name);
+			
 			}
+			if(email!=null && !email.equals("")){
+				currentShop.setEmail(email);
+			}
+			
+			if(phone.length()!=0 && !phone.equals(""))currentShop.setTel(phone);
+			if(site.length()!=0 && !site.equals(""))currentShop.setSite(site);
+			//if(about.length()!=0 && !about.equals(""))currentShop.setInfo(about);
+			Boolean changePassword=false;
+			if(aut.searchShop(sessionMail, currentPassword)){
+				if(password!=null && password.equals(confirmPassword) && !password.equals("")){
+					changePassword=true;
+				}
+			}
+			aut.updateShop(currentShop, password, changePassword, sessionMail);
+			HttpSession ses=request.getSession();
+			ses.setAttribute("email", currentShop.getEmail());
+			RequestDispatcher rd = request.getRequestDispatcher("iShopMain.jsp");
+			rd.forward(request, response);
 		}
-		aut.updateShop(currentShop, password, changePassword, sessionMail);
-		HttpSession ses=request.getSession();
-		ses.setAttribute("email", currentShop.getEmail());
-		RequestDispatcher rd = request.getRequestDispatcher("iShopMain.jsp");
-		rd.forward(request, response);
 	}
 
 }

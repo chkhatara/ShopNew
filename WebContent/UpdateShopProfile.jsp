@@ -19,7 +19,13 @@
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/jquery.bxslider.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    
+    <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+<link rel="stylesheet" href="css/jquery.fileupload.css">
+<link rel="stylesheet" href="css/jquery.fileupload-ui.css">
+<!-- CSS adjustments for browsers with JavaScript disabled -->
+<noscript><link rel="stylesheet" href="css/jquery.fileupload-noscript.css"></noscript>
+<noscript><link rel="stylesheet" href="css/jquery.fileupload-ui-noscript.css"></noscript>
     
 
 </head>
@@ -101,8 +107,10 @@
             </div>
         </div>
     </nav>
+   
 <div class="container" style="padding-top: 0px;">
   <div class="row">
+     
     <!-- left column -->
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="text-center">
@@ -112,10 +120,7 @@
 			    <input class="btn btn-primary" type="submit" />
 		</form>
         
-       <div>
-			
-			
-		</div>
+ 
       </div>
     </div>    
     <% DatabaseClass db = new DatabaseClass();
@@ -128,11 +133,11 @@
          <strong>ყურადღება!</strong>. გთხოვთ შეავსოთ შესაბამისი ველები სანდო ინფორმაციით.
       </div>
       <h3>Shop info</h3>
-      <form class="form-horizontal" role="form" action="PersonalInfoUpdate" method="post">       
+      <form class="form-horizontal" role="form" action="UpdateShopProfile" method="post">       
         <div class="form-group">
           <label class="col-lg-3 control-label">Shop name:</label>
           <div class="col-lg-8">
-            <input class="form-control" value =<%= shop.getName() %>name="name" type="text" id="name" value="">
+            <input class="form-control" value =<%= shop.getName() %> name="shopname" type="text" id="shopname" >
           </div>
         </div>
       
@@ -140,19 +145,19 @@
         <div class="form-group">
           <label class="col-lg-3 control-label">Email:</label>
           <div class="col-lg-8">
-            <input class="form-control" value = <%= shop.getEmail() %> name="email" id="email" type="text" value="" >
+            <input class="form-control" value = <%= shop.getEmail() %> name="shopemail" id="shopemail" type="text" >
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Shop Site:</label>
           <div class="col-lg-8">
-            <input class="form-control" value= <%= shop.getSite() %> name="site" id="site" type="text" value="" >
+            <input class="form-control" value= <%= shop.getSite() %> name="shopsite" id="shopsite" type="text"  >
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Phone:</label>
           <div class="col-lg-8">
-            <input class="form-control" value=<%= shop.getTel() %>  name="phone" id="phone" type="text" value="" >
+            <input class="form-control" value=<%= shop.getTel() %>  name="shopphone" id="shopphone" type="text"  >
           </div>
         </div>
           <div class="form-group">
@@ -176,10 +181,15 @@
            <div class="form-group">
           <label class="col-lg-3 control-label">About me</label>
           <div class="col-lg-8">
-           	<textarea cols="50" rows="5" value=<%= shop.getInfo() %> name="about"> 
+           	<textarea cols="50" rows="5" value=<%= shop.getInfo() %> name="shopabout" id ="shopabout" > 
 			</textarea>
           </div>
         </div>
+       
+            
+            
+		
+		
         <div class="form-group">
           <label class="col-md-3 control-label"></label>
           <div class="col-lg-8">
@@ -192,6 +202,7 @@
     </div>
   </div>
   </div>
+
 
 <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>

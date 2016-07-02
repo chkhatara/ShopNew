@@ -166,8 +166,9 @@
                         <p> <%= shop.getInfo() %></p>
                     </div>
                     <div class="container">
-  
-  			<button type="button" class="btn btn-primary">Primary</button>
+  <a href="ItemCreate.jsp" class="btn btn-primary" role="button">Link Button</a>
+  			
+  			
 			</div>
                     
                 </div>

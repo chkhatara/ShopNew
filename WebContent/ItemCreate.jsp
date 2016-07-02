@@ -107,17 +107,15 @@
     <!-- left column -->
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="text-center">
-       
+       	
         
-       <div>
-			
-			
-		</div>
+      
       </div>
     </div>    
      <%
      	DatabaseClass db = new DatabaseClass();
      	ArrayList<String> subCate = db.getAllSubCategories();
+     	ArrayList<String> shops = db.getAllShop();
      %>
     <!-- edit form column -->
     <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
@@ -127,7 +125,7 @@
          <strong>ყურადღება!</strong>. გთხოვთ შეავსოთ შესაბამისი ველები სანდო ინფორმაციით.
       </div>
       <h3>Item info</h3>
-      <form class="form-horizontal" role="form" action="ItemCreateServlet" method="post">       
+      <form class="form-horizontal" role="form" action="CreateItemServlet" method="post">       
         <div class="form-group">
           <label class="col-lg-3 control-label">Item name:</label>
           <div class="col-lg-8">
@@ -162,10 +160,9 @@
          <label class="col-lg-3 control-label">Shop:</label>  
             <div class="col-lg-8">
       			<select class="form-control" id="sel1">
-			        <option>1</option>
-			        <option>2</option>
-			        <option>3</option>
-			        <option>4</option>
+			        <% for(int i=0;i<shops.size();i++){ %>
+			        <option><%=shops.get(i) %></option>
+				<%} %>
       			</select>
                  </div>
                  </div>
@@ -202,36 +199,7 @@
     <script src="js/jquery.bxslider.min.js"></script>
     <script src="js/jquery.blImageCenter.js"></script>
     <script src="js/mimity.js"></script>
-   <script>
-    //Select2
-    $.getScript('js/select.js',function(){
-                    
-      /* Select2 plugin as tagpicker */
-      $("#tagPicker").select2({
-        closeOnSelect:false
-      });
-    }); //script         
-    $(document).ready(function() {});</script>
-    <script>
-    //Select2
-    $.getScript('js/select.js',function(){
-                    
-      /* Select2 plugin as tagpicker */
-      $("#tagPicker2").select2({
-        closeOnSelect:false
-      });
-    }); //script         
-    $(document).ready(function() {});</script>
-    <script>
-    //Select2
-    $.getScript('js/select.js',function(){
-                    
-      /* Select2 plugin as tagpicker */
-      $("#tagPicker3").select2({
-        closeOnSelect:false
-      });
-    }); //script         
-    $(document).ready(function() {});</script>
+   
 </body>
 </html>
 
