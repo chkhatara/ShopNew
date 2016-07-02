@@ -102,12 +102,15 @@
             </div>
         </div>
     </nav>
+    <% DatabaseClass db = new DatabaseClass();
+    Item item =  db.getItemById(Integer.parseInt((String)request.getParameter("id")));
+    System.out.println(item.getName());%>
 <div class="container" style="padding-top: 0px;">
   <div class="row">
     <!-- left column -->
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="text-center">
-       	<form action=<%="\""+"Upload?id=5"+"\"" %> method="post" enctype="multipart/form-data">
+       	<form action=<%="\""+"Upload?id="+item.getId()+"\"" %> method="post" enctype="multipart/form-data">
 			    <input type="file" name="file" />
 			    <h1></h1>
 			    <input class="btn btn-primary" type="submit" />
@@ -117,9 +120,8 @@
       </div>
     </div>    
      <%
-     	DatabaseClass db = new DatabaseClass();
+     	
      	ArrayList<String> subCate = db.getAllSubCategories();
-     	ArrayList<String> shops = db.getAllShop();
      %>
     <!-- edit form column -->
     <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
@@ -129,17 +131,18 @@
          <strong>ყურადღება!</strong>. გთხოვთ შეავსოთ შესაბამისი ველები სანდო ინფორმაციით.
       </div>
       <h3>Item info</h3>
-      <form class="form-horizontal" role="form" action="CreateItemServlet" method="post">       
+      <form class="form-horizontal" role="form" action="UpdateItemServlet" method="post">       
         <div class="form-group">
           <label class="col-lg-3 control-label">Item name:</label>
           <div class="col-lg-8">
-            <input class="form-control" name="itemname" placeholder="Item Name" type="text" id="itemname" >
+            <input class="form-control" name="itemname" value=<%= item.getName() %> type="text" id="itemname" >
           </div>
         </div>
       <div class="form-group">
          <label class="col-lg-3 control-label">SubCategory:</label>  
             <div class="col-lg-8">
       			<select class="form-control" id="sel1" name = "subcategory">
+      			 <option><%=item.getSubCategory() %></option>
       			<% for(int i=0;i<subCate.size();i++){ %>
 			        <option><%=subCate.get(i) %></option>
 				<%} %>
@@ -150,20 +153,21 @@
         <div class="form-group">
           <label class="col-lg-3 control-label">Item Price:</label>
           <div class="col-lg-8">
-            <input class="form-control" placeholder="Item Price" name="itemprice" type="text">
+            <input class="form-control" value=<%= item.getPrice() %> name="itemprice" type="text">
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Item Quantity:</label>
           <div class="col-lg-8">
-            <input class="form-control" placeholder="Quantity" name="itemquantity" type="text" >
+            <input class="form-control" value=<%=item.getQuantity() %> name="itemquantity" type="text" >
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-lg-3 control-label">Item Info:</label>
           <div class="col-lg-8">
-           	<textarea cols="50" rows="5"  name="itemabout"> 
+           	<textarea cols="50" rows="5"  name="itemabout" > 
+           	<%= item.getitemDescription() %>
 			</textarea>
           </div>
         </div>

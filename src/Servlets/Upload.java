@@ -62,7 +62,8 @@ public class Upload extends HttpServlet {
 	        db.addCompPicture(mail, inputStream);
         } else if(id!=null) {
         	 DatabaseClass db = new DatabaseClass();
-        	 db.addItemPicture(Integer.parseInt(id), inputStream);
+        	 db.addItemProfilePicture(Integer.parseInt(id), inputStream);
+        	 response.sendRedirect("http://localhost:8080/ShopNew/ShopPageServlet");
         }
         inputStream.close();
         file.delete();
