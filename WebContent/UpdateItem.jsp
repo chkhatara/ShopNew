@@ -131,7 +131,7 @@
          <strong>ყურადღება!</strong>. გთხოვთ შეავსოთ შესაბამისი ველები სანდო ინფორმაციით.
       </div>
       <h3>Item info</h3>
-      <form class="form-horizontal" role="form" action="UpdateItemServlet" method="post">       
+      <form class="form-horizontal" role="form" action="UpdateItemServlet?id=<%=item.getId() %>" method="post">       
         <div class="form-group">
           <label class="col-lg-3 control-label">Item name:</label>
           <div class="col-lg-8">

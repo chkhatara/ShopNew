@@ -107,11 +107,7 @@
     <!-- left column -->
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="text-center">
-       	<form action=<%="\""+"Upload?id=5"+"\"" %> method="post" enctype="multipart/form-data">
-			    <input type="file" name="file" />
-			    <h1></h1>
-			    <input class="btn btn-primary" type="submit" />
-		</form>
+       	
         
       
       </div>

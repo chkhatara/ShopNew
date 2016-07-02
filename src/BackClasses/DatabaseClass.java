@@ -37,7 +37,22 @@ public class DatabaseClass {
 		}		
 		return arr;
 	}
-
+	
+	public void updateItem(Item item,int subCatId){		
+		Statement stm;
+		Connection con = DataBaseInfo.getConnection();
+			try {
+				stm=con.createStatement();
+				stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+				stm.executeUpdate("update item "
+							+ "set item_name='"+item.getName()+"', item_sub_category="+subCatId+", item_description='"+item.getitemDescription()+"', item_price="+item.getPrice()+", item_quantity="+
+						item.getQuantity()+" where item_id="+item.getId()+";");	
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+	}
 	private ItemCart getItemCart(int itemId, int itemQuantity ,int isBought) {
 		ItemCart item = null;
 		Statement stm;
