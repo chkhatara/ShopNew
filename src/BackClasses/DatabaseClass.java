@@ -254,17 +254,17 @@ public class DatabaseClass {
 		try {
 			stm = con.createStatement();
 			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
-//			//ResultSet rSet = stm.executeQuery("select * from item_sub_category  where item_sub_='" + name + "';");			
-//			if (rSet.next()) {
-//				
-//				category = rSet.getInt("item_category_id");
-//			}
-//
+			ResultSet rSet = stm.executeQuery("select * from item_sub_category  where item_sub_name='" + subCat + "';");			
+			if (rSet.next()) {
+				
+				category = rSet.getInt("item_sub_category");
+			}
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 		}
-		return 0;
+		return category;
 	}
 	//search sub category ids by category name
 	public ArrayList<Integer> searchSubCategories(String name){
@@ -454,6 +454,22 @@ public class DatabaseClass {
 			e.printStackTrace();
 		}
 	}
+	//adds picture to item
+		public void addItemProfilePicture(int id, InputStream in) {
+			try {
+				Statement st;
+				Connection con = DataBaseInfo.getConnection();
+				st = con.createStatement();
+				st.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+				java.sql.PreparedStatement prs = con.prepareStatement("insert into item_profile_picture (item_id, item_photo) values(?,?)");
+				prs.setInt(1, id);
+				prs.setBlob(2, in);
+				prs.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	
 	public byte [] getPhoto(int idNum){
 		 Statement stm;
@@ -464,7 +480,7 @@ public class DatabaseClass {
 				stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
 			
 				ResultSet rSet=stm.executeQuery("select shop_photo from shop_photoes where shop_id="+idNum+";");
-				System.out.println(idNum);
+
 				if(rSet.next()){
 					Blob blob = rSet.getBlob(1);
 				    photo =  blob.getBytes(1, (int) blob.length());
@@ -475,6 +491,27 @@ public class DatabaseClass {
 			}
 		 	return photo;
 	}
+	
+	public byte [] getItemProfilePhoto(int idNum){
+		 Statement stm;
+		 byte[] photo=null;
+		 try {
+			 Connection con = DataBaseInfo.getConnection();
+				stm=con.createStatement();
+				stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			
+				ResultSet rSet=stm.executeQuery("select item_photo from item_profile_picture where item_id="+idNum+";");
+				if(rSet.next()){
+					Blob blob = rSet.getBlob(1);
+				    photo =  blob.getBytes(1, (int) blob.length());
+				}
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		 	return photo;
+	}
+	
 	public void addItem(Item item,int shopId,int subCategoryId){
 		try {
 			Statement st;

@@ -12,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import BackClasses.DatabaseClass;
 
 /**
- * Servlet implementation class GetCompanyPicture
+ * Servlet implementation class GetItemProfilePicture
  */
-@WebServlet("/GetCompanyPicture")
-public class GetCompanyPicture extends HttpServlet {
+@WebServlet("/GetItemProfilePicture")
+public class GetItemProfilePicture extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetCompanyPicture() {
+    public GetItemProfilePicture() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,11 +30,10 @@ public class GetCompanyPicture extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		response.setContentType("image/jpeg");
 		String id = request.getParameter("id");
 		DatabaseClass db = new DatabaseClass();
-		byte [] pic = db.getPhoto(Integer.parseInt(id));
+		byte [] pic = db.getItemProfilePhoto(Integer.parseInt(id));
 		if (pic == null){
 			//response.sendRedirect("http://dogvacay.com/img/default_profile.jpg");
 			response.sendRedirect("pagePictures/default_profile.jpg");

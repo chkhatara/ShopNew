@@ -60,6 +60,7 @@
                         	<li><a href="UpdatePersonProfile.jsp">Update Profile</a></li>
                         	<% }else{ %>
                        	 	<li><a href="UpdateShopProfile.jsp">Update Profile</a></li>
+                       	 	<li><a href="ItemCreate.jsp">Create Item</a></li>
                         <%} %>
                         </ul>
                     </li>
@@ -150,11 +151,8 @@
 				</div>
 				<!-- End Categories -->
 
-				
-				<!-- End Best Seller -->
-
         	</div>
-				<!-- End Categories -->
+			
 
             <div class="col-md-9">
 
@@ -165,11 +163,7 @@
                         </h2>
                         <p> <%= shop.getInfo() %></p>
                     </div>
-                    <div class="container">
-  <a href="ItemCreate.jsp" class="btn btn-primary" role="button">Link Button</a>
-  			
-  			
-			</div>
+                    
                     
                 </div>
                 <% 
@@ -180,7 +174,7 @@
                 Item item = arr.get(i);%>
 				<div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <img src="GetCompanyPicture?id=1"  alt="">
+                            <img src="GetCompanyPicture?id=2"  alt="">
                             <div class="caption">
                                 <h4 class="pull-right">$<%= item.getPrice()  %></h4>
                                 <h4><a href="ItemPage.jsp?id=<%= item.getId()%>"><%= item.getName() %></a>

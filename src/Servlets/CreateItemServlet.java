@@ -44,40 +44,35 @@ public class CreateItemServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		String name=(String)request.getParameter("name");
-		String subCat=(String)request.getParameter("SubCategory");
-		String price=(String)request.getParameter("price");
-		String quantity = (String)request.getParameter("quantity");
-		String about=(String)request.getParameter("about");
+		String name=(String)request.getParameter("itemname");
+		String subCat=(String)request.getParameter("subcategory");
+		String price=(String)request.getParameter("itemprice");
+		String quantity = (String)request.getParameter("itemquantity");
+		String about=(String)request.getParameter("itemabout");
+		String category= null;
+		if(price==null){
+			price="0";
+		}
+		if(quantity==null){
+			quantity="1";
+		}
+		if(about==""){
+			about="";
+		}
 		DatabaseClass db=  new DatabaseClass();
-		System.out.println(request.getParameter("shoEmail"));
 		try {			
-			if(name.length()==0||subCat.length()==0){
+			if(name==null||name.length()==0){
 				RequestDispatcher rd=request.getRequestDispatcher("iShopMain.jsp");
 				rd.forward(request, response);
-			}else{
-				
-				HttpSession session = request.getSession(false);			        
-		        if(session != null){
-		            session.invalidate();
-		        }
-//		        db.getCategory(name);
-//		        Item item = new Item(name, price, Integer.parseInt(quantity), about, itemCategory, itemSubCategory, id)
-//		        db.addItem(item, shopId, subCategoryId);
-//				Person p=aut.getPerson(aut.getPersonId(email));
-//				session=request.getSession();
-//				session.setAttribute("person", p);
-//				session.setAttribute("user", "person");
-//				session.setAttribute("first_name", first_name);
-//				session.setAttribute("last_name", surname);
-//				session.setAttribute("email", email);
-				RequestDispatcher rd=request.getRequestDispatcher("iShopMain.jsp");
-				rd.forward(request, response);			
+			}else{				
+				category=db.getCategoryName(db.getCategoryId(db.SubCatId(subCat)));
+		        System.out.println(category);
+		        Item item = new Item(name, Integer.parseInt(price), Integer.parseInt(quantity), about, category, subCat, db.getShopId((String)request.getSession().getAttribute("email")));
+		        db.addItem(item, db.getShopId((String)request.getSession().getAttribute("email")),  db.SubCatId(subCat));
+		        
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-}
-		
+		}		
 	}
-
 }

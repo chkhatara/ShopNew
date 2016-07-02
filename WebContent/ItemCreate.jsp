@@ -129,13 +129,13 @@
         <div class="form-group">
           <label class="col-lg-3 control-label">Item name:</label>
           <div class="col-lg-8">
-            <input class="form-control" name="name" placeholder="Item Name" type="text" id="name" value="">
+            <input class="form-control" name="itemname" placeholder="Item Name" type="text" id="itemname" >
           </div>
         </div>
       <div class="form-group">
          <label class="col-lg-3 control-label">SubCategory:</label>  
             <div class="col-lg-8">
-      			<select class="form-control" id="sel1">
+      			<select class="form-control" id="sel1" name = "subcategory">
       			<% for(int i=0;i<subCate.size();i++){ %>
 			        <option><%=subCate.get(i) %></option>
 				<%} %>
@@ -146,30 +146,20 @@
         <div class="form-group">
           <label class="col-lg-3 control-label">Item Price:</label>
           <div class="col-lg-8">
-            <input class="form-control" placeholder="Item Price" name="price" type="text" value="" >
+            <input class="form-control" placeholder="Item Price" name="itemprice" type="text">
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Item Quantity:</label>
           <div class="col-lg-8">
-            <input class="form-control" placeholder="Quantity" name="idnumber" type="text" value="" >
+            <input class="form-control" placeholder="Quantity" name="itemquantity" type="text" >
           </div>
         </div>
-       
-         <div class="form-group">
-         <label class="col-lg-3 control-label">Shop:</label>  
-            <div class="col-lg-8">
-      			<select class="form-control" id="sel1">
-			        <% for(int i=0;i<shops.size();i++){ %>
-			        <option><%=shops.get(i) %></option>
-				<%} %>
-      			</select>
-                 </div>
-                 </div>
+
         <div class="form-group">
           <label class="col-lg-3 control-label">Item Info:</label>
           <div class="col-lg-8">
-           	<textarea cols="50" rows="5"  name="about"> 
+           	<textarea cols="50" rows="5"  name="itemabout"> 
 			</textarea>
           </div>
         </div>

@@ -60,7 +60,7 @@
                     <li><a href="#">Search Pages</a></li>
                     <li class="nav-dropdown">
                     	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							Pages <span class="caret"></span>
+							Pages
 						</a>
 						<ul class="dropdown-menu">                    
 						<% if(session.getAttribute("email")==null){ %>       
@@ -139,7 +139,7 @@
                 <div class="thumbnail">
                     <img src="http://placehold.it/800x500" alt="">
                     <div class="caption">
-                        <h3><%= items.get(i).getName() %></h3>
+                        <h5><%= items.get(i).getName() %></h5>
                         <p><%= items.get(i).getitemDescription() %>.</p>
                         <p>
                             <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
