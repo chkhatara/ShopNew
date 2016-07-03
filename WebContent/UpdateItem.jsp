@@ -135,7 +135,7 @@
         <div class="form-group">
           <label class="col-lg-3 control-label">Item name:</label>
           <div class="col-lg-8">
-            <input class="form-control" name="itemname" value=<%= item.getName() %> type="text" id="itemname" >
+            <input class="form-control" value=<%= item.getName() %> name="itemname"  type="text" >
           </div>
         </div>
       <div class="form-group">
@@ -149,7 +149,8 @@
       			</select>
                  </div>
                  </div>
-  
+  	
+  	
         <div class="form-group">
           <label class="col-lg-3 control-label">Item Price:</label>
           <div class="col-lg-8">

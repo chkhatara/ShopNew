@@ -167,16 +167,29 @@
 							<div class="well product-short-detail">
 								<div class="row">
 									<div class="the-list">
-										<h3 class="col-xs-12">$<%= item.getPrice() %>
+										<h3 class="col-xs-12">Price: $<%= item.getPrice() %>
 										</h3>
 									</div>
 									<div class="the-list">
-										<div class="col-xs-4">Availability</div>
+										<div class="col-xs-4">In Stock</div>
 										<div class="col-xs-8">
 											<!-- <span class="red">OUT OF STOCK</span> -->
 											<span class="green"><%= item.getQuantity() %></span>
 										</div>
+										</div>
+										<div class="the-list">
+										<div class="col-xs-4">Rating</div>
+										<div class="col-xs-8">
+										<% int itemRating = db.getItemRating(Integer.parseInt(request.getParameter("id")));
+										for(int st =0;st<itemRating;st++){ %>
+														<i class="fa fa-star"></i>									
+													<%} %>
 									</div>
+									</div>
+									
+								
+										
+									
 									
 									<div class="clearfix"></div>
 									<hr/>
@@ -236,50 +249,38 @@
 								</div>
 								<div class="tab-pane" id="review">
 									<div class="well">
+										<% ArrayList<Review> rev= db.getAllReviews(request.getParameter("id"));
+										%>
+										<% for(int i=0;i<rev.size();i++){ 
+												Review review = rev.get(i);%>
+											
 										<div class="media">
 											<a class="pull-left" href="#">
 												<img class="media-object" alt="64x64" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjZWVlIi8+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iMzIiIHk9IjMyIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9zdmc+">
 												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-half-o"></i>
+													<%for(int st =0;st<review.getStar();st++){ %>
+														<i class="fa fa-star"></i>									
+													<%} %>
+			
 												</div>
 											</a>
 											<div class="media-body">
-												<h5 class="media-heading"><strong>John Thor</strong></h5>
-												Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+												<h5 class="media-heading"><strong><%= review.getPersonName() %></strong></h5>
+												<%= review.getReview() %>
 											</div>
 										</div>
-										<div class="media">
-											<a class="pull-left" href="#">
-												<img class="media-object" alt="64x64" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjZWVlIi8+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iMzIiIHk9IjMyIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9zdmc+">
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-half-o"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</a>
-											<div class="media-body">
-												<h5 class="media-heading"><strong>Michael</strong></h5>
-												Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-											</div>
-										</div>
+										<%} %>
+										
 										<hr/>
 		                                <h4>Add your review</h4>
 		                                <p></p>
-		                                <form role="form">
+		                                <form role="form" action="SubmitReviewServlet?id=<%=(request.getParameter("id"))%>" method="post">
 		                                    <div class="form-group">
-		                                        <input type="text" class="form-control" placeholder="Name">
+		                                        <input type="text" class="form-control" placeholder="Name" name ="personName">
 		                                    </div>
+	
 		                                    <div class="form-group">
-		                                        <input type="text" class="form-control" placeholder="Email">
-		                                    </div>
-		                                    <div class="form-group">
-		                                        <select class="form-control">
+		                                        <select class="form-control" name = "rating">
 		                                            <option>1 star</option>
 		                                            <option>2 stars</option>
 		                                            <option>3 stars</option>
@@ -288,7 +289,7 @@
 		                                        </select>
 		                                    </div>
 		                                    <div class="form-group">
-		                                        <textarea class="form-control" rows="5" placeholder="Your Review"></textarea>
+		                                        <textarea class="form-control" rows="5" placeholder="Your Review" name = "review"></textarea>
 		                                    </div>
 		                                    <button type="submit" class="btn btn-default">Submit Review</button>
 		                                </form>
@@ -298,15 +299,7 @@
 						</div>
 					</div>
 
-					<!-- <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
-						<a class="addthis_button_preferred_1"></a>
-						<a class="addthis_button_preferred_2"></a>
-						<a class="addthis_button_preferred_3"></a>
-						<a class="addthis_button_preferred_4"></a>
-						<a class="addthis_button_compact"></a>
-					</div>
-					<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=xa-4f0c254f1302adf8"></script>
-	             -->
+				
 	            </div>
 	            <div class="clearfix"></div>
 	            <div class="col-lg-12 col-sm-12">

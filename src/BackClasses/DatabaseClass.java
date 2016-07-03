@@ -17,7 +17,80 @@ import java.util.ArrayList;
  *
  */
 public class DatabaseClass {
-	
+	public int getItemRating(int itemId){
+		Statement stm;
+		Connection con = DataBaseInfo.getConnection();
+		int resultRating=0;
+		int size=0;
+		try {
+			stm=con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			ResultSet rSet=stm.executeQuery(
+					"select * from item_review where item_id="+itemId+ ";");
+			while(rSet.next()){
+				size++;
+				resultRating+=rSet.getInt("star");
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}	
+		if(size==0){
+			return 0;
+		}
+		return resultRating/size;
+	}
+	public boolean checkReview(String person,String star,String review,String id){
+		Statement stm;
+		Connection con = DataBaseInfo.getConnection();
+		try {
+			stm=con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			ResultSet rSet=stm.executeQuery(
+					"select * from item_review where item_id="+Integer.parseInt(id)+" and person_name= '"+person+"' ;");
+			if(rSet.next()){
+				return false;
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}		
+		return true;
+	}
+	public void addReview(String person,String star,String review,String id){
+		Connection con = DataBaseInfo.getConnection();
+
+		PreparedStatement stmt;
+		try {
+			stmt = con.prepareStatement(
+					"INSERT INTO item_review (item_id,description,star,person_name) "
+							+ "values (?,?,?,?)");
+			stmt.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			stmt.setInt(1,Integer.parseInt(id) );
+			stmt.setString(2, review);
+			stmt.setInt(3, Integer.parseInt(star));
+			stmt.setString(4, person);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.print(e.getMessage());
+		}
+	}
+	public ArrayList<Review> getAllReviews(String id){
+		ArrayList<Review> arr = new ArrayList<Review>();
+		Statement stm;
+		Connection con = DataBaseInfo.getConnection();
+		try {
+			stm=con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			ResultSet rSet=stm.executeQuery(
+					"select * from item_review where item_id="+Integer.parseInt(id)+";");
+			while(rSet.next()){
+				arr.add(new Review(rSet.getString("person_name"),rSet.getInt("star"),Integer.parseInt(id),rSet.getString("description")));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}		
+		return arr;
+	}
 	public ArrayList<ItemCart> getShoppingCartItemsOfPerson(String email){
 		ArrayList<ItemCart> arr = new ArrayList<ItemCart>();
 		Authorizations aut = new Authorizations();

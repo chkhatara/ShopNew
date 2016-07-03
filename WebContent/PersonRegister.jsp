@@ -95,30 +95,31 @@
             <div class="col-sm-6 mobile-pull">
               <article role="login">
                 <h3 class="text-center"><i class="fa fa-lock"></i>Create Person Account</h3>
-                <form class="signup" action="RegisterPerson" method="post" >
+                <form class="signup" action="RegisterPerson" method="post" onSubmit="return validateUser()">
                   <div class="form-group">
-                    <input type="text" name="name" id="name" class="form-control" placeholder="First Name">
+                 
+                    <input type="text" name="name" id="username" class="form-control" placeholder="First Name">
                   </div>
                   <div class="form-group">
-                    <input type="text" name="surname" id="surname" class="form-control" placeholder="Last Name">
+                    <input type="text" name="surname" id="usersurname" class="form-control" placeholder="Last Name">
                   </div>
                   <div class="form-group">
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Email Address">
+                    <input type="email" name="email" id="useremail" class="form-control" placeholder="Email Address">
                   </div>
             
          
                   <div class="form-group">
-                    <input type="text" name="idNumber" id="idNumber" class="form-control" placeholder="id number">
+                    <input type="text" name="idNumber" id="useridNumber" class="form-control" placeholder="id number">
                   </div>
                   <div class="form-group">
-                    <input type="text" name="Phone" id="Phone" class="form-control" placeholder="Phone Number">
+                    <input type="text" name="Phone" id="userPhone" class="form-control" placeholder="Phone Number">
                   </div>
                   
                   <div class="form-group">
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+                    <input type="password" name="password" id="userpassword" class="form-control" placeholder="Password">
                   </div>
                   <div class="form-group">
-                    <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm Password">
+                    <input type="password" name="confirm_password" id="userconfirm_password" class="form-control" placeholder="Confirm Password">
                   </div>
                    
 				 
@@ -132,7 +133,7 @@
                   
                    
                   <div class="form-group">
-                    <input type="submit" class="btn btn-success btn-block"  value="SUBMIT">
+                    <input type="submit"  class="btn btn-success btn-block"  value="SUBMIT">
                   </div>
                 </form>
 
@@ -179,25 +180,25 @@
           <div class="col-sm-6 mobile-pull">
             <article role="login">
               <h3 class="text-center"><i class="fa fa-lock"></i> Create Shop Account</h3>
-              <form class="signup" action="RegisterShop" method="post">
+              <form class="signup" action="RegisterShop" method="post" onSubmit="return validateShop()">
                 <div class="form-group">
-                  <input type="text" id="name" name="name" class="form-control" placeholder="Shop Name">
+                  <input type="text"  name="name" id="shopname" class="form-control" placeholder="Shop Name">
                 </div>
                 <div class="form-group">
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Email Address">
+                    <input type="email" name="email" id="shopemail" class="form-control" placeholder="Email Address">
                   </div>
                   <div class="form-group">
-                    <input type="text" name="site" id="site" class="form-control" placeholder="Site">
+                    <input type="text" name="site" id="shopsite" class="form-control" placeholder="Site">
                   </div>
                   <div class="form-group">
-                    <input type="text" name="Phone" id="Phone" class="form-control" placeholder="Phone Number">
+                    <input type="text" name="Phone" id="shopPhone" class="form-control" placeholder="Phone Number">
                   </div>
                   
                   <div class="form-group">
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+                    <input type="password" name="password" id="shoppassword" class="form-control" placeholder="Password">
                   </div>
                   <div class="form-group">
-                    <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm Password">
+                    <input type="password" name="confirm_password" id="shopconfirm_password" class="form-control" placeholder="Confirm Password">
                   </div>
                    <div class="form-group">
 				  <textarea name="Text" id="Text" cols="68" rows="5"></textarea>
@@ -238,7 +239,66 @@
  
 
 </head>
+<script type="text/javascript">
+            function validateUser()
+            {
+                var name = document.getElementById("username");
+                var surname = document.getElementById("usersurname");
+                var email = document.getElementById("useremail");
+                var password = document.getElementById("userpassword");
+                var idNumber = document.getElementById("useridNumber");
+                var Phone = document.getElementById("userPhone");
+				var idNum = document.getElementById("useridNumber").value;
+				var PhoneNum = document.getElementById("useridPhone").value;
+				var passwordConfirm = document.getElementById("userconfirm_password");
+                var valid = true;
+                if(name.value.length<=0||surname.value.length<=0||email.value.length<=0||password.value.length<=0
+                		||idNumber.value.length<=0||Phone.value.length<=0||passwordConfirm.value.length<=0)
+                    {
+                        alert("Don't leave the field empty!");
+                        valid = false;
+                    }
+                    else if(isNaN(idNum) || isNaN(Phone)){
+	                    alert("Enter a number in id number and phone ");
+	                    valid = false;
+                    }else if(passwordConfirm.value!=password.value){
+                    	alert("password and password confirm must be equal");
+                    	valid = false;
+                    }
+                
+                return false;
+            };
 
+        </script>
+        
+        <script type="text/javascript">
+            function validateShop()
+            {
+                var name = document.getElementById("shopname");
+                var email = document.getElementById("shopemail");
+                var password = document.getElementById("shoppassword");
+                var site = document.getElementById("shopisite");
+                var Phone = document.getElementById("shopPhone");
+                var password = document.getElementById("shoppassword");
+				var passwordConfirm = document.getElementById("shopconfirm_password");
+                var valid = true;
+                if(name.value.length<=0||email.value.length<=0||password.value.length<=0
+                		||site.value.length<=0||Phone.value.length<=0||passwordConfirm.value.length<=0)
+                    {
+                        alert("Don't leave the field empty!");
+                        valid = false;
+                    }else if(isNaN(Phone)){
+                        alert("Enter a number in in Phone");
+                    	valid = false;
+                    }else if(passwordConfirm!=password){
+                    	alert("password and password confirm must be equal");
+                    	valid = false;
+                    }
+                
+                return valid;
+            };
+
+        </script>
 <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
