@@ -195,7 +195,7 @@
 			<!-- Featured -->
         	<div class="col-lg-9 col-md-9 col-sm-12">
         		<div class="col-lg-12 col-sm-12">
-            		<span class="title">FEATURED PRODUCTS</span>
+            		<span class="title">ALL PRODUCTS</span>
             	</div>
             	<% ArrayList<Item> allItems = db.getAllItems();
             	int startingPoint =0;

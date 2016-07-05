@@ -20,12 +20,42 @@
     <link href="css/jquery.bxslider.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     
+              <script>
+function validateUserForm() {
+    var username = document.forms["userRegister"]["username"].value;
+    var usersurname = document.forms["userRegister"]["usersurname"].value;
+    var userEmail = document.forms["userRegister"]["useremail"].value;
+    var useridNumber = document.forms["userRegister"]["useridNumber"].value;
+    var userPhone = document.forms["userRegister"]["userPhone"].value;
+    var userPassword = document.forms["userRegister"]["userpassword"].value;
+    var userConfirm = document.forms["userRegister"]["userconfirm_password"].value;
+    if (username == null || username == "") {
+        alert("Name must be filled out");
+        return false;
+    }else if(usersurname==null || usersurname==""){
+	    	alert("Surname must be filled out");
+	    	return false;
+    }else if(userEmail==null || userEmail==""){
+	  	  alert("Email must be filled out");
+	      return false;
+    }else if(useridNumber=null || useridNumber==""){
+    	  alert("Id Number must be filled out");
+        return false;
     
+    }else if(userPassword==null || userPassword==""){
+    	  alert("user password must be filled out");
+          return false;
+    }else if(userConfirm != userPassword){
+	  	  alert("user password and password confirm must be equal");
+	      return false;
+	}
+}
+</script>
 
 </head>
 <body>
 <%@page import="BackClasses.*" %>
- 
+
 <!-- Navigation -->
     <nav class="navbar navbar-inverse" role="navigation">
         <div class="container">
@@ -126,54 +156,54 @@
          <strong>ყურადღება!</strong>. გთხოვთ შეავსოთ შესაბამისი ველები სანდო ინფორმაციით.
       </div>
       <h3>Personal info</h3>
-      <form class="form-horizontal" role="form" action="UpdatePersonProfile" method="post">       
+      <form class="form-horizontal" name="userRegister" role="form" action="UpdatePersonProfile"  method="post" onsubmit="return validateUserForm()">       
         <div class="form-group">
           <label class="col-lg-3 control-label">First name:</label>
           <div class="col-lg-8">
-            <input class="form-control" name="first_name" value=<%= p.getName() %> type="text" id="first_name" value="">
+            <input class="form-control" name="first_name" id="username" value=<%= p.getName() %> type="text" id="first_name" >
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Last name:</label>
           <div class="col-lg-8">
-            <input class="form-control" name="last_name" value=<%= p.getSurname() %> type="text" value="">
+            <input class="form-control" name="last_name" id="usersurname" value=<%= p.getSurname() %> type="text" >
           </div>
         </div>
   
         <div class="form-group">
           <label class="col-lg-3 control-label">Email:</label>
           <div class="col-lg-8">
-            <input class="form-control" value=<%= p.getMail() %> name="email" type="text" value="" >
+            <input class="form-control" value=<%= p.getMail() %> name="email" id= "useremail" type="text" >
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Id Number:</label>
           <div class="col-lg-8">
-            <input class="form-control" value=<%= p.getId() %> name="idnumber" type="text" value="" >
+            <input class="form-control" value=<%= p.getId() %> name="idnumber" id= "useridNumber" type="text" >
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Phone:</label>
           <div class="col-lg-8">
-            <input class="form-control" value=<%= p.getTel() %> name="phone" type="text" value="" >
+            <input class="form-control" value=<%= p.getTel() %> name="phone" id ="userPhone" type="text" >
           </div>
         </div>
           <div class="form-group">
           <label class="col-md-3 control-label">Current Password:</label>
           <div class="col-lg-8">
-            <input class="form-control" placeholder="Enter Current Password" name="current_password" type="password">
+            <input class="form-control" placeholder="Enter Current Password" name="current_password" id = "usercurrpassword" type="password">
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-3 control-label">Enter Password:</label>
           <div class="col-lg-8">
-            <input class="form-control" placeholder="Enter Password" name="password" type="password">
+            <input class="form-control" placeholder="Enter Password" name="password" id= userpassword" type="password">
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-3 control-label">Confirm password:</label>
           <div class="col-lg-8">
-            <input class="form-control" placeholder = "password_confirm" name="password_confirm" type="password">
+            <input class="form-control" placeholder = "password_confirm" name="password_confirm" id ="userconfirm_password" "type="password">
           </div>
         </div>
            
