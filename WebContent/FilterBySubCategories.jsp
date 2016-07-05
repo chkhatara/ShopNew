@@ -154,12 +154,7 @@
         </div>
         <!-- /.row -->
 
-	<nav>
-	  <ul class="pager">
-	    <li class="pager-prev disabled"><a href="#">Older</a></li>
-	    <li class="pager-next"><a href="#">Newer</a></li>
-	  </ul>
-	</nav>
+	
 
        
 

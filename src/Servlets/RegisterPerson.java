@@ -44,7 +44,6 @@ public class RegisterPerson extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String email=(String)request.getParameter("email");
 		String password=(String)request.getParameter("password");
-		String password_confirm=(String)request.getParameter("confirm_password");
 		String first_name=(String)request.getParameter("name");
 		String surname=(String)request.getParameter("surname");
 		String id=(String)request.getParameter("idNumber");
@@ -55,9 +54,7 @@ public class RegisterPerson extends HttpServlet {
 			
 			boolean containsPerson=aut.searchPerson(email,password);	
 			boolean containsShop=aut.searchShop(email,password);
-			if(containsPerson==true||containsShop==true||password.length()==0
-					||password_confirm.length()==0||!password.equals(password_confirm)||surname.length()==0
-					||email.length()==0||first_name.length()==0){
+			if(containsPerson==true||containsShop==true){
 				RequestDispatcher rd=request.getRequestDispatcher("PersonRegister.jsp");
 				rd.forward(request, response);
 			}else{

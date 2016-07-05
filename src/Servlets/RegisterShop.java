@@ -45,7 +45,6 @@ public class RegisterShop extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String email=(String)request.getParameter("email");
 		String password=(String)request.getParameter("password");
-		String password_confirm=(String)request.getParameter("confirm_password");
 		String name=(String)request.getParameter("name");
 		String tel = (String)request.getParameter("Phone");
 		String info = (String)request.getParameter("Text");
@@ -56,10 +55,7 @@ public class RegisterShop extends HttpServlet {
 			
 			boolean containsPerson=aut.searchPerson(email,password);	
 			boolean containsShop=aut.searchShop(email,password);
-			if(containsPerson==true||containsShop==true||password.length()==0
-					||password_confirm.length()==0||!password.equals(password_confirm)
-				
-					||email.length()==0||name.length()==0){
+			if(containsPerson==true||containsShop==true){
 				RequestDispatcher rd=request.getRequestDispatcher("PersonRegister.jsp");
 				rd.forward(request, response);
 			}else{
@@ -68,7 +64,7 @@ public class RegisterShop extends HttpServlet {
 		        if(session != null){
 		            session.invalidate();
 		        }
-		        aut.addShop(name, email, password_confirm, site, tel,info);
+		        aut.addShop(name, email, password, site, tel,info);
 		        
 				session=request.getSession();
 				session.setAttribute("user", "shop");

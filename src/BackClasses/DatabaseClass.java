@@ -39,6 +39,24 @@ public class DatabaseClass {
 		}
 		return resultRating/size;
 	}
+	public ArrayList<Item> getAllItems(){
+		Statement stm;
+		Connection con = DataBaseInfo.getConnection();
+		ArrayList<Item> items = new ArrayList<>();
+		try {
+			stm=con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			ResultSet rSet=stm.executeQuery(
+					"select * from item ;");
+			while(rSet.next()){
+				Item item = new Item(rSet.getString("item_name"), rSet.getInt("item_price"), rSet.getInt("item_quantity"), rSet.getString("item_description"),getCategoryName(getCategoryId(rSet.getInt("item_sub_category"))) , getSubCategoryName(rSet.getInt("item_sub_category")), rSet.getInt("item_id"));
+				items.add(item);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}		
+		return items;
+	}
 	public boolean checkReview(String person,String star,String review,String id){
 		Statement stm;
 		Connection con = DataBaseInfo.getConnection();

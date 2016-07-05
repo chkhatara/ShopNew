@@ -10,6 +10,38 @@
 
  <link href="css/Register.css" rel="stylesheet" type="text/css">
 <head>
+
+            <script>
+function validateUserForm() {
+    var username = document.forms["userRegister"]["username"].value;
+    var usersurname = document.forms["userRegister"]["usersurname"].value;
+    var userEmail = document.forms["userRegister"]["useremail"].value;
+    var useridNumber = document.forms["userRegister"]["useridNumber"].value;
+    var userPhone = document.forms["userRegister"]["userPhone"].value;
+    var userPassword = document.forms["userRegister"]["userpassword"].value;
+    var userConfirm = document.forms["userRegister"]["userconfirm_password"].value;
+    if (username == null || username == "") {
+        alert("Name must be filled out");
+        return false;
+    }else if(usersurname==null || usersurname==""){
+	    	alert("Surname must be filled out");
+	    	return false;
+    }else if(userEmail=null || userEmail==""){
+	  	  alert("Email must be filled out");
+	      return false;
+    }else if(useridNumber=null || useridNumber==""){
+    	  alert("Id Number must be filled out");
+        return false;
+    
+    }else if(userPassword=null || userPassword==""){
+    	  alert("user password must be filled out");
+          return false;
+    }else if(userConfirm != userPassword){
+	  	  alert("user password and password confirm must be equal");
+	      return false;
+	}
+}
+</script>
  <nav class="navbar navbar-inverse" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -95,7 +127,7 @@
             <div class="col-sm-6 mobile-pull">
               <article role="login">
                 <h3 class="text-center"><i class="fa fa-lock"></i>Create Person Account</h3>
-                <form class="signup" action="RegisterPerson" method="post" onSubmit="return validateUser()">
+                <form class="signup" name="userRegister" action="RegisterPerson" method="post" onsubmit="return validateUserForm()">
                   <div class="form-group">
                  
                     <input type="text" name="name" id="username" class="form-control" placeholder="First Name">
@@ -239,39 +271,9 @@
  
 
 </head>
-<script type="text/javascript">
-            function validateUser()
-            {
-                var name = document.getElementById("username");
-                var surname = document.getElementById("usersurname");
-                var email = document.getElementById("useremail");
-                var password = document.getElementById("userpassword");
-                var idNumber = document.getElementById("useridNumber");
-                var Phone = document.getElementById("userPhone");
-				var idNum = document.getElementById("useridNumber").value;
-				var PhoneNum = document.getElementById("useridPhone").value;
-				var passwordConfirm = document.getElementById("userconfirm_password");
-                var valid = true;
-                if(name.value.length<=0||surname.value.length<=0||email.value.length<=0||password.value.length<=0
-                		||idNumber.value.length<=0||Phone.value.length<=0||passwordConfirm.value.length<=0)
-                    {
-                        alert("Don't leave the field empty!");
-                        valid = false;
-                    }
-                    else if(isNaN(idNum) || isNaN(Phone)){
-	                    alert("Enter a number in id number and phone ");
-	                    valid = false;
-                    }else if(passwordConfirm.value!=password.value){
-                    	alert("password and password confirm must be equal");
-                    	valid = false;
-                    }
-                
-                return false;
-            };
 
-        </script>
-        
-        <script type="text/javascript">
+            
+            <script type="text/javascript">
             function validateShop()
             {
                 var name = document.getElementById("shopname");
@@ -299,6 +301,8 @@
             };
 
         </script>
+        
+
 <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
