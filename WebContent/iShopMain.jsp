@@ -231,10 +231,17 @@
 	    <li class="pager-prev disabled"><a href="#">Older</a></li>
 	    <li class="pager-next disabled"><a href="#">Newer</a></li>
 	  <%}else{
-		  
-		  
-		  }%>
-	  }
+		  if(request.getParameter("page")==null){
+			  %>
+			  <li class="pager-prev disabled"><a href="#">Older</a></li>
+			  <li class="pager-next "><a href="iShopMain.jsp?page=1">Newer</a></li>
+	  	
+		  <%
+		  }
+		  int pageNum =Integer.parseInt(request.getParameter("page"));
+		  %>
+		  <%} %>
+	  
 	  </ul>
 	</nav>
 	</div>
