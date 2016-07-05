@@ -218,16 +218,16 @@
             		Item it =allItems.get(i);%>
 	            <div class="col-lg-4 col-sm-4 hero-feature text-center">
 	                <div class="thumbnail">
-	                	<a href="detail.html" class="link-p">
+	                	<a href="ItemPage.jsp?id=<%= it.getId() %>" class="link-p">
 	                    	<img src="images/product-2.jpg" alt="">
 	                	</a>
 	                    <div class="caption prod-caption">
-	                        <h4><a href="#"><%= it.getName() %></a></h4>
+	                        <h4><a href="ItemPage.jsp?id=<%= it.getId() %>"><%= it.getName() %></a></h4>
 	                        <p><%= it.getitemDescription() %></p>
 	                        <p>
 	                        	<div class="btn-group">
 		                        	<a href="#" class="btn btn-default">$ <%= it.getPrice() %></a>
-		                        	<a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
+		                        	<a href="ItemPage.jsp?id=<%= it.getId() %>" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
 	                        	</div>
 	                        </p>
 	                    </div>

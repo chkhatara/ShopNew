@@ -26,14 +26,14 @@ function validateUserForm() {
     }else if(usersurname==null || usersurname==""){
 	    	alert("Surname must be filled out");
 	    	return false;
-    }else if(userEmail=null || userEmail==""){
+    }else if(userEmail==null || userEmail==""){
 	  	  alert("Email must be filled out");
 	      return false;
     }else if(useridNumber=null || useridNumber==""){
     	  alert("Id Number must be filled out");
         return false;
     
-    }else if(userPassword=null || userPassword==""){
+    }else if(userPassword==null || userPassword==""){
     	  alert("user password must be filled out");
           return false;
     }else if(userConfirm != userPassword){
