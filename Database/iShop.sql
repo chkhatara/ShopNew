@@ -78,6 +78,7 @@ create table item_review(
 	review_id int not null auto_increment,
     item_id int not null,
     description text,
+    star int not null,
     person_name varchar(64) not null,
     constraint review_pk primary key(review_id),
     constraint item_review_fk foreign key(item_id) references item(item_id)
@@ -91,6 +92,13 @@ create table item_photoes(
     constraint item_photo_id primary key(item_photo_id),
     constraint item_id_fk foreign key (item_id) references item(item_id)
 
+);
+create table item_profile_picture(
+	item_profile_photo_id int not null auto_increment,
+	item_id int not null,
+    item_photo mediumblob not null,
+	constraint item_photo_profile_id primary key(item_profile_photo_id),
+    constraint item_id_fk4 foreign key (item_id) references item(item_id)
 );
 create table shop_photoes(
 	shop_photo_id int not null auto_increment,
@@ -163,13 +171,39 @@ INSERT INTO person (person_name,person_lastName,person_email,person_password,per
  ("ფენები",2),
  ("ალპინიზმი",3),
  ("სამოგზაურო ჩანთები",3);
+ use ishop;
+ INSERT INTO item_sub_category(item_sub_name,item_category_id)
+ values ("აქსესუარები",4),
+ ("ბიჭის ტანსაცმელი",4),
+ ("გოგოს ტანსაცმელი",4),
+ ("კაცის ტანსაცმელი",4),
+ ("ქალის ტანსაცმელი",4),
+ ("ფეხსაცმელები",4),
+ ("ვიდეო კამერები",5),
+ ("ტელევიზორები",5),
+ ("დინამიკები",5),
+ ("ყურსასმენები",5),
+ ("MP3 ფლეიერები",5),
+ ("ანდროიდი",8),
+ ("iPhobe",8),
+ ("მობილურის აქსესუარები",8)
+;
  
  
- 
-	INSERT INTO shop_category(category_name)
-    values ("pirveli");
  INSERT INTO shop (shop_name,shop_email,shop_password,shop_site,shop_tel,shop_info)
  values ("Tbilisi Shop","tbilisi@gmail.com","123","tbilisi.ge","4533","tbilisi biggest shop");
+ INSERT INTO shop (shop_name,shop_email,shop_password,shop_site,shop_tel,shop_info)
+ values 
+ ("Shoes Shop","shoes@gmail.com","123","shoes.ge","4523424","Check out our latest selection of all the must-have shoes for women this spring. From sandals to pumps and heels to fun spring boots, our assortment of women's shoes is endless. The expansive selection of women's sandals covers every silhouette, style, and fit you need. Think gladiator sandals, flip-flops, wedges and espadrilles! If you can't find the fit you need, check out our selection of women's wide width shoes and wide width sandals. Need another pair of spring or summer shoes besid
+ es your go-to wedge sandals? Get a pair of stylish pumps or high heels, or maybe a pair of flats or boat shoes for everyday wear. And don't forget to grab that perfect pair of sneakers to complete that trendy athleisure look!"),
+ ("Technics","technics@gmail.com","123","technics.ge","2342342","Best Technics shop in tbilisi");
+ 
+ INSERT INTO item (item_name,item_sub_category,item_description,item_price,item_quantity,shop_id)
+ values("Man's Standart Shoes",21,"Summer Mans Shoes",230,1,2),
+   ("Earphones",25,"Noise isolating earphones",123,1,3);
+
+ 
+ 
  INSERT INTO item (item_name,item_sub_category,item_description,item_price,item_quantity,shop_id)
  values("Headphone",1,"Best HeadPhone",100,1,1),
    ("Laptop",1,"Best Laptop",89,1,1);
