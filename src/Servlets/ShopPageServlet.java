@@ -40,13 +40,19 @@ public class ShopPageServlet extends HttpServlet {
 		}
 		HttpSession session=request.getSession();
 		String email= (String)session.getAttribute("email");
+		String page = (String)request.getParameter("page");
 		DatabaseClass dc = new DatabaseClass();
 		int id=0;
 		id = dc.getShopId(email);			
 		Shop shop = dc.getShop(id);
-		request.setAttribute("ShopObject", shop);		
-		RequestDispatcher rd = request.getRequestDispatcher("ShopPage.jsp");
-		rd.forward(request, response);
+		request.setAttribute("ShopObject", shop);	
+		if(page!=null){
+			RequestDispatcher rd = request.getRequestDispatcher("ShopPage.jsp?page="+page);
+			rd.forward(request, response);
+		}else{
+			RequestDispatcher rd = request.getRequestDispatcher("ShopPage.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	/**

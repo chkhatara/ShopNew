@@ -56,7 +56,7 @@ public class UpdateShopProfile extends HttpServlet {
 		String confirmPassword=(String)request.getParameter("password_confirm");
 		String site=(String)request.getParameter("shopsite");
 		String phone = (String) request.getParameter("shopphone");
-		//String about = (String) request.getParameter("shopabout");
+		String about = (String) request.getParameter("shopabout");
 		Authorizations aut = new Authorizations();
 		DatabaseClass db = new DatabaseClass();
 		Shop currentShop = db.getShop(db.getShopId(sessionMail));
@@ -73,7 +73,7 @@ public class UpdateShopProfile extends HttpServlet {
 			
 			if(phone.length()!=0 && !phone.equals(""))currentShop.setTel(phone);
 			if(site.length()!=0 && !site.equals(""))currentShop.setSite(site);
-			//if(about.length()!=0 && !about.equals(""))currentShop.setInfo(about);
+			if(about.length()!=0 && !about.equals(""))currentShop.setInfo(about);
 			Boolean changePassword=false;
 			if(aut.searchShop(sessionMail, currentPassword)){
 				if(password!=null && password.equals(confirmPassword) && !password.equals("")){

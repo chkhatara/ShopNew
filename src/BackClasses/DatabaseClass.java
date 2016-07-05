@@ -39,6 +39,24 @@ public class DatabaseClass {
 		}
 		return resultRating/size;
 	}
+	public int getCompanyPhotoNum(String email){
+		Statement stm;
+		Connection con = DataBaseInfo.getConnection();
+		int shopId = getShopId(email);
+		int size =0;
+		try {
+			stm=con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			ResultSet rSet=stm.executeQuery(
+					"select * from shop_photoes where shop_id = " +shopId+ ";");
+			while(rSet.next()){
+				size++;
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}		
+		return size;
+	}
 	public ArrayList<Item> getAllItems(){
 		Statement stm;
 		Connection con = DataBaseInfo.getConnection();
@@ -577,9 +595,10 @@ public class DatabaseClass {
 			}
 		}
 	
-	public byte [] getPhoto(int idNum){
+	public byte [] getPhoto(int idNum,int num){
 		 Statement stm;
 		 byte[] photo=null;
+		 int size = 0;
 		 try {
 			 Connection con = DataBaseInfo.getConnection();
 				stm=con.createStatement();
@@ -587,9 +606,12 @@ public class DatabaseClass {
 			
 				ResultSet rSet=stm.executeQuery("select shop_photo from shop_photoes where shop_id="+idNum+";");
 
-				if(rSet.next()){
-					Blob blob = rSet.getBlob(1);
-				    photo =  blob.getBytes(1, (int) blob.length());
+				while(rSet.next()){
+					size++;
+					if(size == num){
+						Blob blob = rSet.getBlob(1);
+					    photo =  blob.getBytes(1, (int) blob.length());
+					}
 				}
 
 			} catch (SQLException e) {

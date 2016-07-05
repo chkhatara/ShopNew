@@ -181,7 +181,8 @@
            <div class="form-group">
           <label class="col-lg-3 control-label">About me</label>
           <div class="col-lg-8">
-           	<textarea cols="50" rows="5" value=<%= shop.getInfo() %> name="shopabout" id ="shopabout" > 
+           	<textarea cols="50" rows="5"  name="shopabout" id ="shopabout" > 
+           	<%= shop.getInfo() %>
 			</textarea>
           </div>
         </div>

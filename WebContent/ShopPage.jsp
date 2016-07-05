@@ -155,9 +155,23 @@
 			
 
             <div class="col-md-9">
-
+                <div class="slider">
+                    <ul class="bxslider">
+                    <%
+                    int sizePh = db.getCompanyPhotoNum((String)session.getAttribute("email"));
+                    for (int i=0;i<sizePh;i++){ %>
+                        <li>
+                            <a href="#">
+                                <img src="GetCompanyPicture?id=<%= db.getShopId((String)session.getAttribute("email")) %>&photoId=<%= i+1 %>" alt=""/>
+                            </a>
+                        </li>
+                        <%} %>
+                    </ul>
+                </div>
+          
                 <div class="thumbnail">
-                    <img class="img-responsive" src="http://placehold.it/800x300" alt="">
+              
+                    <img class="img-responsive" src="GetCompanyPicture?id=<%= db.getShopId((String)session.getAttribute("email")) %>" alt="">
                     <div class="caption-full">
                         <h2><a href="#"><%= shop.getName() %></a>
                         </h2>
@@ -167,11 +181,30 @@
                     
                 </div>
                 <% 
-                 db = new DatabaseClass();
-                ArrayList<Item> arr = db.getShopItems(db.getShopId((String)session.getAttribute("email")));
-                for(int i=0;i<arr.size();i++){
+                
+                ArrayList<Item> allItems = db.getShopItems(db.getShopId((String)session.getAttribute("email")));
+          
+            	int startingPoint =0;
+            	int sizeOfItems =0;
+            	int checkPage = 0;
+            	if((String)request.getParameter("page")==null && allItems.size()>=6){
+            		sizeOfItems =6;
+            	}else if((String)request.getParameter("page")==null && allItems.size()<6){
+            		sizeOfItems=allItems.size();
+            	}else if((String)request.getParameter("page")!=null && allItems.size()>6){
+            	 	checkPage = Integer.parseInt((String)request.getParameter("page"));
+            		startingPoint=checkPage*6;
+            		if((checkPage+1)*6>=allItems.size()){
+            			sizeOfItems = allItems.size();
+            		}else{
+            			sizeOfItems = (checkPage+1)*6;
+            		}
+            	}
+            	
+                
+            	for(int i=startingPoint;i<sizeOfItems;i++){
                 	itemNum++;
-                Item item = arr.get(i);%>
+                Item item = allItems.get(i);%>
 				<div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
                             <img src="GetItemProfilePicture?id=<%= item.getId()%>"  alt="">
@@ -186,11 +219,10 @@
                             <div class="ratings">
                                 <p class="pull-right">15 views</p>
                                 <p>
+                                 <% int rating = db.getItemRating(item.getId());
+                                 for(int r =0;r< rating;r++){%>
                                     <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
+                                    <%} %>
                                 </p>
                             </div>
                         </div>
@@ -207,9 +239,36 @@
 
    
  <nav>
-	  <ul class="pager">
+	   <ul class="pager">
+	  <% if(allItems.size()<=6){ %>
 	    <li class="pager-prev disabled"><a href="#">Older</a></li>
-	    <li class="pager-next"><a href="#">Newer</a></li>
+	    <li class="pager-next disabled"><a href="#">Newer</a></li>
+	  <%}else{
+		  if(request.getParameter("page")==null||Integer.parseInt(request.getParameter("page"))==0){
+			  %>
+			  <li class="pager-prev disabled"><a href="#">Older</a></li>
+			  <li class="pager-next "><a href="ShopPageServlet?page=1">Newer</a></li>
+	  	
+		  <%
+		  }else{
+		 	 int pageNum =Integer.parseInt(request.getParameter("page"));
+		  	 if( allItems.size()-pageNum*6>6){
+			  %>
+			  <li class="pager-prev"><a href="ShopPageServlet?page=<%= pageNum-1%>">Older</a></li>
+			  <li class="pager-next "><a href="ShopPageServlet?page=<%= pageNum+1%>">Newer</a></li>
+		 <%  }else{
+			 
+			 %>
+			 <li class="pager-prev"><a href="ShopPageServlet?page=<%= pageNum-1%>">Older</a></li>
+			  <li class="pager-next disabled"><a href="#">Newer</a></li>
+			 <% 
+		 	}
+		}%>
+			 
+		 	
+		  
+		  <%} %>
+	  
 	  </ul>
 	</nav>
 

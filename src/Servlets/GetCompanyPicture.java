@@ -33,8 +33,9 @@ public class GetCompanyPicture extends HttpServlet {
 		
 		response.setContentType("image/jpeg");
 		String id = request.getParameter("id");
+		String photoId = request.getParameter("photoId");
 		DatabaseClass db = new DatabaseClass();
-		byte [] pic = db.getPhoto(Integer.parseInt(id));
+		byte [] pic = db.getPhoto(Integer.parseInt(id),Integer.parseInt(photoId));
 		if (pic == null){
 			//response.sendRedirect("http://dogvacay.com/img/default_profile.jpg");
 			response.sendRedirect("pagePictures/default_profile.jpg");
