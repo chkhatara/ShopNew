@@ -198,7 +198,23 @@
             		<span class="title">FEATURED PRODUCTS</span>
             	</div>
             	<% ArrayList<Item> allItems = db.getAllItems();
-            	for(int i=0;i<allItems.size();i++){
+            	int startingPoint =0;
+            	int sizeOfItems =0;
+            	int checkPage = 0;
+            	if((String)request.getParameter("page")==null && allItems.size()>6){
+            		sizeOfItems =6;
+            	}else if((String)request.getParameter("page")==null && allItems.size()<6){
+            		sizeOfItems=allItems.size();
+            	}else if((String)request.getParameter("page")!=null && allItems.size()>6){
+            	 	checkPage = Integer.parseInt((String)request.getParameter("page"));
+            		startingPoint=checkPage*6;
+            		if((checkPage+1)*6>=allItems.size()){
+            			sizeOfItems = allItems.size();
+            		}else{
+            			sizeOfItems = (checkPage+1)*6;
+            		}
+            	}
+            	for(int i=startingPoint;i<sizeOfItems;i++){
             		Item it =allItems.get(i);%>
 	            <div class="col-lg-4 col-sm-4 hero-feature text-center">
 	                <div class="thumbnail">
@@ -231,15 +247,29 @@
 	    <li class="pager-prev disabled"><a href="#">Older</a></li>
 	    <li class="pager-next disabled"><a href="#">Newer</a></li>
 	  <%}else{
-		  if(request.getParameter("page")==null){
+		  if(request.getParameter("page")==null||Integer.parseInt(request.getParameter("page"))==0){
 			  %>
 			  <li class="pager-prev disabled"><a href="#">Older</a></li>
 			  <li class="pager-next "><a href="iShopMain.jsp?page=1">Newer</a></li>
 	  	
 		  <%
-		  }
-		  int pageNum =Integer.parseInt(request.getParameter("page"));
-		  %>
+		  }else{
+		 	 int pageNum =Integer.parseInt(request.getParameter("page"));
+		  	 if( allItems.size()-pageNum*6>6){
+			  %>
+			  <li class="pager-prev"><a href="iShopMain.jsp?page=<%= pageNum-1%>">Older</a></li>
+			  <li class="pager-next "><a href="iShopMain.jsp?page=<%= pageNum+1%>">Newer</a></li>
+		 <%  }else{
+			 
+			 %>
+			 <li class="pager-prev"><a href="iShopMain.jsp?page=<%= pageNum-1%>">Older</a></li>
+			  <li class="pager-next disabled"><a href="#">Newer</a></li>
+			 <% 
+		 	}
+		}%>
+			 
+		 	
+		  
 		  <%} %>
 	  
 	  </ul>
