@@ -36,7 +36,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="iShopMain.jsp" class="active">Home</a></li>
-                    <li><a href="#">Search Pages</a></li>                   
+                    <li><a href="SearchPages.jsp">Search Pages</a></li>                   
                     <li class="nav-dropdown">
                     	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							Pages <span class="caret"></span>
