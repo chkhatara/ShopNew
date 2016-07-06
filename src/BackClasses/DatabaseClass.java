@@ -39,6 +39,24 @@ public class DatabaseClass {
 		}
 		return resultRating/size;
 	}
+	public int getItemShop(int itemId){
+		Statement stm;
+		Connection con = DataBaseInfo.getConnection();
+		int shopid=0;
+		try {
+			stm=con.createStatement();
+			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			ResultSet rSet=stm.executeQuery(
+					"select * from item where item_id = " +itemId+ ";");
+			if(rSet.next()){
+				shopid = rSet.getInt("shop_id");
+				System.out.println(shopid);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}		
+		return shopid;
+	}
 	public int getCompanyPhotoNum(String email){
 		Statement stm;
 		Connection con = DataBaseInfo.getConnection();

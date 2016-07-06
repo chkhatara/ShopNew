@@ -228,6 +228,7 @@
 	                        
 	                        <p><%= it.getitemDescription() %></p>
 	                        <p>SubCategory: <%= it.getSubCategory() %> </p>
+	                         <p><a href ="ShopPageForPerson?shopid=<%= db.getItemShop(it.getId()) %>">shop</a> </p>
 	                        
 	                        <p>
 	                        	<div class="btn-group">
