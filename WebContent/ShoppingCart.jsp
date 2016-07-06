@@ -120,14 +120,16 @@
                             </div>
                         </div></td>
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                        <input type="email" class="form-control" id="exampleInputEmail1" value=<%= item.getQuantity() %>>
+                        <input  class="form-control" id="exampleInputEmail1" value=<%= item.getQuantity() %>>
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>$<%= item.getPrice() %></strong></td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>$<%= item.getPrice()*item.getQuantity() %></strong></td>
                         <td class="col-sm-1 col-md-1">
-                        <button type="button" class="btn btn-danger">
+                        <form  action="RemoveItemFromCartServlet?id= <%= item.getId() %>" method="post" >
+                        <button type="submit" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span> Remove
                         </button></td>
+                        </form>
                     </tr>
                     <%} %>
                     

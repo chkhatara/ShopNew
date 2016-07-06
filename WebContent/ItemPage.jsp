@@ -44,10 +44,8 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="iShopMain.jsp" class="active">Home</a></li>
-                    <li><a href="catalogue.html">Catalogue</a></li>
-                    <li><a href="cart.html">Shopping Cart</a>
-                    </li>
-                    <li><a href="checkout.html">Checkout</a></li>
+                    <li><a href="#">Search Pages</a></li>
+                    
                     <li class="nav-dropdown">
                     	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							Pages <span class="caret"></span>
@@ -120,7 +118,7 @@
 			<!-- Product Detail -->
         	<div class="col-lg-9 col-md-9 col-sm-12">
         		<div class="col-lg-12 col-sm-12">
-            		<span class="title">Live Nation 3 Days of Peace and Music Carbon</span>
+            		<span class="title"><%= item.getName() %></span>
             	</div>
 	            <div class="col-lg-12 col-sm-12 hero-feature">
 
@@ -130,15 +128,15 @@
 							<div class="product-main-image-container">
 								<img src="images/loader.gif" alt="" class="product-loader">
 								<span class="thumbnail product-main-image">
-									<img src="images/detail1.jpg" alt="">
+									<img src="GetItemProfilePicture?id=<%= item.getId()%>" alt="">
 								</span>
 							</div>
 							<!-- End Main Image -->
 
 							<!-- Thumbnail Image -->
 							<div class="col-xs-3 product-thumb-image">
-								<a href="images/detail1.jpg" class="thumbnail">
-									<img src="images/detail1.jpg" alt="">
+								<a href="GetItemProfilePicture?id=<%= item.getId()%>" class="thumbnail">
+									<img src="GetItemProfilePicture?id=<%= item.getId()%>" alt="">
 								</a>
 							</div>
 							<div class="col-xs-3 product-thumb-image">
@@ -186,30 +184,28 @@
 													<%} %>
 									</div>
 									</div>
-									
+									<div class="the-list">
+										<div class="col-xs-4">SubCategory</div>
+										<div class="col-xs-8">
+											<span class="green"><%= item.getSubCategory() %></span>
+										</div>
+										</div>
 								
 										
 									
 									
 									<div class="clearfix"></div>
 									<hr/>
-									<form id="AddToCart" action="AddToCartServlet" method="post" role="form">
+									<% if (session.getAttribute("user")!=null && session.getAttribute("user").equals("person")){ %>
+									<form id="AddToCart" action="AddToCartServlet?id=<%= item.getId() %>" method="post" >
 									<div class="col-xs-12 input-qty-detail">
 										<input type="text" class="form-control input-qty text-center" value="1">
 										<button type ="submit" class="btn btn-default pull-left"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
 									</div>
 									</form>
+									<%} %>
 									<div class="clearfix"></div><br/>
-									<div class="col-xs-12 add-to-detail">
-										<div class="row">
-										<div class="col-xs-6 text-center">
-											<a href="compare.html"><i class="fa fa-list"></i> Add to Compare</a>
-										</div>
-										<div class="col-xs-6 text-center">
-											<a href="wishlist.html"><i class="fa fa-heart"></i> Add to Wishlist</a>
-										</div>
-										</div>
-									</div>
+									
 								</div>
 							</div>
 						</div>

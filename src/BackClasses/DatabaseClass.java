@@ -435,8 +435,25 @@ public class DatabaseClass {
 		}
 		return items;
 	}
-	
-	public boolean addItemToPersonCart(int cartId,int personId,int quantity){
+	public boolean checkPersonAndItem(int personId , int itemid){
+		Statement stmt;
+		Connection con = DataBaseInfo.getConnection();
+		boolean returnBool=false;
+		try {
+			stmt = con.createStatement();
+			stmt.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			ResultSet rSet = stmt.executeQuery("select * from person_cart_items where person_id=" + personId +" and item_id="+itemid+ ";");			
+			if(rSet.next()){
+				returnBool=true;
+			}
+		} catch (SQLException e) {
+			returnBool=false;
+			// TODO Auto-generated catch block
+			System.out.print(e.getMessage());
+		}
+		return returnBool;
+	}
+	public boolean addItemToPersonCart(int personId,int itemid,int quantity){
 		Connection con = DataBaseInfo.getConnection();
 
 		PreparedStatement stmt;
@@ -446,8 +463,8 @@ public class DatabaseClass {
 					"INSERT INTO person_cart_items (person_id,item_id,item_quantity,is_bought) "
 							+ "values (?,?,?,?)");
 			stmt.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
-			stmt.setInt(1,cartId);
-			stmt.setInt(2,personId);
+			stmt.setInt(1,personId);
+			stmt.setInt(2,itemid);
 			stmt.setInt(3,quantity);
 			stmt.setInt(4, 0);
 			stmt.executeUpdate();
