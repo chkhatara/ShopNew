@@ -88,14 +88,15 @@
     <!-- End Navigation -->
 <div class="container">
     <div class="row">
+    <form  action="RemoveItemFromCartServlet" method="post" >
+    
         <div class="col-sm-12 col-md-10 col-md-offset-1">
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>Product</th>
-                        <th>Quantity</th>
                         <th class="text-center">Price</th>
-                        <th class="text-center">Total</th>
+                        <th class="text-center">Operations</th>
                         <th> </th>
                     </tr>
                 </thead>
@@ -110,7 +111,7 @@
                     <tr>
                         <td class="col-sm-8 col-md-6">
                         <div class="media">
-                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="GetCompanyPicture?id=1" style="width: 72px; height: 72px;"> </a>
+                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="GetItemProfilePicture?id=<%= item.getId() %>" style="width: 72px; height: 72px;"> </a>
                             <div class="media-body">
                                 <h4 class="media-heading"><a href="ItemPage.jsp?id=<%= item.getId()%>"> <%= item.getName()%></a></h4>
                                
@@ -119,45 +120,38 @@
                                 <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
                             </div>
                         </div></td>
-                        <td class="col-sm-1 col-md-1" style="text-align: center">
-                        <input  class="form-control" id="exampleInputEmail1" value=<%= item.getQuantity() %>>
-                        </td>
+                        
                         <td class="col-sm-1 col-md-1 text-center"><strong>$<%= item.getPrice() %></strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>$<%= item.getPrice()*item.getQuantity() %></strong></td>
                         <td class="col-sm-1 col-md-1">
-                        <form  action="RemoveItemFromCartServlet?id= <%= item.getId() %>" method="post" >
-                        <button type="submit" class="btn btn-danger">
+                        
+                        <button type="submit" class="btn btn-danger" name ="removebut" value =<%= item.getId() %> >
                             <span class="glyphicon glyphicon-remove"></span> Remove
+                        </button>
+                        </td>
+                        <td class="col-sm-1 col-md-1">
+                        <button type="submit" class="btn btn-success" name ="buybut" value =<%= item.getId() %> >
+                            <span class="glyphicon glyphicon-check"></span> Buy
                         </button></td>
-                        </form>
+                        
                     </tr>
                     <%} %>
                     
                     
                    
                     <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
+                        
                         <td><h3>Total</h3></td>
                         <td class="text-right"><h3><strong>$<%= total %></strong></h3></td>
                     </tr>
                     <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
+                        
                         <td>
-                        <button type="button" class="btn btn-default">
-                            <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
-                        </button></td>
-                        <td>
-                        <button type="button" class="btn btn-success">
-                            Checkout <span class="glyphicon glyphicon-play"></span>
-                        </button></td>
+                        
                     </tr>
                 </tbody>
             </table>
         </div>
+        </form>
     </div>
 </div>
 

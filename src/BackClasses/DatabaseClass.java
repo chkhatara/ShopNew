@@ -453,6 +453,20 @@ public class DatabaseClass {
 		}
 		return returnBool;
 	}
+	public void removeItemPersonConnection(int personId , int itemid){
+		Statement stmt;
+		Connection con = DataBaseInfo.getConnection();
+		try {
+			stmt = con.createStatement();
+			stmt.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+			stmt.executeUpdate("delete  from person_cart_items where person_id=" + personId +" and item_id="+itemid+ ";");			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.print(e.getMessage());
+		}
+		
+	}
 	public boolean addItemToPersonCart(int personId,int itemid,int quantity){
 		Connection con = DataBaseInfo.getConnection();
 
