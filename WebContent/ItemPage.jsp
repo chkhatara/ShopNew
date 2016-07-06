@@ -55,6 +55,7 @@
                             <li><a href="PersonRegister.jsp">Register</a></li>
                         <% }else if(session.getAttribute("user").equals("person")){ %>
                         	<li><a href="UpdatePersonProfile.jsp">Update Profile</a></li>
+                        	<li><a href="http://localhost:8080/ShopNew/BoughtItemServlet">Bought Items</a></li>
                         	<% }else{ %>
                        	 	<li><a href="UpdateShopProfile.jsp">Update Profile</a></li>
                         <%} %>

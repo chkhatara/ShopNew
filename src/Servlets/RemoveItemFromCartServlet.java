@@ -50,7 +50,9 @@ public class RemoveItemFromCartServlet extends HttpServlet {
 			db.removeItemPersonConnection(personId, itemid);
 			response.sendRedirect("http://localhost:8080/ShopNew/ShoppingCartServlet");
 		}else if(buy != null){
-			
+			int itemid = Integer.parseInt(buy);
+			db.buyItem(personId, itemid);
+			response.sendRedirect("http://localhost:8080/ShopNew/BoughtItemServlet");
 		}
 		 
 		

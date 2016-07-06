@@ -205,7 +205,7 @@
             	for(int i=startingPoint;i<sizeOfItems;i++){
                 	itemNum++;
                 Item item = allItems.get(i);%>
-				<div class="col-sm-4 col-lg-4 col-md-4">
+				<div class="col-sm-4 col-lg-4 col-md-4 ">
                         <div class="thumbnail">
                             <img src="GetItemProfilePicture?id=<%= item.getId()%>"  alt="">
                             <div class="caption">

@@ -45,7 +45,6 @@
                             <li><a href="PersonRegister.jsp">Register</a></li>
                         <% }else if(session.getAttribute("user").equals("person")){ %>
                         	<li><a href="UpdatePersonProfile.jsp">Update Profile</a></li>
-                        	<li><a href="http://localhost:8080/ShopNew/BoughtItemServlet">Bought Items</a></li>
                         	<% }else{ %>
                        	 	<li><a href="UpdateShopProfile.jsp">Update Profile</a></li>
                         <%} %>
@@ -97,7 +96,6 @@
                     <tr>
                         <th>Product</th>
                         <th class="text-center">Price</th>
-                        <th class="text-center">Operations</th>
                         <th> </th>
                     </tr>
                 </thead>
@@ -123,16 +121,7 @@
                         </div></td>
                         
                         <td class="col-sm-1 col-md-1 text-center"><strong>$<%= item.getPrice() %></strong></td>
-                        <td class="col-sm-1 col-md-1">
                         
-                        <button type="submit" class="btn btn-danger" name ="removebut" value =<%= item.getId() %> >
-                            <span class="glyphicon glyphicon-remove"></span> Remove
-                        </button>
-                        </td>
-                        <td class="col-sm-1 col-md-1">
-                        <button type="submit" class="btn btn-success" name ="buybut" value =<%= item.getId() %> >
-                            <span class="glyphicon glyphicon-check"></span> Buy
-                        </button></td>
                         
                     </tr>
                     <%} %>

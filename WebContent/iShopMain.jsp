@@ -42,11 +42,13 @@
 							Pages <span class="caret"></span>
 						</a>
 						
-						<ul class="dropdown-menu">                    
+						<ul class="dropdown-menu">  
+						                  
 						<% if(session.getAttribute("email")==null){ %>       
                             <li><a href="PersonRegister.jsp">Register</a></li>
                         <% }else if(session.getAttribute("user").equals("person")){ %>
                         	<li><a href="UpdatePersonProfile.jsp">Update Profile</a></li>
+                        	<li><a href="http://localhost:8080/ShopNew/BoughtItemServlet">Bought Items</a></li>
                         	<% }else{ %>
                        	 	<li><a href="UpdateShopProfile.jsp">Update Profile</a></li>
                         <%} %>
@@ -219,11 +221,14 @@
 	            <div class="col-lg-4 col-sm-4 hero-feature text-center">
 	                <div class="thumbnail">
 	                	<a href="ItemPage.jsp?id=<%= it.getId() %>" class="link-p">
-	                    	<img src="images/product-2.jpg" alt="">
+	                    	<img src="GetItemProfilePicture?id=<%= it.getId() %>" alt="">
 	                	</a>
 	                    <div class="caption prod-caption">
 	                        <h4><a href="ItemPage.jsp?id=<%= it.getId() %>"><%= it.getName() %></a></h4>
+	                        
 	                        <p><%= it.getitemDescription() %></p>
+	                        <p>SubCategory: <%= it.getSubCategory() %> </p>
+	                        
 	                        <p>
 	                        	<div class="btn-group">
 		                        	<a href="#" class="btn btn-default">$ <%= it.getPrice() %></a>

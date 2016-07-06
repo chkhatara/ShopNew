@@ -15,16 +15,16 @@ import BackClasses.DatabaseClass;
 import BackClasses.ItemCart;
 
 /**
- * Servlet implementation class ShoppingCartServlet
+ * Servlet implementation class BoughtItemServlet
  */
-@WebServlet("/ShoppingCartServlet")
-public class ShoppingCartServlet extends HttpServlet {
+@WebServlet("/BoughtItemServlet")
+public class BoughtItemServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShoppingCartServlet() {
+    public BoughtItemServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,9 +41,9 @@ public class ShoppingCartServlet extends HttpServlet {
 		HttpSession session=request.getSession();
 		String email= (String)session.getAttribute("email");
 		DatabaseClass db = new DatabaseClass();
-		ArrayList<ItemCart> arr = db.getShoppingCartItemsOfPerson(email,0);
+		ArrayList<ItemCart> arr = db.getShoppingCartItemsOfPerson(email,1);
 		request.setAttribute("ItemCart", arr);	
-		RequestDispatcher rd = request.getRequestDispatcher("ShoppingCart.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("BoughtItems.jsp");
 		rd.forward(request, response);
 	}
 

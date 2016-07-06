@@ -75,6 +75,21 @@ public class DatabaseClass {
 		}		
 		return items;
 	}
+	public void buyItem(int personId,int itemId){
+		Statement stm;
+		Connection con = DataBaseInfo.getConnection();
+			try {
+				stm=con.createStatement();
+				stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
+					stm.executeUpdate("update person_cart_items "
+							+ "set is_bought = 1 where person_id="+personId+" and item_id="+itemId+";");
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
 	public boolean checkReview(String person,String star,String review,String id){
 		Statement stm;
 		Connection con = DataBaseInfo.getConnection();
@@ -127,7 +142,7 @@ public class DatabaseClass {
 		}		
 		return arr;
 	}
-	public ArrayList<ItemCart> getShoppingCartItemsOfPerson(String email){
+	public ArrayList<ItemCart> getShoppingCartItemsOfPerson(String email,int bought){
 		ArrayList<ItemCart> arr = new ArrayList<ItemCart>();
 		Authorizations aut = new Authorizations();
 		int personId = aut.getPersonId(email);
@@ -137,7 +152,7 @@ public class DatabaseClass {
 			stm=con.createStatement();
 			stm.executeQuery("USE " + DataBaseInfo.MYSQL_DATABASE_NAME);
 			ResultSet rSet=stm.executeQuery(
-					"select * from person_cart_items where person_id='"+personId+"';");
+					"select * from person_cart_items where person_id='"+personId+"' and is_bought="+bought+";");
 			while(rSet.next()){
 				arr.add(getItemCart(rSet.getInt(2),rSet.getInt(3),rSet.getInt(4)));
 			}
