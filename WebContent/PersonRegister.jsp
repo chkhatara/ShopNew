@@ -186,16 +186,13 @@ function validateUserForm() {
             <div class="col-sm-6">
               <article role="manufacturer"  class="text-center">
                 <header>
-                  ADMIN
+                  PERSON
                 </header>
                 <h1>FREE</h1>
                 <ul class="text-left">
                   <li><i class="fa fa-check"></i>  Unlimited  access</li>
-                  <li><i class="fa fa-check"></i>  Create Project Lists</li>
-                  <li><i class="fa fa-check"></i>  Create Project Lists</li>
-                  <li><i class="fa fa-check"></i>  Share Files</li>
-                  <li><i class="fa fa-check"></i>   Unlimited  access</li>
-                  <li><i class="fa fa-check"></i>  Unlimited  access</li>
+                  <li><i class="fa fa-check"></i>  BUY ITEMS</li>
+                  
                 </ul>
                 <a href="#" class="btn btn-success">SignUp  For Person</a>
               </article>
@@ -248,16 +245,13 @@ function validateUserForm() {
           <div class="col-sm-6">
             <article role="manufacturer"  class="text-center">
               <header>
-                USER
+                SHOP
               </header>
               <h1>FREE</h1>
               <ul class="text-left">
                 <li><i class="fa fa-check"></i>  Unlimited Site Access</li>
-                <li><i class="fa fa-check"></i>  Unlimited Site Access </li>
-                <li><i class="fa fa-check"></i>  Unlimited Site Access</li>
-                <li><i class="fa fa-check"></i>  Unlimited Site Access</li>
-                <li><i class="fa fa-check"></i>   Unlimited Site Access</li>
-                <li><i class="fa fa-check"></i>   Unlimited Site Access</li>
+                <li><i class="fa fa-check"></i>  CREATE ITEMS</li>
+             
               </ul>
 
               <a href="#" class="btn btn-success">SignUp  For Shop</a>

@@ -128,27 +128,7 @@
             <!-- End Slider -->
 
 			<!-- Product Selection, visible only on large desktop -->
-            <div class="col-lg-3 visible-lg">
-                <div class="row text-center">
-                    <div class="col-lg-12 col-md-12 hero-feature">
-                        <div class="thumbnail">
-                        	<a href="detail.html" class="link-p first-p">
-		                    	<img src="images/product-1.jpg" alt="">
-		                    </a>
-		                    <div class="caption prod-caption">
-		                        <h4><a href="detail.html">Funkalicious Print T-Shirt</a></h4>
-		                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-		                        <p>
-		                        	<div class="btn-group">
-			                        	<a href="#" class="btn btn-default">$ 928.96</a>
-			                        	<a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
-		                        	</div>
-		                        </p>
-		                    </div>
-		                </div>
-                    </div>
-                </div>
-            </div>
+            
             <!-- End Product Selection -->
         </div>
 
@@ -225,10 +205,10 @@
 	                	</a>
 	                    <div class="caption prod-caption">
 	                        <h4><a href="ItemPage.jsp?id=<%= it.getId() %>"><%= it.getName() %></a></h4>
-	                        
+	                        <% String shopName=db.getShop(db.getItemShop(it.getId())).getName(); %>
 	                        <p><%= it.getitemDescription() %></p>
 	                        <p>SubCategory: <%= it.getSubCategory() %> </p>
-	                         <p><a href ="ShopPageForPerson?shopid=<%= db.getItemShop(it.getId()) %>">shop</a> </p>
+	                         <p><a href ="ShopPageForPerson?shopid=<%= db.getItemShop(it.getId()) %>"> <%= shopName %> </a> </p>
 	                        
 	                        <p>
 	                        	<div class="btn-group">
@@ -282,57 +262,7 @@
 	</nav>
 	</div>
 
-	<footer>
-    	<div class="container">
-        	<div class="col-lg-3 col-md-3 col-sm-6">
-        		<div class="column">
-        			<h4>Information</h4>
-        			<ul>
-        				<li><a href="about.html">About Us</a></li>
-        				<li><a href="typography.html">Policy Privacy</a></li>
-        				<li><a href="typography.html">Terms and Conditions</a></li>
-        				<li><a href="typography.html">Shipping Methods</a></li>
-        			</ul>
-        		</div>
-        	</div>
-        	<div class="col-lg-3 col-md-3 col-sm-6">
-        		<div class="column">
-        			<h4>Categories</h4>
-        			<ul>
-        				<li><a href="catalogue.html">Cras justo odio</a></li>
-        				<li><a href="catalogue.html">Dapibus ac facilisis in</a></li>
-        				<li><a href="catalogue.html">Morbi leo risus</a></li>
-        				<li><a href="catalogue.html">Porta ac consectetur ac</a></li>
-        			</ul>
-        		</div>
-        	</div>
-        	<div class="col-lg-3 col-md-3 col-sm-6">
-        		<div class="column">
-        			<h4>Customer Service</h4>
-        			<ul>
-        				<li><a href="contact.html">Contact Us</a></li>
-        				<li><a href="#">YM: cs_</a></li>
-        				<li><a href="#">Phone: +6281234567891</a></li>
-        				<li><a href="#">Email: cs.domain@domain.tld</a></li>
-        			</ul>
-        		</div>
-        	</div>
-        	<div class="col-lg-3 col-md-3 col-sm-6">
-        		<div class="column">
-        			<h4>Follow Us</h4>
-        			<ul class="social">
-        				<li><a href="#">Google Plus</a></li>
-        				<li><a href="#">Facebook</a></li>
-        				<li><a href="#">Twitter</a></li>
-        				<li><a href="#">RSS Feed</a></li>
-        			</ul>
-        		</div>
-        	</div>
-        </div>
-        <div class="navbar-inverse text-center copyright">
-        	Copyright &copy; iShop Ge
-        </div>
-    </footer>
+	
 
     <a href="#top" class="back-top text-center" onclick="$('body,html').animate({scrollTop:0},500); return false">
     	<i class="fa fa-angle-double-up"></i>

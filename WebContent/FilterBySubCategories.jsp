@@ -138,12 +138,12 @@
 			<% for (int i=0;i<items.size();i++){ %>
             <div class="col-md-3 col-sm-6 hero-feature">
                 <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
+                    <img src="GetItemProfilePicture?id=<%= items.get(i).getId() %>" alt="">
                     <div class="caption">
                         <h5><%= items.get(i).getName() %></h5>
                         <p><%= items.get(i).getitemDescription() %>.</p>
                         <p>
-                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                            <a href="ItemPage.jsp?id=<%= items.get(i).getId() %>" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
                         </p>
                     </div>
                 </div>
